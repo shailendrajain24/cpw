@@ -28,5 +28,9 @@
       class = "com.cpw.dao.UserDetailDAOImpl">
       <property name = "dataSource" ref = "dataSource" />    
    </bean>
+   <bean id = "portMasterDAOImpl" 
+      class = "com.cpw.dao.PortMasterDAOImpl">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
       
 </beans>
