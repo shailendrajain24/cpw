@@ -32,5 +32,9 @@
       class = "com.cpw.dao.PortMasterDAOImpl">
       <property name = "dataSource" ref = "dataSource" />    
    </bean>
+   <bean id = "trackingDetailDAOImpl" 
+      class = "com.cpw.dao.TrackingDetailDAOImpl">
+      <property name = "dataSource" ref = "dataSource" />    
+   </bean>
       
 </beans>
