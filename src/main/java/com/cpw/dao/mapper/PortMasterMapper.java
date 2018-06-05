@@ -11,7 +11,7 @@ public class PortMasterMapper implements RowMapper<PortMaster> {
 
 	public PortMaster mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 		final PortMaster portMaster = new PortMaster();
-		//portMaster.setPortId(resultSet.getLong("PORT_ID"));
+		portMaster.setPortId(resultSet.getLong("PORT_ID"));
 		portMaster.setCode(resultSet.getString("CODE"));
 		portMaster.setCountryName(resultSet.getString("COUNTRY_NAME"));
 		portMaster.setCityName(resultSet.getString("NAME"));

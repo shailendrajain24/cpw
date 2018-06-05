@@ -10,10 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.cpw.dao.mapper.PortMasterMapper;
-import com.cpw.jdbc.model.PortMaster;
+import com.cpw.dao.mapper.TrackingDetailMapper;
+import com.cpw.jdbc.model.TrackingDetail;
 
-public class PortMasterDAOImpl implements PortMasterDAO {
+public class TrackingDetailDAOImpl implements TrackingDetailDAO {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	private DataSource dataSource;
@@ -23,21 +23,20 @@ public class PortMasterDAOImpl implements PortMasterDAO {
 		this.dataSource = dataSource;
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
-	
+
 	@Override
-	public List<PortMaster> allPortMaster() {
-		logger.debug("Entering into allPortMaster");
-		List<PortMaster> portMasters = Collections.emptyList();
-		final String userRoleSql = "SELECT PORT_MASTER.CODE, PORT_MASTER.PORT_ID, PORT_MASTER.NAME, COUNTRIES.COUNTRY_NAME "
-				+ "FROM PORT_MASTER, COUNTRIES "
-				+ "WHERE COUNTRIES.COUNTRY_ID=PORT_MASTER.COUNTRY_ID ORDER BY PORT_ID";
+	public List<TrackingDetail> trackingDetail() {
+		logger.debug("Entering into trackingDetail");
+		List<TrackingDetail> trackingDetail = Collections.emptyList();
+		final String trackingSql = "SELECT TYPE, MIN_LENGTH, MAX_LENGTH, CONTENT_TYPE, START_FROM, START_CHAR_LENGTH"
+				+ " FROM TRACKTYPES";
 		try {
-			portMasters = jdbcTemplateObject.query(userRoleSql, new PortMasterMapper());
-			return portMasters;
+			trackingDetail = jdbcTemplateObject.query(trackingSql, new TrackingDetailMapper());
+			return trackingDetail;
 		} catch (EmptyResultDataAccessException e) {
 			logger.error("No Port data  in system");
 			return null;
 		}
 	}
-	
+
 }

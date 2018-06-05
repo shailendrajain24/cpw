@@ -26,15 +26,23 @@ public class PortController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(value = "/ports", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<? extends PortResponse>> PortData() {
+	//public ResponseEntity<List<? extends PortResponse>> PortData() {
+	public ResponseEntity<Object> PortData() {
 		logger.debug("Entering into PortData");
 		try {
 			PortImpl portImpl = new PortImpl();
-			List<PortResponse> portResponses = portImpl.getAllPort();
+			/*List<PortResponse> portResponses = portImpl.getAllPort();
 			if (portResponses != null && !portResponses.isEmpty()) {
 				return new ResponseEntity<List<? extends PortResponse>>(portResponses, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<List<? extends PortResponse>>(portResponses, HttpStatus.NO_CONTENT);
+			}*/
+			
+			String portResponses = portImpl.getAllPort();
+			if (portResponses != null && !portResponses.isEmpty()) {
+				return new ResponseEntity<Object>(portResponses, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<Object>(portResponses, HttpStatus.NO_CONTENT);
 			}
 
 		} catch (Exception e) {

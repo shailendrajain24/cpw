@@ -1,12 +1,12 @@
 package com.cpw.model;
 
-public class PortResponse extends PortDataResponse {
+public class PortDataResponse {
 
-	//private long portId;
-	/*private String cityName;
-	private String cityCode;*/
-	private String countryName;
-	/*public String getCityName() {
+	private long portId;
+	private String cityName;
+	private String cityCode;
+	//private String countryName;
+	public String getCityName() {
 		return cityName;
 	}
 	public void setCityName(String cityName) {
@@ -17,12 +17,18 @@ public class PortResponse extends PortDataResponse {
 	}
 	public void setCityCode(String cityCode) {
 		this.cityCode = cityCode;
-	}*/
-	public String getCountryName() {
+	}
+	/*public String getCountryName() {
 		return countryName;
 	}
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
+	}*/
+	public long getPortId() {
+		return portId;
+	}
+	public void setPortId(long portId) {
+		this.portId = portId;
 	}
 	
 }
