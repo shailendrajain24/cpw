@@ -28,7 +28,7 @@ public class PortMasterDAOImpl implements PortMasterDAO {
 	public List<PortMaster> allPortMaster() {
 		logger.debug("Entering into allPortMaster");
 		List<PortMaster> portMasters = Collections.emptyList();
-		final String userRoleSql = "SELECT PORT_MASTER.CODE, PORT_MASTER.NAME, COUNTRIES.COUNTRY_NAME "
+		final String userRoleSql = "SELECT PORT_MASTER.CODE, PORT_MASTER.PORT_ID, PORT_MASTER.NAME, COUNTRIES.COUNTRY_NAME "
 				+ "FROM PORT_MASTER, COUNTRIES "
 				+ "WHERE COUNTRIES.COUNTRY_ID=PORT_MASTER.COUNTRY_ID ORDER BY PORT_ID";
 		try {

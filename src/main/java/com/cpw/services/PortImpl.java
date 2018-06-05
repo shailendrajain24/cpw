@@ -3,6 +3,9 @@ package com.cpw.services;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,18 +14,28 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.cpw.dao.PortMasterDAOImpl;
 import com.cpw.jdbc.model.PortMaster;
+import com.cpw.model.PortDataResponse;
 import com.cpw.model.PortResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PortImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	public List<PortResponse> getAllPort() {
+	public String getAllPort() {
+	//public List<PortResponse> getAllPort() {
 		logger.debug("Entering into getAllPort");
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
 		PortMasterDAOImpl portMasterDAOImpl = (PortMasterDAOImpl) context.getBean("portMasterDAOImpl");
 		final List<PortMaster> portMastersList = portMasterDAOImpl.allPortMaster();
-		return map(portMastersList);
+		//return map(portMastersList);
+		try {
+			return mapJson(portMastersList);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 
 	}
 
@@ -46,9 +59,24 @@ public class PortImpl {
 			portResponse.setCityCode(portMaster.getCode());
 			portResponse.setCityName(portMaster.getCityName());
 			portResponse.setCountryName(portMaster.getCountryName());
+			portResponse.setPortId(portMaster.getPortId());
 		}
 		return portResponse;
 
 	}
 
+	private String mapJson(List<PortMaster> portMastersList) throws JsonProcessingException {
+		List<PortResponse> portResponse = map(portMastersList);
+		//List<PortResponse2> p2 = new  ArrayList<PortResponse2>();
+		Map<String, List<PortDataResponse>> map = portResponse.stream().collect(Collectors.groupingBy(
+				PortResponse :: getCountryName, Collectors.mapping(a->{
+					PortDataResponse portDataResponse = new PortDataResponse();
+					portDataResponse.setCityCode(a.getCityCode());
+					portDataResponse.setCityName(a.getCityName());
+					portDataResponse.setPortId(a.getPortId());
+					return portDataResponse;
+				}, Collectors.toList())));
+		logger.debug("Size of the Map : "+map.size());
+		return new ObjectMapper().writeValueAsString(map);
+	}
 }
