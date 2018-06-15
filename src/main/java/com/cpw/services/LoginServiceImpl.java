@@ -44,8 +44,9 @@ public class LoginServiceImpl implements LoginService {
 			if (userRole != null) {
 				loginResponse.setCode((int) userRole.getRoleId());
 			}
-			loginResponse.setUserId(loginRequest.getUserName());
+			loginResponse.setUserId(String.valueOf(userDetail.getUserId()));
 			loginResponse.setUserName(loginRequest.getUserName());
+			loginResponse.setUserType(userDetail.getUserType());
 			return loginResponse;
 		} else {
 			LoginResponse loginResponse = new LoginResponse();

@@ -33,9 +33,9 @@ public class ScheduleSearchDAOImpl implements ScheduleSearchDAO {
 
 	@Override
 	public List<ScheduleSearch> searchScheduleList(ScheduleSearchRequest scheduleSearchRequest) {
-		final String sql = "SELECT B.pol_code, B.pod_code, B.etd, B.eta, C.NAME FROM "
+		/*final String sql = "SELECT B.pol_code, B.pod_code, B.etd, B.eta, C.NAME FROM "
 				+ "  sailing_schedule_hdr A INNER JOIN sailing_schedule_dtl B ON A.schedule_id = B.schedule_id "
-				+ "LEFT JOIN vessel_master C ON A.vessel_id = C.vessel_id WHERE  A.vessel_id = ? "
+				+ "LEFT JOIN vessel_master C ON A.vessel_id = C.vessel_id WHERE  A.vessel_id = ? "*/
 		/*
 		 * + "AND B.pod_id = ? " +
 		 * "AND B.pol_id = ? AND B.etd >= FromETD AND B.etd <= ToETD AND B.eta >= FromETA AND B.eta <= ToETA "

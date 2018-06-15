@@ -40,4 +40,7 @@
 	<bean id="scheduleSearchDAOImpl" class="com.cpw.dao.ScheduleSearchDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<bean id="blListDAOImpl" class="com.cpw.dao.BlListDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 </beans>
