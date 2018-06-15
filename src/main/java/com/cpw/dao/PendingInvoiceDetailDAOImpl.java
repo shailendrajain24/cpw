@@ -28,7 +28,7 @@ public class PendingInvoiceDetailDAOImpl implements PendingInvoiceDetailDAO {
 	public List<PendingInvoicesDetail> pendingInvoiceList(String userName) {
 		logger.debug("Entering into pendingInvoiceList");
 		List<PendingInvoicesDetail> trackingDetail = Collections.emptyList();
-		final String trackingSql = "Select A.Booking_ID,A.BOOKING_NO,B.IV_NO,B.LOCAL_AMOUNT"
+		final String trackingSql = "Select A.Booking_ID, A.BOOKING_NO, B.DUE_DATE, B.IV_NO, B.LOCAL_AMOUNT"
 				+ " from  BOOKING_HDR A INNER JOIN IV_HDR B" + " ON A.BOOKING_ID=B.BOOKING_ID" + " LEFT JOIN RV_HDR C"
 				+ " On A.BOOKING_ID=C.BOOKING_ID"
 				+ " WHERE A.BILLING_CUST_ID=(SELECT EMP_ID FROM USERS WHERE USER_NAME = ?) AND C.BOOKING_ID IS NULL";

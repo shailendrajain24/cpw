@@ -49,6 +49,7 @@ public class PendingInvoiceImpl {
 			pendingInvoicesResponse.setBookingNumber(pendingInvoicesDetail.getBookingNumber());
 			pendingInvoicesResponse.setInvoiceNumber(pendingInvoicesDetail.getInvoiceNumber());
 			pendingInvoicesResponse.setLocalAmount(pendingInvoicesDetail.getLocalAmount());
+			pendingInvoicesResponse.setDueDate(pendingInvoicesDetail.getDueDate());
 		}
 		return pendingInvoicesResponse;
 
