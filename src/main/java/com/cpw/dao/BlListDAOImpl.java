@@ -31,7 +31,7 @@ public class BlListDAOImpl implements BlListDAO {
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT BOOKING_NO, BOOKING_DATE, ETA, ETD FROM BOOKING_HDR WHERE");
 		if (!userType.isEmpty() && userType.trim().equals("E")) {
-			sb.append(" CR_TYPE = ? ");
+			sb.append(" CR_BY = ? ");
 		} else {
 			sb.append(" FORWARDER_ID = ? ");
 		}
