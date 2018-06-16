@@ -49,6 +49,7 @@ public class TrackingImpl {
 			trackingResponse.setType(trackingDetail.getType());
 			trackingResponse.setStartWith(trackingDetail.getStartWith());
 			trackingResponse.setStartWithLength(trackingDetail.getStartWithLength());
+			trackingResponse.setTrackingId(trackingDetail.getTrackingId());
 		}
 		return trackingResponse;
 

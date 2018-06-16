@@ -17,6 +17,7 @@ public class TrackingDetailMapper implements RowMapper<TrackingDetail> {
 		trackingDetail.setType(resultSet.getString("CONTENT_TYPE"));
 		trackingDetail.setStartWith(resultSet.getString("START_FROM"));
 		trackingDetail.setStartWithLength(resultSet.getString("START_CHAR_LENGTH"));
+		trackingDetail.setTrackingId(resultSet.getInt("TYPE_ID"));
 		return trackingDetail;
 	}
 

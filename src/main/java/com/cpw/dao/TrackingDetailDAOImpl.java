@@ -28,13 +28,13 @@ public class TrackingDetailDAOImpl implements TrackingDetailDAO {
 	public List<TrackingDetail> trackingDetail() {
 		logger.debug("Entering into trackingDetail");
 		List<TrackingDetail> trackingDetail = Collections.emptyList();
-		final String trackingSql = "SELECT TYPE, MIN_LENGTH, MAX_LENGTH, CONTENT_TYPE, START_FROM, START_CHAR_LENGTH"
+		final String trackingSql = "SELECT TYPE_ID, TYPE, MIN_LENGTH, MAX_LENGTH, CONTENT_TYPE, START_FROM, START_CHAR_LENGTH"
 				+ " FROM TRACKTYPES";
 		try {
 			trackingDetail = jdbcTemplateObject.query(trackingSql, new TrackingDetailMapper());
 			return trackingDetail;
 		} catch (EmptyResultDataAccessException e) {
-			logger.error("No Port data  in system");
+			logger.error("No Track data  in system");
 			return null;
 		}
 	}

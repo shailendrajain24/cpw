@@ -8,6 +8,7 @@ public class TrackingDetail {
 	private String type;
 	private String startWith;
 	private String startWithLength;
+	private int trackingId;
 	public String getTrackType() {
 		return trackType;
 	}
@@ -43,6 +44,12 @@ public class TrackingDetail {
 	}
 	public void setStartWithLength(String startWithLength) {
 		this.startWithLength = startWithLength;
+	}
+	public int getTrackingId() {
+		return trackingId;
+	}
+	public void setTrackingId(int trackingId) {
+		this.trackingId = trackingId;
 	}
 	
 }
