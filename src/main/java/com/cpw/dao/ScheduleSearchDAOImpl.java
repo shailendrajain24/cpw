@@ -49,21 +49,25 @@ public class ScheduleSearchDAOImpl implements ScheduleSearchDAO {
 		if (scheduleSearchRequest.getVesselId() != 0) {
 			sb.append(" A.vessel_id = ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getVesselId()));
+			sb.append(" AND ");
 		}
 		if (scheduleSearchRequest.getPodId() != 0) {
-			sb.append("AND B.pod_id = ? ");
+			sb.append("B.pod_id = ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getPodId()));
+			sb.append(" AND ");
 		}
 		if (scheduleSearchRequest.getPolId() != 0) {
-			sb.append("AND B.pol_id = ? ");
+			sb.append("B.pol_id = ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getPolId()));
+			sb.append(" AND ");
 		}
 		/*String sDate = "2017-11-18";
 		String eDate = "2017-11-19";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");*/
 		if (scheduleSearchRequest.getFromETD()!= null && !scheduleSearchRequest.getFromETD().isEmpty()) {
-			sb.append("AND B.etd >= ? ");
+			sb.append("B.etd >= ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getFromETD()));
+			sb.append(" AND ");
 		} /*else {
 			sb.append("AND B.etd >= ? ");
 			java.util.Date dd = sdf.parse(sDate, new ParsePosition(0));
@@ -72,8 +76,9 @@ public class ScheduleSearchDAOImpl implements ScheduleSearchDAO {
 			value.add(String.valueOf(dd1));
 		}*/
 		if (scheduleSearchRequest.getToETD()!= null && !scheduleSearchRequest.getToETD().isEmpty()) {
-			sb.append("AND B.etd <= ? ");
+			sb.append("B.etd <= ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getToETD()));
+			sb.append(" AND ");
 		} /*else {
 			sb.append("AND B.etd <= ? ");
 			java.util.Date dd = sdf.parse(sDate, new ParsePosition(0));
@@ -83,8 +88,9 @@ public class ScheduleSearchDAOImpl implements ScheduleSearchDAO {
 		}*/
 		
 		if (scheduleSearchRequest.getFromETA()!= null && !scheduleSearchRequest.getFromETA().isEmpty()) {
-			sb.append("AND B.eta >= ? ");
+			sb.append("B.eta >= ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getFromETA()));
+			sb.append(" AND ");
 		} /*else {
 			sb.append("AND B.eta >= ? ");
 			java.util.Date dd2 = sdf.parse(eDate, new ParsePosition(0));
@@ -93,7 +99,7 @@ public class ScheduleSearchDAOImpl implements ScheduleSearchDAO {
 			value.add(String.valueOf(dd12));
 		}*/
 		if (scheduleSearchRequest.getToETD()!= null && !scheduleSearchRequest.getToETA().isEmpty()) {
-			sb.append("AND B.eta <= ? ");
+			sb.append("B.eta <= ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getToETA()));
 		} /*else {
 			sb.append("AND B.eta <= ? ");

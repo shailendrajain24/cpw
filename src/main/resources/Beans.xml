@@ -43,4 +43,7 @@
 	<bean id="blListDAOImpl" class="com.cpw.dao.BlListDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<bean id="traceDAOImpl" class="com.cpw.dao.TraceDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 </beans>
