@@ -46,4 +46,7 @@
 	<bean id="traceDAOImpl" class="com.cpw.dao.TraceDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<bean id="pramotionalDAOImpl" class="com.cpw.dao.PramotionalDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 </beans>
