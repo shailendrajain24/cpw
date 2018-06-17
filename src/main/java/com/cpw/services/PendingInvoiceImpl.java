@@ -16,10 +16,11 @@ import com.cpw.model.PendingInvoicesResponse;
 public class PendingInvoiceImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ApplicationContext context;
 
 	public List<PendingInvoicesResponse> pendingInvoiceDetail(String userName) {
 		logger.debug("Entering into trackingDetail");
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		context = new ClassPathXmlApplicationContext("Beans.xml");
 		PendingInvoiceDetailDAOImpl pendingInvoiceDetailDAOImpl = (PendingInvoiceDetailDAOImpl) context
 				.getBean("pendingInvoiceDetailDAOImpl");
 		final List<PendingInvoicesDetail> pendingInvoicesDetails = pendingInvoiceDetailDAOImpl

@@ -5,7 +5,6 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import com.cpw.jdbc.model.BlList;
-import com.cpw.jdbc.model.PortMaster;
 
 public interface BlListDAO {
 

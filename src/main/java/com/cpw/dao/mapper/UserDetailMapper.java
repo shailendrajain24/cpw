@@ -10,7 +10,7 @@ import com.cpw.jdbc.model.UserDetail;
 public class UserDetailMapper implements RowMapper<UserDetail> {
 
 	public UserDetail mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-		UserDetail userDetail = new UserDetail();
+		final UserDetail userDetail = new UserDetail();
 		userDetail.setUserId(resultSet.getLong("USER_ID"));
 		userDetail.setUserName(resultSet.getString("USER_NAME"));
 		userDetail.setStatus(resultSet.getString("STATUS"));

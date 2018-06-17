@@ -16,10 +16,11 @@ import com.cpw.model.TrackingResponse;
 public class TrackingImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ApplicationContext context;
 
 	public List<TrackingResponse> trackingDetail() {
 		logger.debug("Entering into trackingDetail");
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		context = new ClassPathXmlApplicationContext("Beans.xml");
 		TrackingDetailDAOImpl trackingDetailDAOImpl = (TrackingDetailDAOImpl) context.getBean("trackingDetailDAOImpl");
 		final List<TrackingDetail> trackingDetailList = trackingDetailDAOImpl.trackingDetail();
 		return map(trackingDetailList);

@@ -16,10 +16,11 @@ import com.cpw.model.CustChallangeOriginResponse;
 public class CustChallangeOriginImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ApplicationContext context;
 
 	public List<CustChallangeOriginResponse> custChallangeOriginList() {
 		logger.debug("Entering into custChallangeOriginList");
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		context = new ClassPathXmlApplicationContext("Beans.xml");
 		CustChallangeOriginDAOImpl custChallangeOriginDAOImpl = (CustChallangeOriginDAOImpl) context
 				.getBean("custChallangeOriginDAOImpl");
 		final List<CustChallangeOrigin> custChallangeOriginList = custChallangeOriginDAOImpl.custChallangeOriginList();

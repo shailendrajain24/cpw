@@ -10,7 +10,7 @@ import com.cpw.jdbc.model.UserRole;
 public class UserRoleMapper implements RowMapper<UserRole> {
 
 	public UserRole mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-		UserRole userRole = new UserRole();
+		final UserRole userRole = new UserRole();
 		userRole.setUserId(resultSet.getLong("USER_ID"));
 		userRole.setRoleId(resultSet.getLong("ROLE_ID"));
 		userRole.setDescription(resultSet.getString("DESCRIPTION"));

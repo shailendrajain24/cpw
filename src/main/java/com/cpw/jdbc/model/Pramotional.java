@@ -3,30 +3,30 @@ package com.cpw.jdbc.model;
 import java.util.Date;
 
 public class Pramotional {
-	private String primaryId;
+	private long primaryId;
 	private String fromEmailId;
 	private String ToEmailId;
-	private String commercialNvo;
-	private String sendBy;
+	private int commercialNvo;
+	private int sendBy;
 	private String subject;
-	private String countryId;
-	private String categoryId;
+	private int countryId;
+	private int categoryId;
 	private String attachment;
 	private String addAttachment;
 	private String body;
-	private String locId;
-	private String fyId;
-	private String fyPrdId;
-	private String createdBy;
+	private long locId;
+	private long fyId;
+	private long fyPrdId;
+	private long createdBy;
 	private Date createdDate;
 	private String createdTime;
-	private String modifyBy;
+	private long modifyBy;
 	private Date modifyDate;
 	private String modifyTime;
-	public String getPrimaryId() {
+	public long getPrimaryId() {
 		return primaryId;
 	}
-	public void setPrimaryId(String primaryId) {
+	public void setPrimaryId(long primaryId) {
 		this.primaryId = primaryId;
 	}
 	public String getFromEmailId() {
@@ -41,16 +41,16 @@ public class Pramotional {
 	public void setToEmailId(String toEmailId) {
 		ToEmailId = toEmailId;
 	}
-	public String getCommercialNvo() {
+	public int getCommercialNvo() {
 		return commercialNvo;
 	}
-	public void setCommercialNvo(String commercialNvo) {
+	public void setCommercialNvo(int commercialNvo) {
 		this.commercialNvo = commercialNvo;
 	}
-	public String getSendBy() {
+	public int getSendBy() {
 		return sendBy;
 	}
-	public void setSendBy(String sendBy) {
+	public void setSendBy(int sendBy) {
 		this.sendBy = sendBy;
 	}
 	public String getSubject() {
@@ -59,16 +59,16 @@ public class Pramotional {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	public String getCountryId() {
+	public int getCountryId() {
 		return countryId;
 	}
-	public void setCountryId(String countryId) {
+	public void setCountryId(int countryId) {
 		this.countryId = countryId;
 	}
-	public String getCategoryId() {
+	public int getCategoryId() {
 		return categoryId;
 	}
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
 	public String getAttachment() {
@@ -89,28 +89,28 @@ public class Pramotional {
 	public void setBody(String body) {
 		this.body = body;
 	}
-	public String getLocId() {
+	public long getLocId() {
 		return locId;
 	}
-	public void setLocId(String locId) {
+	public void setLocId(long locId) {
 		this.locId = locId;
 	}
-	public String getFyId() {
+	public long getFyId() {
 		return fyId;
 	}
-	public void setFyId(String fyId) {
+	public void setFyId(long fyId) {
 		this.fyId = fyId;
 	}
-	public String getFyPrdId() {
+	public long getFyPrdId() {
 		return fyPrdId;
 	}
-	public void setFyPrdId(String fyPrdId) {
+	public void setFyPrdId(long fyPrdId) {
 		this.fyPrdId = fyPrdId;
 	}
-	public String getCreatedBy() {
+	public long getCreatedBy() {
 		return createdBy;
 	}
-	public void setCreatedBy(String createdBy) {
+	public void setCreatedBy(long createdBy) {
 		this.createdBy = createdBy;
 	}
 	public Date getCreatedDate() {
@@ -125,10 +125,10 @@ public class Pramotional {
 	public void setCreatedTime(String createdTime) {
 		this.createdTime = createdTime;
 	}
-	public String getModifyBy() {
+	public long getModifyBy() {
 		return modifyBy;
 	}
-	public void setModifyBy(String modifyBy) {
+	public void setModifyBy(long modifyBy) {
 		this.modifyBy = modifyBy;
 	}
 	public Date getModifyDate() {

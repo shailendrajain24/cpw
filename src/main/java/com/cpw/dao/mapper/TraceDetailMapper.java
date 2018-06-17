@@ -10,7 +10,7 @@ import com.cpw.jdbc.model.Trace;
 public class TraceDetailMapper implements RowMapper<Trace> {
 
 	public Trace mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-		Trace trace = new Trace();
+		final Trace trace = new Trace();
 /*		
 		trackingDetail.setTrackType(resultSet.getString("TYPE"));
 		trackingDetail.setMaxLength(resultSet.getInt("MAX_LENGTH"));

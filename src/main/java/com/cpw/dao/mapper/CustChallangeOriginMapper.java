@@ -10,7 +10,7 @@ import com.cpw.jdbc.model.CustChallangeOrigin;
 public class CustChallangeOriginMapper implements RowMapper<CustChallangeOrigin> {
 
 	public CustChallangeOrigin mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-		CustChallangeOrigin custChallangeOrigin = new CustChallangeOrigin();
+		final CustChallangeOrigin custChallangeOrigin = new CustChallangeOrigin();
 		custChallangeOrigin.setOriginId(resultSet.getInt("PRIORTY_ID"));
 		custChallangeOrigin.setOriginName(resultSet.getString("NAME"));
 		return custChallangeOrigin;

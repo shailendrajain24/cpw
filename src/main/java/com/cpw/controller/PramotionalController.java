@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cpw.model.LoginResponse;
 import com.cpw.model.PramotionalRequest;
-import com.cpw.services.LoginService;
-import com.cpw.services.LoginServiceImpl;
 import com.cpw.services.PramotionalImpl;
 
 /**
@@ -34,8 +31,7 @@ public class PramotionalController {
 
 		logger.debug("Entering into Pramotional");
 		try {
-			if (request.getPrimaryId().isEmpty() || request.getFromEmailId().isEmpty()
-					|| request.getToEmailId().isEmpty()) {
+			if (request.getPrimaryId() == 0 || request.getFromEmailId().isEmpty() || request.getToEmailId().isEmpty()) {
 				return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
 			}
 			logger.debug("Primary ID : " + request.getPrimaryId());

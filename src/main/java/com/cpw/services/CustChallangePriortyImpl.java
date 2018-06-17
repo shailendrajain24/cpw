@@ -16,10 +16,11 @@ import com.cpw.model.CustChallangePriortyResponse;
 public class CustChallangePriortyImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ApplicationContext context;
 
 	public List<CustChallangePriortyResponse> custChallangePriortyList() {
 		logger.debug("Entering into custChallangePriortyList");
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		context = new ClassPathXmlApplicationContext("Beans.xml");
 		CustChallangePriortyDAOImpl custChallangePriortyDAOImpl = (CustChallangePriortyDAOImpl) context
 				.getBean("custChallangePriortyDAOImpl");
 		final List<CustChallangePriorty> custChallangePriortyList = custChallangePriortyDAOImpl

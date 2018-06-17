@@ -16,10 +16,11 @@ import com.cpw.model.VesselResponse;
 public class VesselImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ApplicationContext context;
 
 	public List<VesselResponse> vesselList() {
 		logger.debug("Entering into vesselList");
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		context = new ClassPathXmlApplicationContext("Beans.xml");
 		VesselDAOImpl vesselDAOImpl = (VesselDAOImpl) context.getBean("vesselDAOImpl");
 		final List<Vessel> vesselList = vesselDAOImpl.vesselList();
 		return map(vesselList);

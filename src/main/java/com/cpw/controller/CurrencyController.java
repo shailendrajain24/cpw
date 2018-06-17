@@ -34,7 +34,8 @@ public class CurrencyController {
 			if (currencyResponseList != null && !currencyResponseList.isEmpty()) {
 				return new ResponseEntity<List<? extends CurrencyResponse>>(currencyResponseList, HttpStatus.OK);
 			} else {
-				return new ResponseEntity<List<? extends CurrencyResponse>>(currencyResponseList, HttpStatus.NO_CONTENT);
+				return new ResponseEntity<List<? extends CurrencyResponse>>(currencyResponseList,
+						HttpStatus.NO_CONTENT);
 			}
 
 		} catch (Exception e) {

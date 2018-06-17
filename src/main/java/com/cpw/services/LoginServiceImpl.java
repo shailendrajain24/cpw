@@ -16,6 +16,7 @@ public class LoginServiceImpl implements LoginService {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	private static final String SUCCESS_STATUS = "SUCESS";
 	private static final String FAILED_STATUS = "FAILED";
+	private ApplicationContext context;
 
 	public LoginResponse authenticateUser(LoginRequest loginRequest) {
 		logger.debug("Entering into authenticateUser");
@@ -23,13 +24,7 @@ public class LoginServiceImpl implements LoginService {
 			logger.error("UserName or Password is empty");
 			return null;
 		}
-		/*
-		 * UserDetailDAOImpl userDetailDAOImpl = null; try
-		 * (ClassPathXmlApplicationContext context = new
-		 * ClassPathXmlApplicationContext("Beans.xml")) { userDetailDAOImpl =
-		 * (UserDetailDAOImpl) context.getBean("userDetailDAOImpl"); }
-		 */
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		context = new ClassPathXmlApplicationContext("Beans.xml");
 		UserDetailDAOImpl userDetailDAOImpl = (UserDetailDAOImpl) context.getBean("userDetailDAOImpl");
 		UserDetail userDetail = userDetailDAOImpl.getUserDetail(loginRequest.getUserName());
 		if (userDetail != null && loginRequest.getUserName().equalsIgnoreCase(userDetail.getUserName())

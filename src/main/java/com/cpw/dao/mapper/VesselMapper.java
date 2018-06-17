@@ -10,7 +10,7 @@ import com.cpw.jdbc.model.Vessel;
 public class VesselMapper implements RowMapper<Vessel> {
 
 	public Vessel mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-		Vessel vessel = new Vessel();
+		final Vessel vessel = new Vessel();
 		vessel.setVesselName(resultSet.getString("NAME"));
 		vessel.setVesselId(resultSet.getInt("VESSEL_ID"));
 		return vessel;

@@ -10,7 +10,7 @@ import com.cpw.jdbc.model.TrackingDetail;
 public class TrackingDetailMapper implements RowMapper<TrackingDetail> {
 
 	public TrackingDetail mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-		TrackingDetail trackingDetail = new TrackingDetail();
+		final TrackingDetail trackingDetail = new TrackingDetail();
 		trackingDetail.setTrackType(resultSet.getString("TYPE"));
 		trackingDetail.setMaxLength(resultSet.getInt("MAX_LENGTH"));
 		trackingDetail.setMinLength(resultSet.getInt("MIN_LENGTH"));

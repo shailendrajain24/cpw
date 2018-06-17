@@ -28,13 +28,15 @@ public class BlListController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(value = "/bldata", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	
-	public ResponseEntity<List<? extends BlListResponse>> BlList(@RequestParam(value="userType", required=false) String userType,
-			@RequestParam(value="userId", required=false) int userId) {
-		logger.debug("Entering into Tracking");
+
+	public ResponseEntity<List<? extends BlListResponse>> BlList(
+			@RequestParam(value = "userType", required = false) String userType,
+			@RequestParam(value = "userId", required = false) int userId) {
+		logger.debug("Entering into BlList");
 		try {
-			if (userType.isEmpty() && userId!=0) {
-				return new ResponseEntity<List<? extends BlListResponse>>(Collections.EMPTY_LIST, HttpStatus.NOT_FOUND);
+			if (userType.isEmpty() && userId != 0) {
+				return new ResponseEntity<List<? extends BlListResponse>>(Collections.emptyList(),
+						HttpStatus.NOT_FOUND);
 			}
 			BlListImpl blListImpl = new BlListImpl();
 			List<BlListResponse> blListResponseList = blListImpl.getBlList(userType, userId);

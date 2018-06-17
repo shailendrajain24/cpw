@@ -32,10 +32,10 @@ public class SailingScheduleController {
 	@RequestMapping(value = "/sailingSchedule", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<? extends ScheduleSearchResponse>> sailingScheduleSearch(
 			@RequestBody ScheduleSearchRequest request,
-			@RequestParam(value="FromETD", required=false) String fromETD,
-			@RequestParam(value="ToETD", required=false) String toETD,
-			@RequestParam(value="FromETA", required=false) String fromETA,
-			@RequestParam(value="ToETA", required=false) String toETA ) {
+			@RequestParam(value = "FromETD", required = false) String fromETD,
+			@RequestParam(value = "ToETD", required = false) String toETD,
+			@RequestParam(value = "FromETA", required = false) String fromETA,
+			@RequestParam(value = "ToETA", required = false) String toETA) {
 		logger.debug("Entering into SailingScheduleController");
 		try {
 			List<ScheduleSearchResponse> scheduleSearchResponseList = Collections.emptyList();

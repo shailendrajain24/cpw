@@ -16,10 +16,11 @@ import com.cpw.model.CurrencyResponse;
 public class CurrencyImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ApplicationContext context;
 
 	public List<CurrencyResponse> currencyList() {
 		logger.debug("Entering into currencyList");
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		context = new ClassPathXmlApplicationContext("Beans.xml");
 		CurrencyDAOImpl currencyDAOImpl = (CurrencyDAOImpl) context.getBean("currencyDAOImpl");
 		final List<Currency> currencyList = currencyDAOImpl.currencyList();
 		return map(currencyList);

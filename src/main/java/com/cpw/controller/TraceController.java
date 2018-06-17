@@ -37,9 +37,9 @@ public class TraceController {
 				TraceImpl traceImpl = new TraceImpl();
 				TraceResponse traceResponse = traceImpl.traceDetail(transactionId, type);
 				if (traceResponse != null) {
-					return new ResponseEntity(traceResponse, HttpStatus.OK);
+					return new ResponseEntity<TraceResponse>(traceResponse, HttpStatus.OK);
 				} else {
-					return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+					return new ResponseEntity<TraceResponse>(traceResponse, HttpStatus.NOT_FOUND);
 				}
 			}
 

@@ -12,10 +12,11 @@ import com.cpw.model.TraceResponse;
 public class TraceImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ApplicationContext context;
 
 	public TraceResponse traceDetail(String transactionId, int type) {
 		logger.debug("Entering into traceDetail");
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		context = new ClassPathXmlApplicationContext("Beans.xml");
 		TraceDAOImpl traceDAOImpl = (TraceDAOImpl) context.getBean("traceDAOImpl");
 		final Trace trace = traceDAOImpl.traceDetail(transactionId, type);
 		return map(trace);

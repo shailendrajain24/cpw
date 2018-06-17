@@ -6,19 +6,17 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.cpw.dao.PramotionalDAOImpl;
-import com.cpw.dao.TraceDAOImpl;
 import com.cpw.jdbc.model.Pramotional;
-import com.cpw.jdbc.model.Trace;
 import com.cpw.model.PramotionalRequest;
-import com.cpw.model.TraceResponse;
 
 public class PramotionalImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ApplicationContext context;
 
 	public String pramotional(PramotionalRequest pramotionalRequest) {
 		logger.debug("Entering into pramotional");
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		context = new ClassPathXmlApplicationContext("Beans.xml");
 		PramotionalDAOImpl pramotionalDAOImpl = (PramotionalDAOImpl) context.getBean("pramotionalDAOImpl");
 		return pramotionalDAOImpl.pramotinal(map(pramotionalRequest));
 	}

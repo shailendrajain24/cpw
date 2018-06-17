@@ -10,7 +10,7 @@ import com.cpw.jdbc.model.BlList;
 public class BlListMapper implements RowMapper<BlList> {
 
 	public BlList mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-		BlList blList = new BlList();
+		final BlList blList = new BlList();
 		blList.setBookingDate(resultSet.getDate("BOOKING_DATE"));
 		blList.setBookingNumber(resultSet.getString("BOOKING_NO"));
 		blList.setEta(resultSet.getDate("ETA"));

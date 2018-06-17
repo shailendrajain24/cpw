@@ -14,7 +14,7 @@ public class PendingInvoicesDetailMapper implements RowMapper<PendingInvoicesDet
 
 	@Override
 	public PendingInvoicesDetail mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-		PendingInvoicesDetail penInvDetail = new PendingInvoicesDetail();
+		final PendingInvoicesDetail penInvDetail = new PendingInvoicesDetail();
 		penInvDetail.setBookingId(resultSet.getString("BOOKING_ID"));
 		penInvDetail.setBookingNumber(resultSet.getString("BOOKING_NO"));
 		penInvDetail.setInvoiceNumber(resultSet.getString("IV_NO"));

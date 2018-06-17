@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.cpw.dao.ScheduleSearchDAO;
 import com.cpw.dao.ScheduleSearchDAOImpl;
 import com.cpw.jdbc.model.ScheduleSearch;
 import com.cpw.model.ScheduleSearchRequest;
@@ -18,10 +17,11 @@ import com.cpw.model.ScheduleSearchResponse;
 public class SailingScheduleSearchImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ApplicationContext context;
 
 	public List<ScheduleSearchResponse> sailingSearchSchedule(ScheduleSearchRequest scheduleSearchRequest) {
 		logger.debug("Entering into vesselList");
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		context = new ClassPathXmlApplicationContext("Beans.xml");
 		ScheduleSearchDAOImpl scheduleSearchDAOImpl = (ScheduleSearchDAOImpl) context.getBean("scheduleSearchDAOImpl");
 		final List<ScheduleSearch> scheduleSearchList = scheduleSearchDAOImpl.searchScheduleList(scheduleSearchRequest);
 		return map(scheduleSearchList);

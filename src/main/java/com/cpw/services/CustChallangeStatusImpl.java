@@ -16,10 +16,11 @@ import com.cpw.model.CustChallangeStatusResponse;
 public class CustChallangeStatusImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ApplicationContext context;
 
 	public List<CustChallangeStatusResponse> custChallangeStatusList() {
 		logger.debug("Entering into custChallangeStatusList");
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		context = new ClassPathXmlApplicationContext("Beans.xml");
 		CustChallangeStatusDAOImpl custChallangeStatusDAOImpl = (CustChallangeStatusDAOImpl) context
 				.getBean("custChallangeStatusDAOImpl");
 		final List<CustChallangeStatus> custChallangeStatusList = custChallangeStatusDAOImpl.custChallangeStatusList();

@@ -16,10 +16,11 @@ import com.cpw.model.SectorResponse;
 public class SectorImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ApplicationContext context;
 
 	public List<SectorResponse> sectorList() {
 		logger.debug("Entering into sectorList");
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		context = new ClassPathXmlApplicationContext("Beans.xml");
 		SectorDAOImpl sectorDAOImpl = (SectorDAOImpl) context.getBean("sectorDAOImpl");
 		final List<Sector> sectorList = sectorDAOImpl.sectorList();
 		return map(sectorList);

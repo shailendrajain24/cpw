@@ -10,7 +10,7 @@ import com.cpw.jdbc.model.Currency;
 public class CurrencyMapper implements RowMapper<Currency> {
 
 	public Currency mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-		Currency currency = new Currency();
+		final Currency currency = new Currency();
 		currency.setCurrencyId(resultSet.getInt("CURRENCY_ID"));
 		currency.setCurrencyCode(resultSet.getString("CODE"));
 		return currency;

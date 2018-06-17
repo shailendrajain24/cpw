@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,9 +43,9 @@ public class LoginController {
 				LoginResponse loginResponse = loginService.authenticateUser(request);
 				logger.debug("Service Status: " + loginResponse.getStatus());
 				if (loginResponse.getStatus().equals(SUCCESS_STATUS)) {
-					return new ResponseEntity(loginResponse, HttpStatus.OK);
+					return new ResponseEntity<LoginResponse>(loginResponse, HttpStatus.OK);
 				} else if (loginResponse.getStatus().equals(FAILED_STATUS)) {
-					return new ResponseEntity(loginResponse, HttpStatus.NOT_FOUND);
+					return new ResponseEntity<LoginResponse>(loginResponse, HttpStatus.NOT_FOUND);
 				}
 			}
 			return null;

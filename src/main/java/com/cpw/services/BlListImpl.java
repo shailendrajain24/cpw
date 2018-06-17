@@ -16,10 +16,11 @@ import com.cpw.model.BlListResponse;
 public class BlListImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ApplicationContext context;
 
 	public List<BlListResponse> getBlList(String userType, int userId) {
-		logger.debug("Entering into vesselList");
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		logger.debug("Entering into getBlList");
+		context = new ClassPathXmlApplicationContext("Beans.xml");
 		BlListDAOImpl blListDAOImpl = (BlListDAOImpl) context.getBean("blListDAOImpl");
 		final List<BlList> blList = blListDAOImpl.getBlList(userType, userId);
 		return map(blList);
@@ -30,8 +31,8 @@ public class BlListImpl {
 		List<BlListResponse> blResponseList = Collections.emptyList();
 		if (blList != null && !blList.isEmpty()) {
 			blResponseList = new ArrayList<BlListResponse>();
-			for (BlList vessel : blList) {
-				BlListResponse blResponse = map(vessel);
+			for (BlList bl : blList) {
+				BlListResponse blResponse = map(bl);
 				blResponseList.add(blResponse);
 			}
 			blList.clear();

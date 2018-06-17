@@ -10,7 +10,7 @@ import com.cpw.jdbc.model.CustChallangePriorty;
 public class CustChallangePriortyMapper implements RowMapper<CustChallangePriorty> {
 
 	public CustChallangePriorty mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-		CustChallangePriorty custChallangePriorty = new CustChallangePriorty();
+		final CustChallangePriorty custChallangePriorty = new CustChallangePriorty();
 		custChallangePriorty.setPriortyId(resultSet.getInt("PRIORTY_ID"));
 		custChallangePriorty.setPriortyName(resultSet.getString("NAME"));
 		return custChallangePriorty;

@@ -13,11 +13,9 @@ import com.cpw.jdbc.model.Trace;
 public class TraceDAOImpl implements TraceDAO {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
 
 	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
@@ -52,9 +50,8 @@ public class TraceDAOImpl implements TraceDAO {
 			sb.append(" A.SHIPPING_BILL_NO = ? ");
 		}
 		try {
-			Trace trackingDetail = jdbcTemplateObject.queryForObject(sb.toString(), new Object[] { transactionId },
+			return jdbcTemplateObject.queryForObject(sb.toString(), new Object[] { transactionId },
 					new TraceDetailMapper());
-			return trackingDetail;
 		} catch (EmptyResultDataAccessException e) {
 			logger.error("No Track data  in system");
 			return null;
