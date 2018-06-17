@@ -34,29 +34,25 @@ public class PramotionalController {
 
 		logger.debug("Entering into Pramotional");
 		try {
-			if (request.getPrimaryId().isEmpty() || request.getFromEmailId().isEmpty() || request.getToEmailId().isEmpty()) {
+			if (request.getPrimaryId().isEmpty() || request.getFromEmailId().isEmpty()
+					|| request.getToEmailId().isEmpty()) {
 				return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
 			}
-				logger.debug("Primary ID : " + request.getPrimaryId());
-				PramotionalImpl pramotionalImpl = new PramotionalImpl();
-				String response = pramotionalImpl.pramotional(request);
-				if (response.equals(SUCCESS_STATUS)) {
-					return new ResponseEntity<Object>(HttpStatus.CREATED);
-				} else if (response.equals(FAILED_STATUS)) {
-					return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
-				}
-		
+			logger.debug("Primary ID : " + request.getPrimaryId());
+			PramotionalImpl pramotionalImpl = new PramotionalImpl();
+			String response = pramotionalImpl.pramotional(request);
+			if (response.equals(SUCCESS_STATUS)) {
+				return new ResponseEntity<Object>(HttpStatus.CREATED);
+			} else if (response.equals(FAILED_STATUS)) {
+				return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+			}
+
 			return null;
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	@RequestMapping("/test")
-	public String test() {
-		return "CPW Service Available...";
 	}
 
 }
