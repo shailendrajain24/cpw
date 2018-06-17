@@ -15,7 +15,7 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
 		<property name="url"
-			value="jdbc:sqlserver://27.106.119.154:1433;DatabaseName=CPW" />
+			value="jdbc:sqlserver://localhost:1433;DatabaseName=CPW" />
 		<property name="username" value="sa" />
 		<property name="password" value="Sqlserver#346" />
 	</bean>
