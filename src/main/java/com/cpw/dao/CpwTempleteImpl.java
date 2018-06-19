@@ -11,5 +11,11 @@ public class CpwTempleteImpl<T> implements CpwTemplete<T>{
 	public List<T> getRecordList(String sql, JdbcTemplate jdbcTemplate, RowMapper<T> mapper) {
 		return jdbcTemplate.query(sql, mapper);
 	}
+	
+	@Override
+	public int upsert(String sql, Object [] values, JdbcTemplate jdbcTemplate) {
+		return jdbcTemplate.update(sql, values);
+		
+	}
 
 }

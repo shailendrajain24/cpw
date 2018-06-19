@@ -3,6 +3,12 @@
  */
 package com.cpw.controller;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -22,28 +28,31 @@ import com.cpw.services.PramotionalImpl;
  */
 @RestController
 public class PramotionalController {
-	private static final String SUCCESS_STATUS = "SUCESS";
-	private static final String FAILED_STATUS = "FAILED";
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(value = "/pramotional", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> pramotional(@RequestBody PramotionalRequest request) {
 
 		logger.debug("Entering into Pramotional");
+		/*
+		LocalDateTime ldt = LocalDateTime.ofInstant(request.getCreatedDate().toInstant(), ZoneId.systemDefault());
+		System.out.println(DateTimeFormatter.ofPattern("MM-dd-yyyy", Locale.ENGLISH).format(ldt));
+		System.out.println(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(ldt));
+		System.out.println(request.getCreatedDate());
+		String a = DateTimeFormatter.ofPattern("MM-dd-yyyy", Locale.ENGLISH).format(ldt);
+		 * */
 		try {
 			if (request.getPrimaryId() == 0 || request.getFromEmailId().isEmpty() || request.getToEmailId().isEmpty()) {
 				return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
 			}
 			logger.debug("Primary ID : " + request.getPrimaryId());
 			PramotionalImpl pramotionalImpl = new PramotionalImpl();
-			String response = pramotionalImpl.pramotional(request);
-			if (response.equals(SUCCESS_STATUS)) {
+			int response = pramotionalImpl.pramotional(request);
+			if (response>0) {
 				return new ResponseEntity<Object>(HttpStatus.CREATED);
-			} else if (response.equals(FAILED_STATUS)) {
-				return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+			} else {
+				return new ResponseEntity<Object>(HttpStatus.NOT_ACCEPTABLE);
 			}
-
-			return null;
 
 		} catch (Exception e) {
 			e.printStackTrace();

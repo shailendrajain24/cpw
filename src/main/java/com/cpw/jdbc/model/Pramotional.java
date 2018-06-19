@@ -18,10 +18,10 @@ public class Pramotional {
 	private long fyId;
 	private long fyPrdId;
 	private long createdBy;
-	private Date createdDate;
+	private String createdDate;
 	private String createdTime;
 	private long modifyBy;
-	private Date modifyDate;
+	private String modifyDate;
 	private String modifyTime;
 	public long getPrimaryId() {
 		return primaryId;
@@ -113,10 +113,10 @@ public class Pramotional {
 	public void setCreatedBy(long createdBy) {
 		this.createdBy = createdBy;
 	}
-	public Date getCreatedDate() {
+	public String getCreatedDate() {
 		return createdDate;
 	}
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
 	public String getCreatedTime() {
@@ -131,10 +131,10 @@ public class Pramotional {
 	public void setModifyBy(long modifyBy) {
 		this.modifyBy = modifyBy;
 	}
-	public Date getModifyDate() {
+	public String getModifyDate() {
 		return modifyDate;
 	}
-	public void setModifyDate(Date modifyDate) {
+	public void setModifyDate(String modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 	public String getModifyTime() {

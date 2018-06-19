@@ -26,10 +26,10 @@ public class PramotionalMapper implements RowMapper<Pramotional> {
 		pramotional.setFyId(resultSet.getLong("FY_ID"));
 		pramotional.setFyPrdId(resultSet.getLong("FY_PRD_ID"));
 		pramotional.setCreatedBy(resultSet.getLong("CR_BY"));
-		pramotional.setCreatedDate(resultSet.getDate("CR_DATE"));
+		pramotional.setCreatedDate(resultSet.getString("CR_DATE"));
 		pramotional.setCreatedTime(resultSet.getString("CR_TIME"));
 		pramotional.setModifyBy(resultSet.getLong("MD_BY"));
-		pramotional.setModifyDate(resultSet.getDate("MD_DATE"));
+		pramotional.setModifyDate(resultSet.getString("MD_DATE"));
 		pramotional.setModifyTime(resultSet.getString("MD_TIME"));
 		return pramotional;
 	}

@@ -5,7 +5,11 @@ package com.cpw.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 
 /**
  * @author Unknown
@@ -28,11 +32,46 @@ public class PramotionalRequest {
 	private long fyId;
 	private long fyPrdId;
 	private long createdBy;
+	@JsonSerialize(using=DateSerializer.class)
 	private Date createdDate;
 	private String createdTime;
 	private long modifyBy;
+	@JsonSerialize(using=DateSerializer.class)
 	private Date modifyDate;
 	private String modifyTime;
+	@JsonCreator
+	 public PramotionalRequest(@JsonProperty("primaryId") long primaryId, @JsonProperty("fromEmailId") String fromEmailId
+			 , @JsonProperty("toEmailId") String ToEmailId, @JsonProperty("commercialNvo") int commercialNvo
+			 , @JsonProperty("sendBy") int sendBy, @JsonProperty("subject") String subject
+			 , @JsonProperty("countryId") int countryId, @JsonProperty("categoryId") int categoryId
+			 , @JsonProperty("attachment") String attachment, @JsonProperty("addAttachment") String addAttachment
+			 , @JsonProperty("body") String body, @JsonProperty("locId") long locId
+			 , @JsonProperty("fyId") long fyId, @JsonProperty("fyPrdId") long fyPrdId
+			 , @JsonProperty("createdBy") long createdBy, @JsonProperty("createdDate") Date createdDate
+			 , @JsonProperty("createdTime") String createdTime, @JsonProperty("modifyBy") long modifyBy
+			 , @JsonProperty("modifyDate") Date modifyDate, @JsonProperty("modifyTime") String modifyTime) {
+	  this.primaryId = primaryId;
+	  this.fromEmailId = fromEmailId;
+	  this.ToEmailId = ToEmailId;
+	  this.commercialNvo = commercialNvo;
+	  this.sendBy = sendBy;
+	  this.subject = subject;
+	  this.countryId = countryId;
+	  this.categoryId = categoryId;
+	  
+	  this.attachment = attachment;
+	  this.addAttachment = addAttachment;
+	  this.body = body;
+	  this.locId = locId;
+	  this.fyId = fyId;
+	  this.fyPrdId = fyPrdId;
+	  this.createdBy = createdBy;
+	  this.createdDate = createdDate;
+	  this.createdTime = createdTime;
+	  this.modifyBy = modifyBy;
+	  this.modifyDate = modifyDate;
+	  this.modifyTime = modifyTime;
+	 }
 	public long getPrimaryId() {
 		return primaryId;
 	}
