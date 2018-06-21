@@ -25,7 +25,7 @@ import com.cpw.services.RatingImpl;
 public class RatingController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@RequestMapping(value = "/rating", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/lead/rating", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<? extends RatingResponse>> Tracking() {
 		logger.debug("Entering into rating");
 		try {
