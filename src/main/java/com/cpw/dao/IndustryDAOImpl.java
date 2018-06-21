@@ -25,7 +25,7 @@ public class IndustryDAOImpl implements IndustryDAO {
 	public List<Industry> industryList() {
 		logger.debug("Entering into industryList DAO");
 		CpwTemplete<Industry> cpwTemplete = new CpwTempleteImpl<Industry>();
-		final String sql = "SELECT ID, NAME FROM RATING";
+		final String sql = "SELECT ID, NAME FROM LEAD_INDUSTRY";
 		try {
 			List<Industry> industries = cpwTemplete.getRecordList(sql, jdbcTemplateObject, new IndustryMapper());
 			return industries;

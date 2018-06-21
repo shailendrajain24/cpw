@@ -25,7 +25,7 @@ import com.cpw.services.IndustryImpl;
 public class IndustryController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@RequestMapping(value = "/industry", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/lead/industry", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<? extends IndustryResponse>> Tracking() {
 		logger.debug("Entering into industry");
 		try {

@@ -25,7 +25,7 @@ import com.cpw.services.LeadSourceImpl;
 public class LeadSourceController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@RequestMapping(value = "/leadSource", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/lead/leadSource", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<? extends LeadSourceResponse>> Tracking() {
 		logger.debug("Entering into leadSource");
 		try {

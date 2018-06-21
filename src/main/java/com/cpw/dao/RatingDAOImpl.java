@@ -25,7 +25,7 @@ public class RatingDAOImpl implements RatingDAO {
 	public List<Rating> ratingList() {
 		logger.debug("Entering into ratingList DAO");
 		CpwTemplete<Rating> cpwTemplete = new CpwTempleteImpl<Rating>();
-		final String sql = "SELECT ID, NAME FROM RATING";
+		final String sql = "SELECT ID, NAME FROM LEAD_RATING";
 		try {
 			List<Rating> ratings = cpwTemplete.getRecordList(sql, jdbcTemplateObject, new RatingMapper());
 			return ratings;

@@ -25,7 +25,7 @@ public class SalutationDAOImpl implements SalutationDAO {
 	public List<Salutation> salutationList() {
 		logger.debug("Entering into salutationList DAO");
 		CpwTemplete<Salutation> cpwTemplete = new CpwTempleteImpl<Salutation>();
-		final String sql = "SELECT ID, NAME FROM SALUTATION";
+		final String sql = "SELECT ID, NAME FROM LEAD_SALUTATION";
 		try {
 			List<Salutation> salutations = cpwTemplete.getRecordList(sql, jdbcTemplateObject, new SalutationMapper());
 			return salutations;

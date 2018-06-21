@@ -25,7 +25,7 @@ import com.cpw.services.LeadStatusImpl;
 public class LeadStatusController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@RequestMapping(value = "/leadStatus", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/lead/leadStatus", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<? extends LeadStatusResponse>> Tracking() {
 		logger.debug("Entering into leadStatus");
 		try {

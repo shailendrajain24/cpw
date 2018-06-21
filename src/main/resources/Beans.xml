@@ -47,7 +47,7 @@
 	<bean id="leadSourceDAOImpl" class="com.cpw.dao.LeadSourceDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	<bean id="leadStatusDAOImpl" class="com.cpw.dao.LeadSatusDAOImpl">
+	<bean id="leadStatusDAOImpl" class="com.cpw.dao.LeadStatusDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<bean id="pramotionalDAOImpl" class="com.cpw.dao.PramotionalDAOImpl">
