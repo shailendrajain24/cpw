@@ -17,6 +17,7 @@ public class TraceResponse {
 	private String cfsPolCode;
 	private String cfsPodCode;
 	private String cfsFdcCode;
+	private int status;
 	public String getCfsReceivedId() {
 		return cfsReceivedId;
 	}
@@ -100,5 +101,11 @@ public class TraceResponse {
 	}
 	public void setCfsFdcCode(String cfsFdcCode) {
 		this.cfsFdcCode = cfsFdcCode;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }

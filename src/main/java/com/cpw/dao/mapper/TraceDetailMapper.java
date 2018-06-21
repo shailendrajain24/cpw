@@ -34,7 +34,7 @@ public class TraceDetailMapper implements RowMapper<Trace> {
 		trace.setCfsPolCode(resultSet.getString("CFS_POL_CODE"));//AS
 		trace.setCfsPodCode(resultSet.getString("CFS_POD_CODE"));//AS
 		trace.setCfsFdcCode(resultSet.getString("CFS_FDC_CODE"));//AS
-		
+		trace.setStatus(resultSet.getInt("STATUS"));
 		/*
 		resultSet.getString("STATUS"));
 		resultSet.getString("BOOKING_HDR_ID"));//AS

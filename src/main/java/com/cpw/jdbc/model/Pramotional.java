@@ -1,7 +1,5 @@
 package com.cpw.jdbc.model;
 
-import java.util.Date;
-
 public class Pramotional {
 	private long primaryId;
 	private String fromEmailId;

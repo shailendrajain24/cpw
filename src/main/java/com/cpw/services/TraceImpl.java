@@ -32,6 +32,7 @@ public class TraceImpl {
 			traceResponse.setCfsPolCode(trace.getCfsPolCode());
 			traceResponse.setCfsReceivedId(trace.getCfsReceivedId());
 			traceResponse.setCustomerClearanceDate(trace.getCustomerClearanceDate());
+			traceResponse.setStatus(trace.getStatus());
 		}
 		return traceResponse;
 
