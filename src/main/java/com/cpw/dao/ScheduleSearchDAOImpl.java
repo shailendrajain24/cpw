@@ -29,14 +29,14 @@ public class ScheduleSearchDAOImpl implements ScheduleSearchDAO {
 		List<String> value = new ArrayList<>();
 		sb.append("SELECT B.pol_code, B.pod_code, B.etd, B.eta, C.NAME " + "FROM sailing_schedule_hdr A "
 				+ "INNER JOIN sailing_schedule_dtl B ON A.schedule_id = B.schedule_id "
-				+ "LEFT JOIN vessel_master C ON A.vessel_id = C.vessel_id WHERE");
+				+ "LEFT JOIN vessel_master C ON A.vessel_id = C.vessel_id WHERE ");
 		if (scheduleSearchRequest.getVesselId() != 0) {
 			sb.append(" A.vessel_id = ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getVesselId()));
 			sb.append(" AND ");
 		}
 		if (scheduleSearchRequest.getPodId() != 0) {
-			sb.append("B.pod_id = ? ");
+			sb.append(" B.pod_id = ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getPodId()));
 			sb.append(" AND ");
 		}
@@ -51,17 +51,17 @@ public class ScheduleSearchDAOImpl implements ScheduleSearchDAO {
 			sb.append(" AND ");
 		}
 		if (scheduleSearchRequest.getToETD() != null && !scheduleSearchRequest.getToETD().isEmpty()) {
-			sb.append("B.etd <= ? ");
+			sb.append(" B.etd <= ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getToETD()));
 			sb.append(" AND ");
 		}
 		if (scheduleSearchRequest.getFromETA() != null && !scheduleSearchRequest.getFromETA().isEmpty()) {
-			sb.append("B.eta >= ? ");
+			sb.append(" B.eta >= ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getFromETA()));
 			sb.append(" AND ");
 		}
 		if (scheduleSearchRequest.getToETD() != null && !scheduleSearchRequest.getToETA().isEmpty()) {
-			sb.append("B.eta <= ? ");
+			sb.append(" B.eta <= ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getToETA()));
 		}
 

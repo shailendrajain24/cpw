@@ -44,6 +44,9 @@
 	<bean id="industryDAOImpl" class="com.cpw.dao.IndustryDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<bean id="leadDAOImpl" class="com.cpw.dao.LeadDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	<bean id="leadSourceDAOImpl" class="com.cpw.dao.LeadSourceDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>

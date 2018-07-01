@@ -43,10 +43,19 @@ public class SailingScheduleController {
 				return new ResponseEntity<List<? extends ScheduleSearchResponse>>(scheduleSearchResponseList,
 						HttpStatus.NOT_FOUND);
 			} else {
+				/*request.setFromETA(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(LocalDateTime
+						.ofInstant(fromETA.toInstant(), ZoneId.systemDefault())));
+				request.setToETA(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(LocalDateTime
+						.ofInstant(toETA.toInstant(), ZoneId.systemDefault())));
+				request.setFromETD(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(LocalDateTime
+						.ofInstant(fromETD.toInstant(), ZoneId.systemDefault())));
+				request.setToETD(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(LocalDateTime
+						.ofInstant(toETD.toInstant(), ZoneId.systemDefault())));*/
 				request.setFromETA(fromETA);
 				request.setToETA(toETA);
 				request.setFromETD(fromETD);
 				request.setToETD(toETD);
+
 				logger.debug("PodId: " + request.getPodId());
 				SailingScheduleSearchImpl sailingScheduleSearchImpl = new SailingScheduleSearchImpl();
 				scheduleSearchResponseList = sailingScheduleSearchImpl.sailingSearchSchedule(request);
