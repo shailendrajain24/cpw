@@ -16,11 +16,9 @@ import com.cpw.jdbc.model.UserRole;
 
 public class UserDetailDAOImpl implements UserDetailDAO {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
 
 	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
@@ -32,7 +30,6 @@ public class UserDetailDAOImpl implements UserDetailDAO {
 		logger.debug("Entering into getUserDetail");
 		logger.debug("User Name is : " + id);
 		String sql = "SELECT * FROM USERS WHERE USER_NAME = ?";
-		// String sql = "select * from userdetail where userID = ?";
 		try {
 			UserDetail userDetail = jdbcTemplateObject.queryForObject(sql, new Object[] { id }, new UserDetailMapper());
 			return userDetail;

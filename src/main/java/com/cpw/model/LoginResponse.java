@@ -12,6 +12,7 @@ public class LoginResponse {
 	private String userName;
 	 private String status;
 	 private Integer code = 0;
+	 private String userType;
 	public String getUserId() {
 		return userId;
 	}
@@ -35,6 +36,12 @@ public class LoginResponse {
 	}
 	public void setCode(Integer code) {
 		this.code = code;
+	}
+	public String getUserType() {
+		return userType;
+	}
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 	
 }

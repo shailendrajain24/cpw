@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -22,17 +21,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class PortImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ApplicationContext context;
+
 	public String getAllPort() {
-	//public List<PortResponse> getAllPort() {
 		logger.debug("Entering into getAllPort");
-		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+		context = new ClassPathXmlApplicationContext("Beans.xml");
 		PortMasterDAOImpl portMasterDAOImpl = (PortMasterDAOImpl) context.getBean("portMasterDAOImpl");
 		final List<PortMaster> portMastersList = portMasterDAOImpl.allPortMaster();
-		//return map(portMastersList);
 		try {
 			return mapJson(portMastersList);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -67,16 +65,16 @@ public class PortImpl {
 
 	private String mapJson(List<PortMaster> portMastersList) throws JsonProcessingException {
 		List<PortResponse> portResponse = map(portMastersList);
-		//List<PortResponse2> p2 = new  ArrayList<PortResponse2>();
-		Map<String, List<PortDataResponse>> map = portResponse.stream().collect(Collectors.groupingBy(
-				PortResponse :: getCountryName, Collectors.mapping(a->{
+		// List<PortResponse2> p2 = new ArrayList<PortResponse2>();
+		Map<String, List<PortDataResponse>> map = portResponse.stream()
+				.collect(Collectors.groupingBy(PortResponse::getCountryName, Collectors.mapping(a -> {
 					PortDataResponse portDataResponse = new PortDataResponse();
 					portDataResponse.setCityCode(a.getCityCode());
 					portDataResponse.setCityName(a.getCityName());
 					portDataResponse.setPortId(a.getPortId());
 					return portDataResponse;
 				}, Collectors.toList())));
-		logger.debug("Size of the Map : "+map.size());
+		logger.debug("Size of the Map : " + map.size());
 		return new ObjectMapper().writeValueAsString(map);
 	}
 }

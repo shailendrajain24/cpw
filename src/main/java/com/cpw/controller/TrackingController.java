@@ -34,7 +34,8 @@ public class TrackingController {
 			if (trackingResponseList != null && !trackingResponseList.isEmpty()) {
 				return new ResponseEntity<List<? extends TrackingResponse>>(trackingResponseList, HttpStatus.OK);
 			} else {
-				return new ResponseEntity<List<? extends TrackingResponse>>(trackingResponseList, HttpStatus.NO_CONTENT);
+				return new ResponseEntity<List<? extends TrackingResponse>>(trackingResponseList,
+						HttpStatus.NO_CONTENT);
 			}
 
 		} catch (Exception e) {

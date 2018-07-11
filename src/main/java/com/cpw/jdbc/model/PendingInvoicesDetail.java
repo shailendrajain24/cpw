@@ -5,6 +5,7 @@ public class PendingInvoicesDetail {
 	private String bookingNumber;
 	private String invoiceNumber;
 	private String localAmount;
+	private String dueDate;
 	public String getBookingId() {
 		return bookingId;
 	}
@@ -28,5 +29,11 @@ public class PendingInvoicesDetail {
 	}
 	public void setLocalAmount(String localAmount) {
 		this.localAmount = localAmount;
+	}
+	public String getDueDate() {
+		return dueDate;
+	}
+	public void setDueDate(String dueDate) {
+		this.dueDate = dueDate;
 	}
 }

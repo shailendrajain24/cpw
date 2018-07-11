@@ -1,6 +1,5 @@
 package com.cpw.dao;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -16,22 +15,18 @@ import com.cpw.jdbc.model.Vessel;
 public class VesselDAOImpl implements VesselDAO {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
 
 	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
 	@Override
 	public List<Vessel> vesselList() {
 		logger.debug("Entering into vesselList");
-		List<Vessel> vessel = Collections.emptyList();
 		final String vesselSql = "SELECT VESSEL_ID, NAME FROM VESSEL_MASTER";
 		try {
-			vessel = jdbcTemplateObject.query(vesselSql, new VesselMapper());
-			return vessel;
+			return jdbcTemplateObject.query(vesselSql, new VesselMapper());
 		} catch (EmptyResultDataAccessException e) {
 			logger.error("No vessel data  in system");
 			return null;
