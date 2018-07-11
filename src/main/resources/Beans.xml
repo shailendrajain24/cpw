@@ -22,10 +22,18 @@
 
 
 	<!-- Definition for JDBCTemplate bean -->
+	<bean id="accountTypeDAOImpl" class="com.cpw.dao.AccountTypeDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="addAccountDAOImpl" class="com.cpw.dao.AddAccountDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	<bean id="blListDAOImpl" class="com.cpw.dao.BlListDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-
+	<bean id="contactDAOImpl" class="com.cpw.dao.ContactDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	<bean id="currencyDAOImpl" class="com.cpw.dao.CurrencyDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
@@ -45,6 +53,9 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<bean id="leadDAOImpl" class="com.cpw.dao.LeadDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="leadFieldDAOImpl" class="com.cpw.dao.LeadFieldDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<bean id="leadSourceDAOImpl" class="com.cpw.dao.LeadSourceDAOImpl">
