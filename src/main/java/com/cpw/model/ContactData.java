@@ -107,10 +107,10 @@ public class ContactData {
 		this.department = department;
 		this.phone = phone;
 		this.homePhone = homePhone;
-		this.otherPhone = otherPhone;
+		//this.otherPhone = otherPhone;
 		this.fax = fax;
 		this.mobile = mobile;
-		this.dateOfBirth = dateOfBirth;
+		/*this.dateOfBirth = dateOfBirth;
 		this.assistant = assistant;
 		this.asstPhone = asstPhone;
 		this.reportsTo = reportsTo;
@@ -133,7 +133,7 @@ public class ContactData {
 		this.otherAddressState = otherAddressState;
 		this.otherAddressZip = otherAddressZip;
 		this.otherAddressCounty = otherAddressCounty;
-		this.description = description;
+		this.description = description;*/
 	}
 	public Blob getImage() {
 		return image;

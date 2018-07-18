@@ -6,8 +6,6 @@ package com.cpw.model;
 import java.io.InputStream;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 /**
  * @author Unknown
  *
