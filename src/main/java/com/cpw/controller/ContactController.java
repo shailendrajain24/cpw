@@ -50,8 +50,8 @@ public class ContactController {
 	}
 	
 	@RequestMapping(value = "/removeContact/{contactId}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> contactLead(@PathVariable("contactId") long contactId) {
-		logger.debug("Entering into contactLead");
+	public ResponseEntity<Object> removeContact(@PathVariable("contactId") long contactId) {
+		logger.debug("Entering into removeContact");
 		try {
 			ContactImpl contactImpl = new ContactImpl();
 			int response = contactImpl.removeContact(contactId);
@@ -67,7 +67,7 @@ public class ContactController {
 		return null;
 	}
 	
-	@RequestMapping(value = "/addContact", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.ALL_VALUE)
+	@RequestMapping(value = "/addContact", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> upsertContact(@RequestBody ContactData request) {
 
 		logger.debug("Entering into addContact");

@@ -43,12 +43,12 @@ public class ContactMapper implements RowMapper<Contact> {
 		contact.setMailingAddressCity(resultSet.getString("MAILING_ADDRESS_CITY"));
 		contact.setMailingAddressState(resultSet.getString("MAILING_ADDRESS_STATE"));
 		contact.setMailingAddressZip(resultSet.getString("MAILING_ADDRESS_ZIP"));
-		contact.setMailingAddressCounty(resultSet.getString("MAILING_ADDRESS_COUNTRY"));
+		//contact.setMailingAddressCounty(resultSet.getString("MAILING_ADDRESS_COUNTRY"));
 		contact.setOtherAddressStreet(resultSet.getString("OTHER_ADDRESS_STREET"));
 		contact.setOtherAddressCity(resultSet.getString("OTHER_ADDRESS_CITY"));
 		contact.setOtherAddressState(resultSet.getString("OTHER_ADDRESS_STATE"));
 		contact.setOtherAddressZip(resultSet.getString("OTHER_ADDRESS_ZIP"));
-		contact.setOtherAddressCounty(resultSet.getString("OTHER_ADDRESS_COUNTRY"));
+		//contact.setOtherAddressCounty(resultSet.getString("OTHER_ADDRESS_COUNTRY"));
 		contact.setDescription(resultSet.getString("DESCRIPTION"));
 		
 		return contact;

@@ -22,7 +22,7 @@ public class AddAccountController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(value = "/accounts/{createdBy}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<? extends AddAccountResponse>> accounts(@PathVariable("createdBy") String createdBy) {
+	public ResponseEntity<List<? extends AddAccountResponse>> accounts(@PathVariable("createdBy") long createdBy) {
 		logger.debug("Entering into Account list");
 		try {
 			AddAccountImpl accountImpl = new AddAccountImpl();

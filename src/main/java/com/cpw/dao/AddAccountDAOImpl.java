@@ -39,23 +39,45 @@ public class AddAccountDAOImpl implements AddAccountDAO {
 			int count = -1;
 			if (a != null && a.getId() == account.getId()) {
 				logger.debug("UPDATE values" + account.getId());
-				String updateSql = "UPDATE ACCOUNT SET ACCOUNT_OWNER=?, RATING=?, ACCOUNT_NAME=?, PHONE=?, ACCOUNT_SITE=?, FAX=?,"
-						+ " PARENT_ACCOUNT=?, WEBSITE=?, ACCOUNT_NUMBER=?, TICKER_SYMBOL=?, ACCOUNT_TYPE=?, OWNERSHIP=?, INDUSTRY=?, EMPLOYEE=?, ANNUAL_REVENUE=?,SIC_CODE=?"
-						+ ", BILLING_STREET=?, BILLING_CITY=?, BILLING_STATE=?, BILLING_CODE=?, BILLING_COUNTRY=?, ADDRESS_STREET=?,"
-						+ " ADDRESS_CITY=?, ADDRESS_STATE=?, ADDRESS_CODE=?,ADDRESS_COUNTRY=?, DESCRIPTION=?, MODIFY_BY=?,MODIFY_TIME=?,PARENT_ACCOUNT_ID=?"
-						+ " WHERE ACCOUNT_ID=?";
-				return jdbcTemplateObject.update(updateSql, account.getAccountOwner(), account.getRating(),
-						account.getAccountName(), account.getPhone(), account.getAccountSite(), account.getFax(),
-						account.getParentAccount(), account.getWebSite(), account.getAccountNumber(),
-						account.getTickerSymbol(), account.getAccountType(), account.getOwnerShip(),
-						account.getIndustry(), account.getEmployees(), account.getAnnualRevenue(), account.getSicCode(),
-						account.getBillingAddressStreet(), account.getBillingAddressCity(),
-						account.getBillingAddressState(), account.getBillingAddressCode(),
-						account.getBillingAddressCountry(), account.getShippingAddressStreet(),
-						account.getShippingAddressCity(), account.getShippingAddressState(),
-						account.getShippingAddressCode(), account.getShippingAddressCountry(), account.getDescription(),
-						account.getModifyBy(), account.getModifyTime(), account.getCreatedBy(),
-						account.getCreatedTime(), account.getId(), account.getParentAccountId());
+				String updateSql = "UPDATE ACCOUNT SET ACCOUNT_OWNER=?,RATING=?,ACCOUNT_NAME=?,PHONE=?,"
+						+ "ACCOUNT_SITE=?,FAX=?,PARENT_ACCOUNT=?,WEBSITE=?,ACCOUNT_NUMBER=?,TICKER_SYMBOL=?,"
+						+ "ACCOUNT_TYPE=?,OWNERSHIP=?,INDUSTRY=?,EMPLOYEE=?,ANNUAL_REVENUE=?,SIC_CODE=?,BILLING_STREET=?,"
+						+ "BILLING_CITY=?,BILLING_STATE=?,BILLING_CODE=?,BILLING_COUNTRY=?,ADDRESS_STREET=?,ADDRESS_CITY=?,"
+						+ "ADDRESS_STATE=?,ADDRESS_CODE=?,ADDRESS_COUNTRY=?,DESCRIPTION=?,CREATED_BY=?,CREATED_TIME=?,"
+						+ "MODIFY_BY=?,MODIFY_TIME=?,PARENT_ACCOUNT_ID=? WHERE ACCOUNT_ID=?";
+				return jdbcTemplateObject.update(updateSql, account.getAccountOwner(), 
+						account.getRating(),
+						account.getAccountName(),
+						account.getPhone(),
+						account.getAccountSite(), 
+						account.getFax(),
+						account.getParentAccount(),
+						account.getWebSite(),
+						account.getAccountNumber(),
+						account.getTickerSymbol(),
+						account.getAccountType(),
+						account.getOwnerShip(),
+						account.getIndustry(),
+						account.getEmployees(),
+						account.getAnnualRevenue(),
+						account.getSicCode(),
+						account.getBillingAddressStreet(),
+						account.getBillingAddressCity(),
+						account.getBillingAddressState(),
+						account.getBillingAddressCode(),
+						account.getBillingAddressCountry(), 
+						account.getShippingAddressStreet(),
+						account.getShippingAddressCity(), 
+						account.getShippingAddressState(),
+						account.getShippingAddressCode(),
+						account.getShippingAddressCountry(),
+						account.getDescription(),
+						account.getCreatedBy(),
+						account.getCreatedTime(),
+						account.getModifyBy(), 
+						account.getModifyTime(),
+						account.getParentAccountId(),
+						account.getId());
 			} else {
 				Object[] values = new Object[33];
 				values[0] = account.getId();
@@ -114,30 +136,38 @@ public class AddAccountDAOImpl implements AddAccountDAO {
 	}
 
 	@Override
-	public List<AddAccount> accountList(String createdBy) {
-		logger.debug("Entering into accountList " + createdBy);
-		final String trackingSql = "Select ACCOUNT_ID,ACCOUNT_OWNER, RATING, ACCOUNT_NAME, PHONE,"
-				+ " ACCOUNT_SITE, FAX,PARENT_ACCOUNT_ID,PARENT_ACCOUNT, WEBSITE, ACCOUNT_NUMBER, TICKER_SYMBOL, "
-				+ "ACCOUNT_TYPE, OWNERSHIP, INDUSRY, EMPLOYEE, ANNUAL_REVENUE, SIC_CODE,"
-				+ " BILLING_STREET, BILLING_CITY, BILLING_STATE, BILLING_CODE,BILLING_COUNTRY "
-				+ "ADDRESS_STREET, ADDRESS_CITY, ADDRESS_STATE,ADDRESS_CODE,ADDRESS_COUNTRY,"
-				+ " DESCRIPTION,CREATED_BY, CREATED_TIME, MODIFY_BY, MODIFY_TIME"
-				+ " from ACCOUNT WHERE CREATED_BY = ?";
+	public List<AddAccount> accountList(long id) {
+		CpwTemplete<AddAccount> cpwTemplete = new CpwTempleteImpl<AddAccount>();
+		
+		
+		
 		try {
-			List<AddAccount> accountList = jdbcTemplateObject.query(trackingSql, new Object[] { createdBy },
-					new AddAccountMapper());
-			return accountList;
+			if(id==0){
+				logger.debug("Entering into accountList ");
+				final String trackingSql = "SELECT * FROM ACCOUNT";
+				List<AddAccount> accountList = cpwTemplete.getRecordList(trackingSql, jdbcTemplateObject,new AddAccountMapper());
+				return accountList;
+			}else
+			{
+				logger.debug("Entering into accountList" +id);
+				final String trackingSql = "SELECT * FROM ACCOUNT WHERE ACCOUNT_ID=?";
+				List<AddAccount> accountList = jdbcTemplateObject.query(trackingSql, new Object[] { id},
+						new AddAccountMapper());
+				return accountList;
+			}
+			
 		} catch (EmptyResultDataAccessException e) {
 			logger.error("No ACCOUNTList in system");
-			return null;
+			
 		}
+		return null;
 
 	}
 
 	@Override
 	public int removeAccount(long id) {
 		logger.debug("Entering into remove aCCOUNT");
-		final String trackingSql = "DELETE FROM ACCOUNT WHERE ACCOUNT_ID = ?";
+		final String trackingSql = "DELETE FROM ACCOUNT WHERE ACCOUNT_ID=?";
 		try {
 			return jdbcTemplateObject.update(trackingSql, id);
 		} catch (DataAccessException e) {

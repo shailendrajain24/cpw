@@ -11,7 +11,7 @@ public interface AddAccountDAO {
 
 	public int upsertAccount(AddAccount account);
 
-	public List<AddAccount> accountList(String createdBy);
+	public List<AddAccount> accountList(long id);
 
 	public int removeAccount(long id);
 

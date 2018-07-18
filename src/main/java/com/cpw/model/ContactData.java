@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package com.cpw.model;
 
 import java.sql.Blob;
@@ -48,15 +46,16 @@ public class ContactData {
 	private String mailingAddressCity;
 	private String mailingAddressState;
 	private String mailingAddressZip;
-	private String mailingAddressCounty;
+	private String mailingAddressCountry;
 	private String otherAddressStreet;
 	private String otherAddressCity;
 	private String otherAddressState;
 	private String otherAddressZip;
-	private String otherAddressCounty;
+	private String otherAddressCountry;
 	private String description;
+	
 	@JsonCreator
-	public ContactData(	@JsonProperty("image") Blob image,
+      public ContactData(@JsonProperty("image") Blob image,
 			@JsonProperty("contactId") long contactId,
 			@JsonProperty("contactOwner") String contactOwner,
 			@JsonProperty("leadSource") String leadSource,
@@ -68,33 +67,34 @@ public class ContactData {
 			@JsonProperty("department") String department,
 			@JsonProperty("phone") String phone,
 			@JsonProperty("homePhone") String homePhone,
-			@JsonProperty("otherPhone") String otherPhonee,
+			@JsonProperty("otherPhone") String otherPhone,
 			@JsonProperty("fax") String fax,
-			@JsonProperty("mobile") String mobile
-			/*@JsonProperty("") String dateOfBirth,
-			@JsonProperty("") String assistant,
-			@JsonProperty("") String asstPhone,
-			@JsonProperty("") String reportsTo,
-			@JsonProperty("") boolean emailOptOut,
-			@JsonProperty("") String createdBy,
-			@JsonProperty("") long createdDate,
-			@JsonProperty("") String modifyBy,
-			@JsonProperty("") long modifyDate,
-			@JsonProperty("") String skypeId,
-			@JsonProperty("") String secondaryEmail,
-			@JsonProperty("") String lastActivityTime,
-			@JsonProperty("") String twitter,
-			@JsonProperty("") String mailingAddressStreet,
-			@JsonProperty("") String mailingAddressCity,
-			@JsonProperty("") String mailingAddressState,
-			@JsonProperty("") String mailingAddressZip,
-			@JsonProperty("") String mailingAddressCounty,
-			@JsonProperty("") String otherAddressStreet,
-			@JsonProperty("") String otherAddressCity,
-			@JsonProperty("") String otherAddressState,
-			@JsonProperty("") String otherAddressZip,
-			@JsonProperty("") String otherAddressCounty,
-			@JsonProperty("") String description*/) {
+			@JsonProperty("mobile") String mobile,
+			@JsonProperty("dateOfBirth") String dateOfBirth,
+			@JsonProperty("assistant") String assistant,
+			@JsonProperty("asstPhone") String asstPhone,
+			@JsonProperty("reportsTo") String reportsTo,
+			@JsonProperty("emailOptOut") boolean emailOptOut,
+			@JsonProperty("createdBy") String createdBy,
+			@JsonProperty("createdDate") long createdDate,
+			@JsonProperty("modifyBy") String modifyBy,
+			@JsonProperty("modifyDate") long modifyDate,
+			@JsonProperty("skypeId") String skypeId,
+			@JsonProperty("secondaryEmail") String secondaryEmail,
+			@JsonProperty("lastActivityTime") String lastActivityTime,
+			@JsonProperty("twitter") String twitter,
+			@JsonProperty("mailingAddressStreet") String mailingAddressStreet,
+			@JsonProperty("mailingAddressCity") String mailingAddressCity,
+			@JsonProperty("mailingAddressState") String mailingAddressState,
+			@JsonProperty("mailingAddressZip") String mailingAddressZip,
+			@JsonProperty("mailingAddressCountry") String mailingAddressCountry,
+			@JsonProperty("otherAddressStreet") String otherAddressStreet,
+			@JsonProperty("otherAddressCity") String otherAddressCity,
+			@JsonProperty("otherAddressState") String otherAddressState,
+			@JsonProperty("otherAddressZip") String otherAddressZip,
+		    @JsonProperty("otherAddressCountry") String otherAddressCountry,
+		    @JsonProperty("description") String description
+		     ) {
 		this.image = image;
 		this.contactId = contactId;
 		this.contactOwner = contactOwner;
@@ -107,10 +107,10 @@ public class ContactData {
 		this.department = department;
 		this.phone = phone;
 		this.homePhone = homePhone;
-		//this.otherPhone = otherPhone;
+		this.otherPhone = otherPhone;
 		this.fax = fax;
 		this.mobile = mobile;
-		/*this.dateOfBirth = dateOfBirth;
+		this.dateOfBirth = dateOfBirth;
 		this.assistant = assistant;
 		this.asstPhone = asstPhone;
 		this.reportsTo = reportsTo;
@@ -127,14 +127,30 @@ public class ContactData {
 		this.mailingAddressCity = mailingAddressCity;
 		this.mailingAddressState = mailingAddressState;
 		this.mailingAddressZip = mailingAddressZip;
-		this.mailingAddressCounty = mailingAddressCounty;
+		this.mailingAddressCountry = mailingAddressCountry;
 		this.otherAddressStreet = otherAddressStreet;
 		this.otherAddressCity = otherAddressCity;
 		this.otherAddressState = otherAddressState;
 		this.otherAddressZip = otherAddressZip;
-		this.otherAddressCounty = otherAddressCounty;
-		this.description = description;*/
+		this.otherAddressCountry = otherAddressCountry;
+		this.description =description;
+		
 	}
+	
+	
+	
+	public String getDescription() {
+		return description;
+	}
+
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+
 	public Blob getImage() {
 		return image;
 	}
@@ -327,11 +343,11 @@ public class ContactData {
 	public void setMailingAddressZip(String mailingAddressZip) {
 		this.mailingAddressZip = mailingAddressZip;
 	}
-	public String getMailingAddressCounty() {
-		return mailingAddressCounty;
+	public String getMailingAddressCountry() {
+		return mailingAddressCountry;
 	}
-	public void setMailingAddressCounty(String mailingAddressCounty) {
-		this.mailingAddressCounty = mailingAddressCounty;
+	public void setMailingAddressCountry(String mailingAddressCountry) {
+		this.mailingAddressCountry = mailingAddressCountry;
 	}
 	public String getOtherAddressStreet() {
 		return otherAddressStreet;
@@ -357,16 +373,11 @@ public class ContactData {
 	public void setOtherAddressZip(String otherAddressZip) {
 		this.otherAddressZip = otherAddressZip;
 	}
-	public String getOtherAddressCounty() {
-		return otherAddressCounty;
+	public String getOtherAddressCountry() {
+		return otherAddressCountry;
 	}
-	public void setOtherAddressCounty(String otherAddressCounty) {
-		this.otherAddressCounty = otherAddressCounty;
+	public void setOtherAddressCountry(String otherAddressCountry) {
+		this.otherAddressCountry = otherAddressCountry;
 	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
+	
 }

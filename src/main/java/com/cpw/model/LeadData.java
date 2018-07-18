@@ -3,7 +3,7 @@
  */
 package com.cpw.model;
 
-import java.io.InputStream;
+import java.sql.Blob;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LeadData {
-	private InputStream uploadedInputStream;
+	private Blob uploadedInputStream;
 	private long leadId;
 	private String leadOwner;
 	private String company;
@@ -50,7 +50,7 @@ public class LeadData {
 	@JsonSerialize(using=DateSerializer.class)
 	private Date modifyDate;
 	@JsonCreator
-	public LeadData(@JsonProperty("uploadedInputStream") InputStream uploadedInputStream, @JsonProperty("leadId") long leadId, @JsonProperty("leadOwner") String leadOwner, @JsonProperty("company") String company,
+	public LeadData(@JsonProperty("uploadedInputStream") Blob uploadedInputStream, @JsonProperty("leadId") long leadId, @JsonProperty("leadOwner") String leadOwner, @JsonProperty("company") String company,
 			@JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName,
 			@JsonProperty("title") String title, @JsonProperty("email") String email,
 			@JsonProperty("phone") String phone, @JsonProperty("fax") String fax, @JsonProperty("mobile") String mobile,
@@ -98,11 +98,11 @@ public class LeadData {
 		// TODO Auto-generated constructor stub
 	}
 
-	public InputStream getUploadedInputStream() {
+	public Blob getUploadedInputStream() {
 		return uploadedInputStream;
 	}
 
-	public void setUploadedInputStream(InputStream uploadedInputStream) {
+	public void setUploadedInputStream(Blob uploadedInputStream) {
 		this.uploadedInputStream = uploadedInputStream;
 	}
 	

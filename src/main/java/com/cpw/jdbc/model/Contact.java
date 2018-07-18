@@ -36,12 +36,12 @@ private String mailingAddressStreet;
 private String mailingAddressCity;
 private String mailingAddressState;
 private String mailingAddressZip;
-private String mailingAddressCounty;
+private String mailingAddressCountry;
 private String otherAddressStreet;
 private String otherAddressCity;
 private String otherAddressState;
 private String otherAddressZip;
-private String otherAddressCounty;
+private String otherAddressCountry;
 private String description;
 public Blob getImage() {
 	return image;
@@ -235,11 +235,11 @@ public String getMailingAddressZip() {
 public void setMailingAddressZip(String mailingAddressZip) {
 	this.mailingAddressZip = mailingAddressZip;
 }
-public String getMailingAddressCounty() {
-	return mailingAddressCounty;
+public String getMailingAddressCountry() {
+	return mailingAddressCountry;
 }
-public void setMailingAddressCounty(String mailingAddressCounty) {
-	this.mailingAddressCounty = mailingAddressCounty;
+public void setMailingAddressCountry(String mailingAddressCountry) {
+	this.mailingAddressCountry = mailingAddressCountry;
 }
 public String getOtherAddressStreet() {
 	return otherAddressStreet;
@@ -265,11 +265,11 @@ public String getOtherAddressZip() {
 public void setOtherAddressZip(String otherAddressZip) {
 	this.otherAddressZip = otherAddressZip;
 }
-public String getOtherAddressCounty() {
-	return otherAddressCounty;
+public String getOtherAddressCountry() {
+	return otherAddressCountry;
 }
-public void setOtherAddressCounty(String otherAddressCounty) {
-	this.otherAddressCounty = otherAddressCounty;
+public void setOtherAddressCountry(String otherAddressCountry) {
+	this.otherAddressCountry = otherAddressCountry;
 }
 public String getDescription() {
 	return description;

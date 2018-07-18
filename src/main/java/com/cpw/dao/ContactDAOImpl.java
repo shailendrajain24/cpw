@@ -25,7 +25,7 @@ public class ContactDAOImpl implements ContactDAO {
 	public List<Contact> contactList(String createdBy) {
 		logger.debug("Entering into contactList " + createdBy);
 		final String trackingSql = "Select IMAGE, CONTACT_ID, CONTACT_OWNER, LEAD_SOURCE, FIRST_NAME, LAST_NAME, ACCOUNT_NAME, EMAIL,TITLE,DEPARTMENT, PHONE,HOME_PHONE,OTHER_PHONE, FAX, MOBILE, DATE_OF_BIRTH,ASSISTANT,ASST_PHONE,REPORTS_TO, "
-				+ " EMAIL_OPT_OUT,CREATED_BY, SKYPE_ID,MODIFY_BY,CREATED_DATE,MODIFY_DATE,SECONDARY_EMAIL,LAST_ACTVITY_TIME,TWITTER, "
+				+ " EMAIL_OPT_OUT,CREATED_BY, SKYPE_ID,MODIFY_BY,CREATED_DATE,MODIFY_DATE,SECONDARY_EMAIL,LAST_ACTIVITY_TIME,TWITTER, "
 				+ "MAILING_ADDRESS_STREET,MAILING_ADDRESS_CITY,MAILING_ADDRESS_STATE, MAILING_ADDRESS_ZIP, MAILING_ADDRESS_COUNTRY,"
 				+ "OTHER_ADDRESS_STREET,OTHER_ADDRESS_CITY,OTHER_ADDRESS_STATE, OTHER_ADDRESS_ZIP, OTHER_ADDRESS_COUNTRY,"
 				+ " DESCRIPTION"
@@ -103,9 +103,9 @@ public class ContactDAOImpl implements ContactDAO {
 						contact.getPhone(),contact.getHomePhone(),contact.getFax(),contact.getMobile(),
 						contact.getDateOfBirth(),contact.getAssistant(),contact.getAsstPhone(),
 						contact.getReportsTo(),contact.isEmailOptOut(),
-						contact.isEmailOptOut(),contact.getSkypeId(),contact.getModifyBy(),contact.getModifyDate(),contact.getSecondaryEmail(),contact.getLastActivityTime(),contact.getTwitter(),
-						contact.getMailingAddressStreet(),contact.getMailingAddressCity(),contact.getMailingAddressState(),contact.getMailingAddressZip(),contact.getMailingAddressCounty(),
-						contact.getOtherAddressStreet(),contact.getOtherAddressCity(),contact.getOtherAddressState(),contact.getOtherAddressZip(),contact.getOtherAddressCounty(),
+						contact.getSkypeId(),contact.getModifyBy(),contact.getModifyDate(),contact.getSecondaryEmail(),contact.getLastActivityTime(),contact.getTwitter(),
+						contact.getMailingAddressStreet(),contact.getMailingAddressCity(),contact.getMailingAddressState(),contact.getMailingAddressZip(),contact.getMailingAddressCountry(),
+						contact.getOtherAddressStreet(),contact.getOtherAddressCity(),contact.getOtherAddressState(),contact.getOtherAddressZip(),contact.getOtherAddressCountry(),
 						contact.getDescription(),
 						contact.getContactId());
 			} else {
@@ -116,10 +116,10 @@ public class ContactDAOImpl implements ContactDAO {
 				values[3] = contact.getLeadSource();
 				values[4] = contact.getFirstName();
 				values[5] = contact.getLastName();
-				values[6]=contact.getAccountName();
+				values[6] = contact.getAccountName();
 				values[7] = contact.getEmail();
 				values[8] = contact.getTitle();
-				values[9]=contact.getDepartment();
+				values[9] = contact.getDepartment();
 			    values[10] = contact.getPhone();
 				values[11] = contact.getHomePhone();
 				values[12] = contact.getOtherPhone();
@@ -142,23 +142,23 @@ public class ContactDAOImpl implements ContactDAO {
 				values[29] = contact.getMailingAddressCity();
 				values[30] = contact.getMailingAddressState();
 				values[31] = contact.getMailingAddressZip();
-				values[32] = contact.getMailingAddressCounty();
+				values[32] = contact.getMailingAddressCountry();
 				values[33] = contact.getOtherAddressStreet();
 				values[34] = contact.getOtherAddressCity();
 				values[35] = contact.getOtherAddressState();
 				values[36] = contact.getOtherAddressZip();
-				values[37] = contact.getOtherAddressCounty();
+				values[37] = contact.getOtherAddressCountry();
 				values[38] = contact.getDescription();
 				
 								
 				logger.debug("INSERT values" + values[1]);
-				String insertSql = "INSERT INTO CONTACT (IMAGE, CONTACT_ID, CONTACT_OWNER,LEAD_SOURCE,  FIRST_NAME, LAST_NAME,ACCOUNT_NAME,EMAIL, TITLE,"
-						+ " DEPARTMENT, PHONE,HOME_PHONE,OTHER_PHONE, FAX, MOBILE, DATE_OF_BIRTH,ASSISTANT,ASST_PHONE,REPORTS_TO,"
-						+ "  EMAIL_OPT_OUT,CREATED_BY,CREATED_DATE,MODIFY_BY,MODIFY_DATE, SKYPE_ID,SECONDARY_EMAIL,LAST_ACTIVITY_TIME,TWITTER,"
-						+ " MAILING_ADDRESS_STREET, MAILING_ADDRESS_CITY, MAILING_ADDRESS_STATE, MAILING_ADDRESS_ZIP, MAILING_ADDRESS_COUNTRY,"
-						+ " OTHER_ADDRESS_STREET, OTHER_ADDRESS_CITY, OTHER_ADDRESS_STATE, OTHER_ADDRESS_ZIP, OTHER_ADDRESS_COUNTRY,"
-						+ " DESCRIPTION)"
-						+ "VALUES (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?,?,?);";
+				String insertSql = "INSERT INTO CONTACT (IMAGE, CONTACT_ID, CONTACT_OWNER,LEAD_SOURCE,FIRST_NAME, LAST_NAME,ACCOUNT_NAME,EMAIL, TITLE,"
+						+ "DEPARTMENT,PHONE,HOME_PHONE,OTHER_PHONE,FAX,MOBILE,DATE_OF_BIRTH,ASSISTANT,ASST_PHONE,REPORTS_TO,"
+						+ "EMAIL_OPT_OUT,CREATED_BY,CREATED_DATE,MODIFY_BY,MODIFY_DATE,SKYPE_ID,SECONDARY_EMAIL,LAST_ACTIVITY_TIME,TWITTER,"
+						+ "MAILING_ADDRESS_STREET,MAILING_ADDRESS_CITY,MAILING_ADDRESS_STATE,MAILING_ADDRESS_ZIP,MAILING_ADDRESS_COUNTRY,"
+						+ "OTHER_ADDRESS_STREET,OTHER_ADDRESS_CITY,OTHER_ADDRESS_STATE,OTHER_ADDRESS_ZIP,OTHER_ADDRESS_COUNTRY,"
+						+ "DESCRIPTION)"
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?,?,?,?);";
 				count = cpwTemplete.upsert(insertSql, values, jdbcTemplateObject);
 				logger.debug("Record creation status: " + count);
 			}

@@ -35,9 +35,9 @@ public class AddAccountImpl {
 		return addAccountDAO.removeAccount(id);
 	}
 
-	public List<AddAccountResponse> accountList(String createdBy) {
+	public List<AddAccountResponse> accountList(long id) {
 		logger.debug("Entering into Account List");
-		final List<AddAccount> AccountList = addAccountDAO.accountList(createdBy);
+		final List<AddAccount> AccountList = addAccountDAO.accountList(id);
 		return map(AccountList);
 
 	}

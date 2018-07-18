@@ -58,12 +58,12 @@ public class ContactImpl {
 		if (contact != null) {
 			contactData.setImage(contact.getImage());
 			contactData.setMailingAddressCity(contact.getMailingAddressCity());
-			contactData.setMailingAddressCounty(contact.getMailingAddressCounty());
+			contactData.setMailingAddressCountry(contact.getMailingAddressCountry());
 			contactData.setMailingAddressState(contact.getMailingAddressState());
 			contactData.setMailingAddressStreet(contact.getMailingAddressStreet());
 			contactData.setMailingAddressZip(contact.getMailingAddressZip());
 			contactData.setOtherAddressCity(contact.getOtherAddressCity());
-			contactData.setOtherAddressCounty(contact.getOtherAddressCounty());
+			contactData.setOtherAddressCountry(contact.getOtherAddressCountry());
 			contactData.setOtherAddressState(contact.getOtherAddressState());
 			contactData.setOtherAddressStreet(contact.getOtherAddressStreet());
 			contactData.setOtherAddressZip(contact.getOtherAddressZip());
@@ -106,12 +106,12 @@ public class ContactImpl {
 			
 			contact.setImage(contactRequest.getImage());
 			contact.setMailingAddressCity(contactRequest.getMailingAddressCity());
-			contact.setMailingAddressCounty(contactRequest.getMailingAddressCounty());
+			contact.setMailingAddressCountry(contactRequest.getMailingAddressCountry());
 			contact.setMailingAddressState(contactRequest.getMailingAddressState());
 			contact.setMailingAddressStreet(contactRequest.getMailingAddressStreet());
 			contact.setMailingAddressZip(contactRequest.getMailingAddressZip());
 			contact.setOtherAddressCity(contactRequest.getOtherAddressCity());
-			contact.setOtherAddressCounty(contactRequest.getOtherAddressCounty());
+			contact.setOtherAddressCountry(contactRequest.getOtherAddressCountry());
 			contact.setOtherAddressState(contactRequest.getOtherAddressState());
 			contact.setOtherAddressStreet(contactRequest.getOtherAddressStreet());
 			contact.setOtherAddressZip(contactRequest.getOtherAddressZip());
