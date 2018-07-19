@@ -60,7 +60,7 @@ public class ScheduleSearchDAOImpl implements ScheduleSearchDAO {
 			value.add(String.valueOf(scheduleSearchRequest.getFromETA()));
 			sb.append(" AND ");
 		}
-		if (scheduleSearchRequest.getToETD() != null && !scheduleSearchRequest.getToETA().isEmpty()) {
+		if (scheduleSearchRequest.getToETA() != null && !scheduleSearchRequest.getToETA().isEmpty()) {
 			sb.append(" B.eta <= ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getToETA()));
 		}

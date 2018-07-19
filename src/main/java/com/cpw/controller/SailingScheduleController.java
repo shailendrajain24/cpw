@@ -37,8 +37,8 @@ public class SailingScheduleController {
 			@RequestParam(value = "FromETA", required = false) String fromETA,
 			@RequestParam(value = "ToETA", required = false) String toETA) {
 		logger.debug("Entering into SailingScheduleController");
+		List<ScheduleSearchResponse> scheduleSearchResponseList = Collections.emptyList();
 		try {
-			List<ScheduleSearchResponse> scheduleSearchResponseList = Collections.emptyList();
 			if (request == null) {
 				return new ResponseEntity<List<? extends ScheduleSearchResponse>>(scheduleSearchResponseList,
 						HttpStatus.NOT_FOUND);
@@ -59,18 +59,19 @@ public class SailingScheduleController {
 				logger.debug("PodId: " + request.getPodId());
 				SailingScheduleSearchImpl sailingScheduleSearchImpl = new SailingScheduleSearchImpl();
 				scheduleSearchResponseList = sailingScheduleSearchImpl.sailingSearchSchedule(request);
-				if (scheduleSearchResponseList.isEmpty()) {
+				if (!scheduleSearchResponseList.isEmpty()) {
 					return new ResponseEntity<List<? extends ScheduleSearchResponse>>(scheduleSearchResponseList,
-							HttpStatus.NO_CONTENT);
+							HttpStatus.OK);
 				}
 				return new ResponseEntity<List<? extends ScheduleSearchResponse>>(scheduleSearchResponseList,
-						HttpStatus.OK);
+						HttpStatus.NO_CONTENT);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<List<? extends ScheduleSearchResponse>>(scheduleSearchResponseList,
+					HttpStatus.NOT_FOUND);
 		}
-		return null;
 	}
 
 }
