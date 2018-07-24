@@ -34,25 +34,25 @@ public class TaskController {
 		try {
 			TaskImpl taskImpl = new TaskImpl();
 			List<TaskDataResponse> taskDateResponse = taskImpl.taskList(taskId);
-			if (taskDateResponse != null && !taskDateResponse.isEmpty()) {
-				return new ResponseEntity<List<? extends TaskDataResponse>>(taskDateResponse, HttpStatus.OK);
-			} else {
+			if (taskDateResponse == null || taskDateResponse.isEmpty()) {
 				return new ResponseEntity<List<? extends TaskDataResponse>>(taskDateResponse, HttpStatus.NO_CONTENT);
+			} else {
+				return new ResponseEntity<List<? extends TaskDataResponse>>(taskDateResponse, HttpStatus.OK);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<List<? extends TaskDataResponse>>(HttpStatus.BAD_REQUEST);
 		}
-		return null;
 	}
-	
+
 	@RequestMapping(value = "/removeTask/{taskId}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> removeTask(@PathVariable("taskId") long taskId) {
 		logger.debug("Entering into removeTask");
 		try {
 			TaskImpl taskImpl = new TaskImpl();
 			int response = taskImpl.removeTask(taskId);
-			if (response>0) {
+			if (response > 0) {
 				return new ResponseEntity<Object>(HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
@@ -63,19 +63,19 @@ public class TaskController {
 		}
 		return null;
 	}
-	
+
 	@RequestMapping(value = "/addTask", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> upsertTask(@RequestBody TaskData request) {
 
 		logger.debug("Entering into addTask");
 		try {
-			if (request.getTaskId()==0) {
+			if (request.getTaskId() == 0) {
 				return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
 			}
 			logger.debug("Task Id : " + request.getTaskId());
 			TaskImpl taskImpl = new TaskImpl();
 			int response = taskImpl.upsertTask(request);
-			if (response>0) {
+			if (response > 0) {
 				return new ResponseEntity<Object>(HttpStatus.CREATED);
 			} else {
 				return new ResponseEntity<Object>(HttpStatus.NOT_ACCEPTABLE);
@@ -85,5 +85,4 @@ public class TaskController {
 			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
 		}
 	}
-
 }

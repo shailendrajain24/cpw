@@ -22,14 +22,14 @@ public class TaskDAOImpl implements TaskDAO {
 	}
 
 	@Override
-	public List<Task> taskList(long createdBy) {
-		logger.debug("Entering into taskList " + createdBy);
+	public List<Task> taskList(long taskId) {
+		logger.debug("Entering into taskList with taskId " + taskId);
 		final String taskListSql = "Select TASK_ID, SUBJECT, DUE_DATE, CONTACT, ACCOUNT, STATUS, PRIORITY, SEND_NOTIFICATION_EMAIL,"
 				+ "REMINDER, REPEAT, DESCRIPTION FROM  TASK  WHERE TASK_ID = ?";
 		try {
-			List<Task> taskList = jdbcTemplateObject.query(taskListSql, new Object[] { createdBy }, new TaskMapper());
+			List<Task> taskList = jdbcTemplateObject.query(taskListSql, new Object[] { taskId }, new TaskMapper());
 			return taskList;
-		} catch (EmptyResultDataAccessException e) {
+		}  catch (EmptyResultDataAccessException e) {
 			logger.error("No taskList in system");
 			return null;
 		}
