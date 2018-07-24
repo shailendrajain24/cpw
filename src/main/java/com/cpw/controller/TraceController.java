@@ -3,6 +3,9 @@
  */
 package com.cpw.controller;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -25,21 +28,22 @@ public class TraceController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(value = "/trace/{type}/{transactionId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<TraceResponse> authenticateUser(@PathVariable(value = "type") int type,
+	public ResponseEntity<List<? extends TraceResponse>> trace(@PathVariable(value = "type") int type,
 			@PathVariable(value = "transactionId") String transactionId) {
 
 		logger.debug("Entering into Trace");
 		try {
 			if (type == 0 || transactionId.isEmpty()) {
-				return new ResponseEntity<TraceResponse>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<List<? extends TraceResponse>>(Collections.emptyList(), HttpStatus.NOT_FOUND);
 			} else {
 				logger.debug("Transaction Id: " + transactionId + " , Tpye: " + type);
 				TraceImpl traceImpl = new TraceImpl();
-				TraceResponse traceResponse = traceImpl.traceDetail(transactionId, type);
-				if (traceResponse != null) {
-					return new ResponseEntity<TraceResponse>(traceResponse, HttpStatus.OK);
+				List <TraceResponse> traceResponse = traceImpl.traceDetail(transactionId, type);
+				if (traceResponse != null && !traceResponse.isEmpty()) {
+					return new ResponseEntity<List<? extends TraceResponse>>(traceResponse, HttpStatus.OK);
 				} else {
-					return new ResponseEntity<TraceResponse>(traceResponse, HttpStatus.NOT_FOUND);
+					return new ResponseEntity<List<? extends TraceResponse>>(traceResponse,
+							HttpStatus.NO_CONTENT);
 				}
 			}
 

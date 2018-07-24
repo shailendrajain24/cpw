@@ -3,17 +3,15 @@
  */
 package com.cpw.model;
 
-import java.io.InputStream;
+import java.sql.Blob;
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * @author Unknown
  *
  */
 public class LeadDataResponse {
-	private InputStream uploadedInputStream;
+	private Blob uploadedInputStream;
 	private long leadId;
 	private String leadOwner;
 	private String company;
@@ -43,11 +41,11 @@ public class LeadDataResponse {
 	private Date createdDate;
 	private Date modifyDate;
 	
-	public InputStream getUploadedInputStream() {
+	public Blob getUploadedInputStream() {
 		return uploadedInputStream;
 	}
 
-	public void setUploadedInputStream(InputStream uploadedInputStream) {
+	public void setUploadedInputStream(Blob uploadedInputStream) {
 		this.uploadedInputStream = uploadedInputStream;
 	}
 	

@@ -22,12 +22,12 @@ public class LeadDAOImpl implements LeadDAO {
 	}
 
 	@Override
-	public List<Lead> leadList(String createdBy) {
+	public List<Lead> leadList(long createdBy) {
 		logger.debug("Entering into leadList " + createdBy);
 		final String trackingSql = "Select IMAGE, LEAD_ID, LEAD_OWNER, COMPANY, FNAME, LNAME, TITLE, EMAIL, PHONE, FAX, MOBILE, WEBSITE, "
 				+ "LEAD_SOURCE, LEAD_STATUS, INDUSTRY, NO_OF_EMP, ANNUAL_REVENUE, RATING, EMAIL_OUTPUT, SKYPE_ID, ADDRESS_STREET, ADDRESS_CITY, "
 				+ "ADDRESS_STATE, ADDRESS_ZIPCODE, ADDRESS_COUNTRY, DESCRIPTION, CR_DATE, MD_DATE, CR_BY"
-				+ " from  LEAD  WHERE CR_BY = ?";
+				+ " from  LEAD  WHERE LEAD_ID = ?";
 		try {
 			List<Lead> leadList = jdbcTemplateObject.query(trackingSql, new Object[] { createdBy }, new LeadMapper());
 			return leadList;

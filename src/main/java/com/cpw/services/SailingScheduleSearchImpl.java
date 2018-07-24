@@ -20,7 +20,7 @@ public class SailingScheduleSearchImpl {
 	private ApplicationContext context;
 
 	public List<ScheduleSearchResponse> sailingSearchSchedule(ScheduleSearchRequest scheduleSearchRequest) {
-		logger.debug("Entering into vesselList");
+		logger.debug("Entering into sailingSearchSchedule");
 		context = new ClassPathXmlApplicationContext("Beans.xml");
 		ScheduleSearchDAOImpl scheduleSearchDAOImpl = (ScheduleSearchDAOImpl) context.getBean("scheduleSearchDAOImpl");
 		final List<ScheduleSearch> scheduleSearchList = scheduleSearchDAOImpl.searchScheduleList(scheduleSearchRequest);

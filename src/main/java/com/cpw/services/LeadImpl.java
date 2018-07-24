@@ -32,7 +32,7 @@ public class LeadImpl {
 		return leadDAO.removeLead(leadId);
 	}
 
-	public List<LeadDataResponse> leadList(String createdBy) {
+	public List<LeadDataResponse> leadList(long createdBy) {
 		logger.debug("Entering into lead List");
 		final List<Lead> leadList = leadDAO.leadList(createdBy);
 		return map(leadList);

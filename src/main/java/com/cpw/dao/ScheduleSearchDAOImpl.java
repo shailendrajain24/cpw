@@ -34,7 +34,7 @@ public class ScheduleSearchDAOImpl implements ScheduleSearchDAO {
 			sb.append(" A.vessel_id = ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getVesselId()));
 			sb.append(" AND ");
-		}
+		} 
 		if (scheduleSearchRequest.getPodId() != 0) {
 			sb.append(" B.pod_id = ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getPodId()));
@@ -60,13 +60,18 @@ public class ScheduleSearchDAOImpl implements ScheduleSearchDAO {
 			value.add(String.valueOf(scheduleSearchRequest.getFromETA()));
 			sb.append(" AND ");
 		}
-		if (scheduleSearchRequest.getToETD() != null && !scheduleSearchRequest.getToETA().isEmpty()) {
+		if (scheduleSearchRequest.getToETA() != null && !scheduleSearchRequest.getToETA().isEmpty()) {
 			sb.append(" B.eta <= ? ");
 			value.add(String.valueOf(scheduleSearchRequest.getToETA()));
 		}
-
+		String finalQuery = sb.toString().trim();
+		logger.error("Before sb.toString() : " + finalQuery);
+		if (finalQuery.endsWith(" AND")) {
+			finalQuery = finalQuery.substring(0, finalQuery.length() - 3);
+		}
+		logger.error("After sb.toString() : " + finalQuery);
 		try {
-			return jdbcTemplateObject.query(sb.toString(), value.toArray(), new ScheduleSearchMapper());
+			return jdbcTemplateObject.query(finalQuery, value.toArray(), new ScheduleSearchMapper());
 		} catch (EmptyResultDataAccessException e) {
 			logger.error("No Sailing Schedule detail in system");
 			return null;

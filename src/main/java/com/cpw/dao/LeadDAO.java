@@ -12,7 +12,7 @@ public interface LeadDAO {
 
 	public int upsertLead(Lead lead);
 
-	public List<Lead> leadList(String createdBy);
+	public List<Lead> leadList(long createdBy);
 	
 	public int removeLead(long leadId);
 }
