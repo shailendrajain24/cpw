@@ -91,6 +91,9 @@
 	<bean id="sectorDAOImpl" class="com.cpw.dao.SectorDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<bean id="taskDAOImpl" class="com.cpw.dao.TaskDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	<bean id="traceDAOImpl" class="com.cpw.dao.TraceDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
