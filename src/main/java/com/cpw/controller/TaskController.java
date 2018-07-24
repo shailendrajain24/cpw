@@ -60,8 +60,8 @@ public class TaskController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 		}
-		return null;
 	}
 
 	@RequestMapping(value = "/addTask", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

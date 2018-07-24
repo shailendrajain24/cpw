@@ -68,7 +68,7 @@ public class TaskDAOImpl implements TaskDAO {
 						taskRequest.getSubject() == null ? taskInSystem.getSubject() : taskRequest.getSubject(),
 						taskRequest.getTaskId());
 			} else {
-				Object[] values = new Object[29];
+				Object[] values = new Object[11];
 				values[0] = taskRequest.getAccount();
 				values[1] = taskRequest.getContact();
 				values[2] = taskRequest.getDescription();

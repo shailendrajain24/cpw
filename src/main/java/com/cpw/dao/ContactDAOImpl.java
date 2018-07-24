@@ -28,10 +28,10 @@ public class ContactDAOImpl implements ContactDAO {
 				+ " EMAIL_OPT_OUT,CREATED_BY, SKYPE_ID,MODIFY_BY,CREATED_DATE,MODIFY_DATE,SECONDARY_EMAIL,LAST_ACTIVITY_TIME,TWITTER, "
 				+ "MAILING_ADDRESS_STREET,MAILING_ADDRESS_CITY,MAILING_ADDRESS_STATE, MAILING_ADDRESS_ZIP, MAILING_ADDRESS_COUNTRY,"
 				+ "OTHER_ADDRESS_STREET,OTHER_ADDRESS_CITY,OTHER_ADDRESS_STATE, OTHER_ADDRESS_ZIP, OTHER_ADDRESS_COUNTRY,"
-				+ " DESCRIPTION"
-				+ " from  CONTACT  WHERE CREATED_BY = ?";
+				+ " DESCRIPTION" + " from  CONTACT  WHERE CREATED_BY = ?";
 		try {
-			List<Contact> contactList = jdbcTemplateObject.query(trackingSql, new Object[] { createdBy }, new ContactMapper());
+			List<Contact> contactList = jdbcTemplateObject.query(trackingSql, new Object[] { createdBy },
+					new ContactMapper());
 			return contactList;
 		} catch (EmptyResultDataAccessException e) {
 			logger.error("No contactList in system");
@@ -40,117 +40,133 @@ public class ContactDAOImpl implements ContactDAO {
 	}
 
 	@Override
-	public int upsertContact(Contact contact) {
+	public int upsertContact(Contact contactRequest) {
 		logger.debug("Entering into contact DAO");
 		CpwTemplete<Contact> cpwTemplete = new CpwTempleteImpl<Contact>();
-		/*
-		 * String sql = "MERGE INTO CONTACT AS L USING (" +
-		 * "SELECT ? IMAGE, ? CONTACT_ID, ? CONTACT_OWNER, ? COMPANY, ? FNAME, ? LNAME, ? TITLE, ? EMAIL, ? PHONE, ? FAX, ? MOBILE, "
-		 * +
-		 * "? WEBSITE, ? CONTACT_SOURCE, ? CONTACT_STATUS, ? INDUSTRY, ? NO_OF_EMP, ? ANNUAL_REVENUE, ? RATING, ? EMAIL_OUTPUT, ? SKYPE_ID, "
-		 * +
-		 * "? ADDRESS_STREET, ? ADDRESS_CITY, ? ADDRESS_STATE, ? ADDRESS_ZIPCODE, ? ADDRESS_COUNTRY, ? DESCRIPTION, ? CR_DATE, "
-		 * + "? MD_DATE, ? CR_BY FROM DUAL ) AS E ON L.CONTACT_ID = E.CONTACT_ID " +
-		 * "WHEN MATCHED THEN " +
-		 * "UPDATE SET L.IMAGE = E.IMAGE , L.CONTACT_OWNER = E.CONTACT_OWNER , L.COMPANY = E.COMPANY , L.FNAME = E.FNAME , "
-		 * +
-		 * "L.LNAME = E.LNAME , L.TITLE = E.TITLE , L.EMAIL = E.EMAIL , L.PHONE = E.PHONE , L.FAX = E.FAX , L.MOBILE = E.MOBILE , "
-		 * +
-		 * "L.WEBSITE = E.WEBSITE , L.CONTACT_SOURCE = E.CONTACT_SOURCE , L.CONTACT_STATUS = E.CONTACT_STATUS , L.INDUSTRY = E.INDUSTRY , "
-		 * +
-		 * "L.NO_OF_EMP = E.NO_OF_EMP , L.ANNUAL_REVENUE = E.ANNUAL_REVENUE , L.RATING = E.RATING , L.EMAIL_OUTPUT = E.EMAIL_OUTPUT , "
-		 * +
-		 * "L.SKYPE_ID = E.SKYPE_ID , L.ADDRESS_STREET = E.ADDRESS_STREET , L.ADDRESS_CITY = E.ADDRESS_CITY , L.ADDRESS_STATE = E.ADDRESS_STATE , "
-		 * +
-		 * "L.ADDRESS_ZIPCODE = E.ADDRESS_ZIPCODE , L.ADDRESS_COUNTRY = E.ADDRESS_COUNTRY , L.DESCRIPTION = E.DESCRIPTION, L.CR_DATE = E.CR_DATE, "
-		 * + "L.MD_DATE= E.MD_DATE, L.CR_BY= E.CR_BY " + "WHEN NOT MATCHED THEN " +
-		 * "INSERT (IMAGE, CONTACT_ID, CONTACT_OWNER, COMPANY, FNAME, LNAME, TITLE, EMAIL, PHONE, FAX, MOBILE, WEBSITE, CONTACT_SOURCE, CONTACT_STATUS, "
-		 * +
-		 * "INDUSTRY, NO_OF_EMP, ANNUAL_REVENUE, RATING, EMAIL_OUTPUT, SKYPE_ID, ADDRESS_STREET, ADDRESS_CITY, ADDRESS_STATE, ADDRESS_ZIPCODE, "
-		 * + "ADDRESS_COUNTRY, DESCRIPTION, CR_DATE, MD_DATE, CR_BY)" +
-		 * "VALUES (E.IMAGE, E.CONTACT_ID, E.CONTACT_OWNER, E.COMPANY, E.FNAME, E.LNAME, E.TITLE, E.EMAIL, E.PHONE, E.FAX, E.MOBILE, E.WEBSITE, E.CONTACT_SOURCE, "
-		 * +
-		 * "E.CONTACT_STATUS, E.INDUSTRY, E.NO_OF_EMP, E.ANNUAL_REVENUE, E.RATING, E.EMAIL_OUTPUT, E.SKYPE_ID, E.ADDRESS_STREET, E.ADDRESS_CITY, "
-		 * +
-		 * "E.ADDRESS_STATE, E.ADDRESS_ZIPCODE, E.ADDRESS_COUNTRY, E.DESCRIPTION, E.CR_DATE, E.MD_DATE, E.CR_BY);"
-		 * ;
-		 */
 		String q1 = "select * from contact where CONTACT_ID=?";
-		Contact l = null;
+		Contact contactInSystem = null;
 		try {
-			l = jdbcTemplateObject.queryForObject(q1, new Object[] { contact.getContactId() }, new ContactMapper());
+			contactInSystem = jdbcTemplateObject.queryForObject(q1, new Object[] { contactRequest.getContactId() },
+					new ContactMapper());
 		} catch (EmptyResultDataAccessException e) {
-			l = null;
+			contactInSystem = null;
 		}
 		try {
 			int count = -1;
-			if (l != null && l.getContactId() == contact.getContactId()) {
-				
-				
-				
-				
-				logger.debug("UPDATE values" + contact.getContactId());
+			if (contactInSystem != null && contactInSystem.getContactId() == contactRequest.getContactId()) {
+				logger.debug("UPDATE values" + contactRequest.getContactId());
 				String updateSql = "UPDATE CONTACT SET IMAGE=?, CONTACT_OWNER=?,LEAD_SOURCE=?, FIRST_NAME=?, LAST_NAME=?, TITLE=?,"
 						+ " EMAIL=?,DEPARTMENT=?, PHONE=?,HOME_PHONE=?, FAX=?, MOBILE=?, DATE_OF_BIRTH=?, ASSISTANT=?,ASST_PHONE=?,REPORTS_TO,"
 						+ " EMAIL_OPT_OUT=?, SKYPE_ID=?,MODIFY_BY=?,MODIFY_DATE=?,SECONDARY_EMAIL=?,LAST_ACTIVITY_TIME=?,TWITTER=?,"
 						+ "MAILING_ADDRESS_STREET=?, MAILING_ADDRESS_CITY=?, MAILING_ADDRESS_STATE=?, MAILING_ADDRESS_ZIP=?, MAILING_ADDRESS_COUNTRY=?,"
 						+ "OTHER_ADDRESS_STREET=?, OTHER_ADDRESS_CITY=?, OTHER_ADDRESS_STATE=?, OTHER_ADDRESS_ZIP=?, OTHER_ADDRESS_COUNTRY=?,"
-						+ " DESCRIPTION=?,"
-						+ " WHERE CONTACT_ID=?";
-				return jdbcTemplateObject.update(updateSql, contact.getImage(),
-						contact.getContactOwner(),contact.getLeadSource(),contact.getFirstName(),
-						contact.getLastName(),contact.getTitle(),contact.getEmail(),contact.getDepartment(),
-						contact.getPhone(),contact.getHomePhone(),contact.getFax(),contact.getMobile(),
-						contact.getDateOfBirth(),contact.getAssistant(),contact.getAsstPhone(),
-						contact.getReportsTo(),contact.isEmailOptOut(),
-						contact.getSkypeId(),contact.getModifyBy(),contact.getModifyDate(),contact.getSecondaryEmail(),contact.getLastActivityTime(),contact.getTwitter(),
-						contact.getMailingAddressStreet(),contact.getMailingAddressCity(),contact.getMailingAddressState(),contact.getMailingAddressZip(),contact.getMailingAddressCountry(),
-						contact.getOtherAddressStreet(),contact.getOtherAddressCity(),contact.getOtherAddressState(),contact.getOtherAddressZip(),contact.getOtherAddressCountry(),
-						contact.getDescription(),
-						contact.getContactId());
+						+ " DESCRIPTION=?," + " WHERE CONTACT_ID=?";
+				return jdbcTemplateObject.update(updateSql,
+						contactRequest.getImage() == null ? contactInSystem.getImage() : contactRequest.getImage(),
+						contactRequest.getContactOwner() == null ? contactInSystem.getContactOwner()
+								: contactRequest.getContactOwner(),
+						contactRequest.getLeadSource() == null ? contactInSystem.getLeadSource()
+								: contactRequest.getLeadSource(),
+						contactRequest.getFirstName() == null ? contactInSystem.getFirstName()
+								: contactRequest.getFirstName(),
+						contactRequest.getLastName() == null ? contactInSystem.getLastName()
+								: contactRequest.getLastName(),
+						contactRequest.getTitle() == null ? contactInSystem.getTitle() : contactRequest.getTitle(),
+						contactRequest.getEmail() == null ? contactInSystem.getEmail() : contactRequest.getEmail(),
+						contactRequest.getDepartment() == null ? contactInSystem.getDepartment()
+								: contactRequest.getDepartment(),
+						contactRequest.getPhone() == null ? contactInSystem.getPhone() : contactRequest.getPhone(),
+						contactRequest.getHomePhone() == null ? contactInSystem.getHomePhone()
+								: contactRequest.getHomePhone(),
+						contactRequest.getFax() == null ? contactInSystem.getFax() : contactRequest.getFax(),
+						contactRequest.getMobile() == null ? contactInSystem.getMobile() : contactRequest.getMobile(),
+						contactRequest.getDateOfBirth() == null ? contactInSystem.getDateOfBirth()
+								: contactRequest.getDateOfBirth(),
+						contactRequest.getAssistant() == null ? contactInSystem.getAssistant()
+								: contactRequest.getAssistant(),
+						contactRequest.getAsstPhone() == null ? contactInSystem.getAsstPhone()
+								: contactRequest.getAsstPhone(),
+						contactRequest.getReportsTo() == null ? contactInSystem.getReportsTo()
+								: contactRequest.getReportsTo(),
+						contactRequest.isEmailOptOut() == false ? contactInSystem.isEmailOptOut()
+								: contactRequest.isEmailOptOut(),
+						contactRequest.getSkypeId() == null ? contactInSystem.getSkypeId()
+								: contactRequest.getSkypeId(),
+						contactRequest.getModifyBy() == null ? contactInSystem.getModifyBy()
+								: contactRequest.getModifyBy(),
+						contactRequest.getModifyDate() == 0 ? contactInSystem.getModifyDate()
+								: contactRequest.getModifyDate(),
+						contactRequest.getSecondaryEmail() == null ? contactInSystem.getSecondaryEmail()
+								: contactRequest.getSecondaryEmail(),
+						contactRequest.getLastActivityTime() == null ? contactInSystem.getLastActivityTime()
+								: contactRequest.getLastActivityTime(),
+						contactRequest.getTwitter() == null ? contactInSystem.getTwitter()
+								: contactRequest.getTwitter(),
+						contactRequest.getMailingAddressStreet() == null ? contactInSystem.getMailingAddressStreet()
+								: contactRequest.getMailingAddressStreet(),
+						contactRequest.getMailingAddressCity() == null ? contactInSystem.getMailingAddressCity()
+								: contactRequest.getMailingAddressCity(),
+						contactRequest.getMailingAddressState() == null ? contactInSystem.getMailingAddressState()
+								: contactRequest.getMailingAddressState(),
+						contactRequest.getMailingAddressZip() == null ? contactInSystem.getMailingAddressZip()
+								: contactRequest.getMailingAddressZip(),
+						contactRequest.getMailingAddressCountry() == null ? contactInSystem.getMailingAddressCountry()
+								: contactRequest.getMailingAddressCountry(),
+						contactRequest.getOtherAddressStreet() == null ? contactInSystem.getOtherAddressStreet()
+								: contactRequest.getOtherAddressStreet(),
+						contactRequest.getOtherAddressCity() == null ? contactInSystem.getOtherAddressCity()
+								: contactRequest.getOtherAddressCity(),
+						contactRequest.getOtherAddressState() == null ? contactInSystem.getOtherAddressState()
+								: contactRequest.getOtherAddressState(),
+						contactRequest.getOtherAddressZip() == null ? contactInSystem.getOtherAddressZip()
+								: contactRequest.getOtherAddressZip(),
+						contactRequest.getOtherAddressCountry() == null ? contactInSystem.getOtherAddressCountry()
+								: contactRequest.getOtherAddressCountry(),
+						contactRequest.getDescription() == null ? contactInSystem.getDescription()
+								: contactRequest.getDescription(),
+						contactRequest.getContactId());
 			} else {
 				Object[] values = new Object[39];
-				values[0] = contact.getImage();
-				values[1] = contact.getContactId();
-				values[2] = contact.getContactOwner();
-				values[3] = contact.getLeadSource();
-				values[4] = contact.getFirstName();
-				values[5] = contact.getLastName();
-				values[6] = contact.getAccountName();
-				values[7] = contact.getEmail();
-				values[8] = contact.getTitle();
-				values[9] = contact.getDepartment();
-			    values[10] = contact.getPhone();
-				values[11] = contact.getHomePhone();
-				values[12] = contact.getOtherPhone();
-				values[13] = contact.getFax();
-				values[14] = contact.getMobile();
-				values[15] = contact.getDateOfBirth();
-				values[16] = contact.getAssistant();
-				values[17] = contact.getAsstPhone();
-				values[18] = contact.getReportsTo();
-				values[19] = contact.isEmailOptOut();
-				values[20] = contact.getCreatedBy();
-				values[21] = contact.getCreatedDate();
-				values[22] = contact.getModifyBy();
-				values[23] = contact.getModifyDate();
-				values[24] = contact.getSkypeId();
-				values[25] = contact.getSecondaryEmail();
-				values[26] = contact.getLastActivityTime();
-				values[27] = contact.getTwitter();
-				values[28] = contact.getMailingAddressStreet();
-				values[29] = contact.getMailingAddressCity();
-				values[30] = contact.getMailingAddressState();
-				values[31] = contact.getMailingAddressZip();
-				values[32] = contact.getMailingAddressCountry();
-				values[33] = contact.getOtherAddressStreet();
-				values[34] = contact.getOtherAddressCity();
-				values[35] = contact.getOtherAddressState();
-				values[36] = contact.getOtherAddressZip();
-				values[37] = contact.getOtherAddressCountry();
-				values[38] = contact.getDescription();
-				
-								
+				values[0] = contactRequest.getImage();
+				values[1] = contactRequest.getContactId();
+				values[2] = contactRequest.getContactOwner();
+				values[3] = contactRequest.getLeadSource();
+				values[4] = contactRequest.getFirstName();
+				values[5] = contactRequest.getLastName();
+				values[6] = contactRequest.getAccountName();
+				values[7] = contactRequest.getEmail();
+				values[8] = contactRequest.getTitle();
+				values[9] = contactRequest.getDepartment();
+				values[10] = contactRequest.getPhone();
+				values[11] = contactRequest.getHomePhone();
+				values[12] = contactRequest.getOtherPhone();
+				values[13] = contactRequest.getFax();
+				values[14] = contactRequest.getMobile();
+				values[15] = contactRequest.getDateOfBirth();
+				values[16] = contactRequest.getAssistant();
+				values[17] = contactRequest.getAsstPhone();
+				values[18] = contactRequest.getReportsTo();
+				values[19] = contactRequest.isEmailOptOut();
+				values[20] = contactRequest.getCreatedBy();
+				values[21] = contactRequest.getCreatedDate();
+				values[22] = contactRequest.getModifyBy();
+				values[23] = contactRequest.getModifyDate();
+				values[24] = contactRequest.getSkypeId();
+				values[25] = contactRequest.getSecondaryEmail();
+				values[26] = contactRequest.getLastActivityTime();
+				values[27] = contactRequest.getTwitter();
+				values[28] = contactRequest.getMailingAddressStreet();
+				values[29] = contactRequest.getMailingAddressCity();
+				values[30] = contactRequest.getMailingAddressState();
+				values[31] = contactRequest.getMailingAddressZip();
+				values[32] = contactRequest.getMailingAddressCountry();
+				values[33] = contactRequest.getOtherAddressStreet();
+				values[34] = contactRequest.getOtherAddressCity();
+				values[35] = contactRequest.getOtherAddressState();
+				values[36] = contactRequest.getOtherAddressZip();
+				values[37] = contactRequest.getOtherAddressCountry();
+				values[38] = contactRequest.getDescription();
+
 				logger.debug("INSERT values" + values[1]);
 				String insertSql = "INSERT INTO CONTACT (IMAGE, CONTACT_ID, CONTACT_OWNER,LEAD_SOURCE,FIRST_NAME, LAST_NAME,ACCOUNT_NAME,EMAIL, TITLE,"
 						+ "DEPARTMENT,PHONE,HOME_PHONE,OTHER_PHONE,FAX,MOBILE,DATE_OF_BIRTH,ASSISTANT,ASST_PHONE,REPORTS_TO,"
@@ -166,7 +182,6 @@ public class ContactDAOImpl implements ContactDAO {
 
 			return count;
 		} catch (DataAccessException e) {
-			// logger.error("Exception at time of creation" + e);
 			e.printStackTrace();
 			return 0;
 		}
