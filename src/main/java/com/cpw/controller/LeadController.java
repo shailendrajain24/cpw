@@ -3,6 +3,7 @@
  */
 package com.cpw.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -34,25 +35,26 @@ public class LeadController {
 		try {
 			LeadImpl leadImpl = new LeadImpl();
 			List<LeadDataResponse> leadDateResponse = leadImpl.leadList(createdBy);
-			if (leadDateResponse != null && !leadDateResponse.isEmpty()) {
-				return new ResponseEntity<List<? extends LeadDataResponse>>(leadDateResponse, HttpStatus.OK);
-			} else {
+			if (leadDateResponse == null || leadDateResponse.isEmpty()) {
 				return new ResponseEntity<List<? extends LeadDataResponse>>(leadDateResponse, HttpStatus.NO_CONTENT);
+			} else {
+				return new ResponseEntity<List<? extends LeadDataResponse>>(leadDateResponse, HttpStatus.OK);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<List<? extends LeadDataResponse>>(Collections.emptyList(),
+					HttpStatus.BAD_REQUEST);
 		}
-		return null;
 	}
-	
+
 	@RequestMapping(value = "/removeLead/{leadId}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> removeLead(@PathVariable("leadId") long leadId) {
 		logger.debug("Entering into removeLead");
 		try {
 			LeadImpl leadImpl = new LeadImpl();
 			int response = leadImpl.removeLead(leadId);
-			if (response>0) {
+			if (response > 0) {
 				return new ResponseEntity<Object>(HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
@@ -60,10 +62,10 @@ public class LeadController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
 		}
-		return null;
 	}
-	
+
 	@RequestMapping(value = "/addLead", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.ALL_VALUE)
 	public ResponseEntity<?> upsertLead(@RequestBody LeadData request) {
 
@@ -75,7 +77,7 @@ public class LeadController {
 			logger.debug("Company : " + request.getCompany());
 			LeadImpl leadImpl = new LeadImpl();
 			int response = leadImpl.upsertLead(request);
-			if (response>0) {
+			if (response > 0) {
 				return new ResponseEntity<Object>(HttpStatus.CREATED);
 			} else {
 				return new ResponseEntity<Object>(HttpStatus.NOT_ACCEPTABLE);
@@ -83,8 +85,8 @@ public class LeadController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
 		}
-		return null;
 	}
 
 }
