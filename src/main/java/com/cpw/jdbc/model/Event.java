@@ -2,7 +2,7 @@ package com.cpw.jdbc.model;
 
 public class Event {
 	
-	private long evnetId;
+	private long eventId;
 	private String title;
 	private String location;
 	private boolean allDay;
@@ -24,11 +24,11 @@ public class Event {
 	private String notes;
 	private String attachments;
 	
-	public long getEvnetId() {
-		return evnetId;
+	public long getEventId() {
+		return eventId;
 	}
-	public void setEvnetId(long evnetId) {
-		this.evnetId = evnetId;
+	public void setEventId(long eventId) {
+		this.eventId = eventId;
 	}
 	public String getTitle() {
 		return title;

@@ -1,5 +1,7 @@
 package com.cpw.dao;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -8,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 //import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.cpw.dao.mapper.CustomerChallengeMapper;
 import com.cpw.jdbc.model.CustomerChallenge;
 
 public class CustomerChallengeDAOImpl implements CustomerChallengeDAO {
@@ -22,7 +25,7 @@ public class CustomerChallengeDAOImpl implements CustomerChallengeDAO {
 	public int customerChallenge(CustomerChallenge customerChallenge) {
 		logger.debug("Entering into customerChallenge DAO");
 		CpwTemplete<CustomerChallenge> cpwTemplete = new CpwTempleteImpl<CustomerChallenge>();
-		String sql = "INSERT INTO CUST_CHALLENGE_HDR\r\n" + 
+		String sql = "INSERT INTO CUST_CHALLENGE_HDR " + 
 				"(CUSTOMER_CHALLENGE_ID, CODE, CUSTOMER_ID, CONTACT_ID, LOG_DATE, STATUS, PRIORITY, ORIGIN, TYPE_ID, REASON,"
 				+ " DUE_DATE, INCHARGE_ID, CC_MAIL, SUBJECT, DESCRIPTION, INTERNAL_NOTE, CUSTOMER_FEEDBACK, CLOSED_DATE, NOTE,"
 				+ " LOC_ID, FY_ID, CREATED_TIME, IS_DELETED, CR_BY, CR_DATE, CR_TIME, MD_BY, MD_DATE, MD_TIME)" 
@@ -66,6 +69,22 @@ public class CustomerChallengeDAOImpl implements CustomerChallengeDAO {
 			logger.error("Exception at time of creation"+ e);
 			return 0;
 		}
+	}
+
+	@Override
+	public List<CustomerChallenge> customerChallengeList(long id) {
+	try {
+		logger.debug("Entering into CustomerChallengeList");
+		String sql="SELECT *FROM CUST_CHALLENGE_HDR WHERE CUSTOMER_CHALLENGE_ID=?";
+		List<CustomerChallenge> custmorChallengeList=jdbcTemplateObject.query(sql, new Object[]{id}, new CustomerChallengeMapper());
+		return custmorChallengeList;
+		
+	} catch (Exception e) {
+		logger.debug("No list in System");
+		e.printStackTrace();
+	}
+		
+		return null;
 	}
 
 }

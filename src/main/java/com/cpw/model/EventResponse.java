@@ -1,7 +1,7 @@
 package com.cpw.model;
 
 public class EventResponse {
-	private long evnetId;
+	private long eventId;
 	private String title;
 	private String location;
 	private boolean allDay;
@@ -22,11 +22,11 @@ public class EventResponse {
 	private long modifyTime;
 	private String notes;
 	private String attachments;
-	public long getEvnetId() {
-		return evnetId;
+	public long getEventId() {
+		return eventId;
 	}
-	public void setEvnetId(long evnetId) {
-		this.evnetId = evnetId;
+	public void setEventId(long eventId) {
+		this.eventId = eventId;
 	}
 	public String getTitle() {
 		return title;

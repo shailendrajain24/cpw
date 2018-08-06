@@ -31,6 +31,9 @@
 	<bean id="blListDAOImpl" class="com.cpw.dao.BlListDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<bean id="callDAOImpl" class="com.cpw.dao.CallDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	<bean id="contactDAOImpl" class="com.cpw.dao.ContactDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
@@ -47,6 +50,9 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<bean id="custChallangeStatusDAOImpl" class="com.cpw.dao.CustChallangeStatusDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="dealDAOImpl" class="com.cpw.dao.DealDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<bean id="eventDAOImpl" class="com.cpw.dao.EventDAOImpl">
@@ -89,6 +95,9 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<bean id="sectorDAOImpl" class="com.cpw.dao.SectorDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<bean id="stageDAOImpl" class="com.cpw.dao.StageDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<bean id="taskDAOImpl" class="com.cpw.dao.TaskDAOImpl">

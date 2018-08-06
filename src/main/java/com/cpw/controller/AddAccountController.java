@@ -41,6 +41,24 @@ public class AddAccountController {
 		}
 	}
 
+@RequestMapping(value = "accounts/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<? extends AddAccountResponse>> accounts() {
+		logger.debug("Entering into Account list");
+		try {
+			AddAccountImpl accountImpl = new AddAccountImpl();
+			List<AddAccountResponse> addAccountResponse = accountImpl.accountList(0);
+			if (addAccountResponse != null && !addAccountResponse.isEmpty()) {
+				return new ResponseEntity<List<? extends AddAccountResponse>>(addAccountResponse, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<List<? extends AddAccountResponse>>(addAccountResponse, HttpStatus.NO_CONTENT);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	@RequestMapping(value = "/removeAccount/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> removeAccount(@PathVariable("id") long id) {
 		logger.debug("Entering into removeAccount");

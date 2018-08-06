@@ -11,17 +11,19 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.cpw.dao.TraceDAOImpl;
 import com.cpw.jdbc.model.Trace;
+import com.cpw.jdbc.model.TrackingHeader;
 import com.cpw.model.TraceResponse;
+import com.cpw.model.TrackingHeaderResponse;
 
 public class TraceImpl {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	private ApplicationContext context;
+	private ApplicationContext context  = new ClassPathXmlApplicationContext("Beans.xml");
+	TraceDAOImpl traceDAOImpl = (TraceDAOImpl) context.getBean("traceDAOImpl");
 
 	public List<TraceResponse> traceDetail(String transactionId, int type) {
 		logger.debug("Entering into traceDetail");
-		context = new ClassPathXmlApplicationContext("Beans.xml");
-		TraceDAOImpl traceDAOImpl = (TraceDAOImpl) context.getBean("traceDAOImpl");
+		
 		final List <Trace> trace = traceDAOImpl.traceDetail(transactionId, type);
 		return map(trace);
 	}
@@ -57,5 +59,25 @@ public class TraceImpl {
 		return traceResponse;
 
 	}
+	public TrackingHeaderResponse headerDetail(String transactionId, int type) {
+		logger.debug("Entering into HeaderDetail");
+		
+		TrackingHeader tracking = traceDAOImpl.headerDetail(transactionId, type);
+		
+		return map1(tracking);
+	}
 
+private TrackingHeaderResponse map1(TrackingHeader trackingList) {
+	TrackingHeaderResponse trackingHeaderResponse = new TrackingHeaderResponse();
+	if (trackingList != null ) {
+		
+		trackingHeaderResponse.setPolCode(trackingList.getPolCode());
+		trackingHeaderResponse.setPodCode(trackingList.getPodCode());
+		trackingHeaderResponse.setEta(trackingList.getEta());
+		trackingHeaderResponse.setEtd(trackingList.getEtd());
+		trackingHeaderResponse.setCurrentStatus(trackingList.getCurrentStatus());
+		}
+	return trackingHeaderResponse;
+
+}
 }

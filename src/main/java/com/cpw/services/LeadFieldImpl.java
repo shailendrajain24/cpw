@@ -9,10 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-
 import com.cpw.dao.LeadFieldDAOImpl;
 import com.cpw.jdbc.model.LeadField;
-
 import com.cpw.model.LeadFieldResponse;
 
 

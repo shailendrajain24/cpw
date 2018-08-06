@@ -1,5 +1,7 @@
 package com.cpw.model;
 
+import java.util.List;
+
 public class TraceResponse {
 	private String jobId;
 	private String sobDate;
@@ -77,5 +79,62 @@ public class TraceResponse {
 	}
 	public void setCartingDate(String cartingDate) {
 		this.cartingDate = cartingDate;
+	}
+}
+class HeaderResponse
+{
+	private String polCode;
+	private String podCode;
+	private String etd;
+	private String eta;
+	private String currentStatus;
+	public String getPolCode() {
+		return polCode;
+	}
+	public void setPolCode(String polCode) {
+		this.polCode = polCode;
+	}
+	public String getPodCode() {
+		return podCode;
+	}
+	public void setPodCode(String podCode) {
+		this.podCode = podCode;
+	}
+	public String getEtd() {
+		return etd;
+	}
+	public void setEtd(String etd) {
+		this.etd = etd;
+	}
+	public String getEta() {
+		return eta;
+	}
+	public void setEta(String eta) {
+		this.eta = eta;
+	}
+	public String getCurrentStatus() {
+		return currentStatus;
+	}
+	public void setCurrentStatus(String currentStatus) {
+		this.currentStatus = currentStatus;
+	}
+	
+}
+
+class TraceHeaderResponse
+{
+	private List<TraceResponse> trace;
+	private List<HeaderResponse> header;
+	public List<TraceResponse> getTrace() {
+		return trace;
+	}
+	public void setTrace(List<TraceResponse> trace) {
+		this.trace = trace;
+	}
+	public List<HeaderResponse> getHeader() {
+		return header;
+	}
+	public void setHeader(List<HeaderResponse> header) {
+		this.header = header;
 	}
 }

@@ -12,7 +12,7 @@ public class EventMapper implements RowMapper<Event>{
 	@Override
 	public Event mapRow(ResultSet rs, int rowNum) throws SQLException {
 		final Event event=new Event();
-		event.setEvnetId(rs.getLong("EVENT_ID"));
+		event.setEventId(rs.getLong("EVENT_ID"));
 		event.setTitle(rs.getString("TITLE"));
 		event.setLocation(rs.getString("LOCATION"));
 		event.setAllDay(rs.getBoolean("ALL_DAY"));
@@ -30,7 +30,7 @@ public class EventMapper implements RowMapper<Event>{
 	    event.setCreatedBy(rs.getString("CREATED_BY"));
 	    event.setCreatedTime(rs.getLong("CREATED_TIME"));
 	    event.setModifyBy(rs.getString("MODIFY_BY"));
-	    event.setModifyTime(rs.getLong("MODIFY_BY"));
+		event.setModifyTime(rs.getLong("MODIFY_TIME"));
 	    event.setNotes(rs.getString("NOTES"));
 	    event.setAttachments(rs.getString("ATTACHMENTS"));
 	    

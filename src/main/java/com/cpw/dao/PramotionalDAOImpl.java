@@ -1,5 +1,7 @@
 package com.cpw.dao;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -8,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 //import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.cpw.dao.mapper.PramotionalMapper;
 import com.cpw.jdbc.model.Pramotional;
 
 public class PramotionalDAOImpl implements PramotionalDAO {
@@ -58,6 +61,24 @@ public class PramotionalDAOImpl implements PramotionalDAO {
 			logger.error("Exception at time of creation"+ e);
 			return 0;
 		}
+	}
+
+	@Override
+	public List<Pramotional> pramotionalList(long primaryId) {
+		
+		try {
+			logger.debug("Entering into PramotionalList");
+			String sql="SELECT * FROM PROMOTION_MAIL WHERE PRM_ID=?";
+			List<Pramotional> pramotionalList=jdbcTemplateObject.query(sql, new Object[]{ primaryId }, new PramotionalMapper());
+			return pramotionalList;
+			
+		} catch (Exception e) {
+			logger.debug("No List in the system");
+			e.printStackTrace();
+		}
+		
+		
+		return null;
 	}
 
 }

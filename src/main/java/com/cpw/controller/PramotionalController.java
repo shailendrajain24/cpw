@@ -3,17 +3,21 @@
  */
 package com.cpw.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cpw.model.PramotionalRequest;
+import com.cpw.model.PramotionalResponse;
 import com.cpw.services.PramotionalImpl;
 
 /**
@@ -52,6 +56,31 @@ public class PramotionalController {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@RequestMapping(value="pramotion/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<? extends PramotionalResponse>> Pramotional(@PathVariable("id")long primaryId)
+	{
+		logger.debug("Entering into Pramotional List");
+
+		try {
+			PramotionalImpl pramotionalImpl=new PramotionalImpl();
+			List<PramotionalResponse> pramotionalResponse=pramotionalImpl.pramotionalList(primaryId);
+			if(pramotionalResponse!=null && !pramotionalResponse.isEmpty())
+			{
+				return new ResponseEntity<List<? extends PramotionalResponse>>(pramotionalResponse,HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<List<? extends PramotionalResponse>>(pramotionalResponse,HttpStatus.NO_CONTENT);
+
+			}
+
+		} catch (Exception e) {
+			logger.debug("NO Pramotional List in the system");
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 }

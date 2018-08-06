@@ -1,5 +1,7 @@
 package com.cpw.dao;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -8,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 //import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.cpw.dao.mapper.SalesBudgetMapper;
 import com.cpw.jdbc.model.SalesBudget;
 
 public class SalesBudgetDAOImpl implements SalesBudgetDAO {
@@ -54,6 +57,21 @@ public class SalesBudgetDAOImpl implements SalesBudgetDAO {
 			logger.error("Exception at time of creation" + e);
 			return 0;
 		}
+	}
+
+	@Override
+	public List<SalesBudget> salesBudgetList(long id) {
+		try {
+			logger.debug("Entering into SalesBudgetList");
+			String sql="SELECT * FROM SALES_BUDGET_HDR WHERE SB_ID=?";
+			List<SalesBudget> salesBudegetList=jdbcTemplateObject.query(sql, new Object[]{id}, new SalesBudgetMapper());
+			return salesBudegetList;
+			
+		} catch (Exception e) {
+			logger.debug("No List in system");
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

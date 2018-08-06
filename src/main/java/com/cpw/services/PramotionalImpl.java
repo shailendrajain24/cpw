@@ -3,6 +3,9 @@ package com.cpw.services;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -13,13 +16,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.cpw.dao.PramotionalDAOImpl;
 import com.cpw.jdbc.model.Pramotional;
 import com.cpw.model.PramotionalRequest;
+import com.cpw.model.PramotionalResponse;
 
 public class PramotionalImpl {
 	public PramotionalImpl() {
 	}
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-	private ApplicationContext context;
+
+	private final ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
+	private final PramotionalDAOImpl pramotionalDAO = (PramotionalDAOImpl) context.getBean("pramotionalDAOImpl");
 	// private JdbcTemplate jdbcTemplateObject;
 
 	/*
@@ -34,8 +40,7 @@ public class PramotionalImpl {
 
 	public int pramotional(PramotionalRequest pramotionalRequest) {
 		logger.debug("Entering into pramotional");
-		context = new ClassPathXmlApplicationContext("Beans.xml");
-		PramotionalDAOImpl pramotionalDAO = (PramotionalDAOImpl) context.getBean("pramotionalDAOImpl");
+
 		return pramotionalDAO.pramotinal(map(pramotionalRequest));
 	}
 
@@ -73,5 +78,60 @@ public class PramotionalImpl {
 		return pramotional;
 
 	}
+
+	public List<PramotionalResponse> pramotionalList(long primaryId)
+	{
+		logger.debug("Entering into List");
+		final List<Pramotional> pramotionalList=pramotionalDAO.pramotionalList(primaryId);
+		return map(pramotionalList);		
+	}
+
+	private List<PramotionalResponse> map(List<Pramotional> pramotionalList){
+
+		List<PramotionalResponse> pramotionalResponse=Collections.emptyList();
+		if(pramotionalList!=null && !pramotionalList.isEmpty())
+		{
+			pramotionalResponse=new ArrayList<PramotionalResponse>();
+			for(Pramotional pramotional : pramotionalList)
+			{
+				PramotionalResponse pramotionalResponseList=map(pramotional);
+				pramotionalResponse.add(pramotionalResponseList);
+			}
+			pramotionalList.clear();
+		}
+		return pramotionalResponse;
+
+	}
+
+	private PramotionalResponse map(Pramotional pramotional)
+	{
+		PramotionalResponse pramotionalResponse=new PramotionalResponse();
+		if(pramotional!=null)
+		{
+			pramotionalResponse.setPrimaryId(pramotional.getPrimaryId());
+			pramotionalResponse.setFromEmailId(pramotional.getFromEmailId());
+			pramotionalResponse.setToEmailId(pramotional.getToEmailId());
+			pramotionalResponse.setCommercialNvo(pramotional.getCommercialNvo());
+			pramotionalResponse.setSendBy(pramotional.getSendBy());
+			pramotionalResponse.setSubject(pramotional.getSubject());
+			pramotionalResponse.setCountryId(pramotional.getCountryId());
+			pramotionalResponse.setCategoryId(pramotional.getCategoryId());
+			pramotionalResponse.setAttachment(pramotional.getAttachment());
+			pramotionalResponse.setAddAttachment(pramotional.getAddAttachment());
+			pramotionalResponse.setBody(pramotional.getBody());
+			pramotionalResponse.setLocId(pramotional.getLocId());
+			pramotionalResponse.setFyId(pramotional.getFyId());
+			pramotionalResponse.setFyPrdId(pramotional.getFyPrdId());
+			pramotionalResponse.setCreatedBy(pramotional.getCreatedBy());
+			pramotionalResponse.setCreatedDate(pramotional.getCreatedDate());
+			pramotionalResponse.setCreatedTime(pramotional.getCreatedTime());
+			pramotionalResponse.setModifyBy(pramotional.getModifyBy());
+			pramotionalResponse.setModifyDate(pramotional.getModifyDate());
+			pramotionalResponse.setModifyTime(pramotional.getModifyTime());
+		}
+		return pramotionalResponse;
+
+	}
+
 
 }

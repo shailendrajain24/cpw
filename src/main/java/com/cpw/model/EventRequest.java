@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EventRequest {
-	private long evnetId;
+	private long eventId;
 	private String title;
 	private String location;
 	private boolean allDay;
@@ -29,7 +29,7 @@ public class EventRequest {
 	private String attachments;
 	
 	@JsonCreator
-	public EventRequest(@JsonProperty("evnetId")long eventId,@JsonProperty("title")String title,
+	public EventRequest(@JsonProperty("eventId")long eventId,@JsonProperty("title")String title,
 			@JsonProperty("location")String location,@JsonProperty("allDay")boolean allDay,
 			@JsonProperty("fromDate")long fromDate,@JsonProperty("toDate")long toDate,
 			@JsonProperty("host")String host,@JsonProperty("participants")String participants,
@@ -41,7 +41,7 @@ public class EventRequest {
 			@JsonProperty("modifyTime")long modifyTime,@JsonProperty("notes")String notes,
 			@JsonProperty("attachments")String attachments)
 	{
-		this.evnetId=eventId;
+		this.eventId=eventId;
 		this.title=title;
 		this.location=location;
 		this.allDay=allDay;
@@ -65,12 +65,12 @@ public class EventRequest {
 		
 	}
 
-	public long getEvnetId() {
-		return evnetId;
+	public long getEventId() {
+		return eventId;
 	}
 
-	public void setEvnetId(long evnetId) {
-		this.evnetId = evnetId;
+	public void setEventId(long eventId) {
+		this.eventId = eventId;
 	}
 
 	public String getTitle() {
