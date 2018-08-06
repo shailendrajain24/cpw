@@ -3,6 +3,7 @@
  */
 package com.cpw.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -18,10 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cpw.model.ContactData;
 import com.cpw.model.ContactDataResponse;
-
-
 import com.cpw.services.ContactImpl;
-
 
 /**
  * @author Unknown
@@ -37,25 +35,27 @@ public class ContactController {
 		try {
 			ContactImpl contactImpl = new ContactImpl();
 			List<ContactDataResponse> contactDateResponse = contactImpl.contactList(createdBy);
-			if (contactDateResponse != null && !contactDateResponse.isEmpty()) {
-				return new ResponseEntity<List<? extends ContactDataResponse>>(contactDateResponse, HttpStatus.OK);
+			if (contactDateResponse == null || contactDateResponse.isEmpty()) {
+				return new ResponseEntity<List<? extends ContactDataResponse>>(contactDateResponse,
+						HttpStatus.NO_CONTENT);
 			} else {
-				return new ResponseEntity<List<? extends ContactDataResponse>>(contactDateResponse, HttpStatus.NO_CONTENT);
+				return new ResponseEntity<List<? extends ContactDataResponse>>(contactDateResponse, HttpStatus.OK);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<List<? extends ContactDataResponse>>(Collections.emptyList(),
+					HttpStatus.NOT_FOUND);
 		}
-		return null;
 	}
-	
+
 	@RequestMapping(value = "/removeContact/{contactId}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> removeContact(@PathVariable("contactId") long contactId) {
 		logger.debug("Entering into removeContact");
 		try {
 			ContactImpl contactImpl = new ContactImpl();
 			int response = contactImpl.removeContact(contactId);
-			if (response>0) {
+			if (response > 0) {
 				return new ResponseEntity<Object>(HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
@@ -63,10 +63,10 @@ public class ContactController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
 		}
-		return null;
 	}
-	
+
 	@RequestMapping(value = "/addContact", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> upsertContact(@RequestBody ContactData request) {
 
@@ -78,7 +78,7 @@ public class ContactController {
 			logger.debug("FirstName : " + request.getFirstName());
 			ContactImpl contactImpl = new ContactImpl();
 			int response = contactImpl.upsertContact(request);
-			if (response>0) {
+			if (response > 0) {
 				return new ResponseEntity<Object>(HttpStatus.CREATED);
 			} else {
 				return new ResponseEntity<Object>(HttpStatus.NOT_ACCEPTABLE);
@@ -86,8 +86,8 @@ public class ContactController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
 		}
-		return null;
 	}
 
 }

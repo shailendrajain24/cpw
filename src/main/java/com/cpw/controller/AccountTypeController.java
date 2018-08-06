@@ -1,5 +1,6 @@
 package com.cpw.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -15,28 +16,26 @@ import com.cpw.model.AccountTypeResponse;
 import com.cpw.services.AccountTypeImpl;
 
 @RestController
-public class AccountTypeController
-{
+public class AccountTypeController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@RequestMapping
-	(value = "/account/AccountType", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/account/AccountType", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<? extends AccountTypeResponse>> Tracking() {
 		logger.debug("Entering into accountType");
 		try {
 			AccountTypeImpl accountTypeImpl = new AccountTypeImpl();
 			List<AccountTypeResponse> accountTypeResponseList = accountTypeImpl.accountTypeList();
-			if (accountTypeResponseList != null && !accountTypeResponseList.isEmpty()) {
-				return new ResponseEntity<List<? extends AccountTypeResponse>>(accountTypeResponseList, HttpStatus.OK);
+			if (accountTypeResponseList == null || accountTypeResponseList.isEmpty()) {
+				return new ResponseEntity<List<? extends AccountTypeResponse>>(accountTypeResponseList,
+						HttpStatus.NO_CONTENT);
 			} else {
-				return new ResponseEntity<List<? extends AccountTypeResponse>>(accountTypeResponseList, HttpStatus.NO_CONTENT);
+				return new ResponseEntity<List<? extends AccountTypeResponse>>(accountTypeResponseList, HttpStatus.OK);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<List<? extends AccountTypeResponse>>(Collections.emptyList(),
+					HttpStatus.NOT_FOUND);
 		}
-		return null;
 	}
-
 
 }

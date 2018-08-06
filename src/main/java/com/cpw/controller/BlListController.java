@@ -40,16 +40,15 @@ public class BlListController {
 			}
 			BlListImpl blListImpl = new BlListImpl();
 			List<BlListResponse> blListResponseList = blListImpl.getBlList(userType, userId);
-			if (blListResponseList != null && !blListResponseList.isEmpty()) {
-				return new ResponseEntity<List<? extends BlListResponse>>(blListResponseList, HttpStatus.OK);
-			} else {
+			if (blListResponseList == null || blListResponseList.isEmpty()) {
 				return new ResponseEntity<List<? extends BlListResponse>>(blListResponseList, HttpStatus.NO_CONTENT);
+			} else {
+				return new ResponseEntity<List<? extends BlListResponse>>(blListResponseList, HttpStatus.OK);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<List<? extends BlListResponse>>(Collections.emptyList(), HttpStatus.NOT_FOUND);
 		}
-		return null;
 	}
-
 }

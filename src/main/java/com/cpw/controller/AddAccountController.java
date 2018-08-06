@@ -1,5 +1,6 @@
 package com.cpw.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.cpw.model.AddAccountRequest;
 import com.cpw.model.AddAccountResponse;
 import com.cpw.services.AddAccountImpl;
-
 
 @RestController
 public class AddAccountController {
@@ -27,16 +28,17 @@ public class AddAccountController {
 		try {
 			AddAccountImpl accountImpl = new AddAccountImpl();
 			List<AddAccountResponse> addAccountResponse = accountImpl.accountList(createdBy);
-			if (addAccountResponse != null && !addAccountResponse.isEmpty()) {
-				return new ResponseEntity<List<? extends AddAccountResponse>>(addAccountResponse, HttpStatus.OK);
+			if (addAccountResponse == null || addAccountResponse.isEmpty()) {
+				return new ResponseEntity<List<? extends AddAccountResponse>>(addAccountResponse,
+						HttpStatus.NO_CONTENT);
 			} else {
-				return new ResponseEntity<List<? extends AddAccountResponse>>(addAccountResponse, HttpStatus.NO_CONTENT);
+				return new ResponseEntity<List<? extends AddAccountResponse>>(addAccountResponse, HttpStatus.OK);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<List<? extends AddAccountResponse>>(Collections.emptyList(),
+					HttpStatus.NO_CONTENT);
 		}
-		return null;
 	}
 
 	@RequestMapping(value = "/removeAccount/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -45,19 +47,18 @@ public class AddAccountController {
 		try {
 			AddAccountImpl accountImpl = new AddAccountImpl();
 			int response = accountImpl.removeAccount(id);
-			if (response>0) {
+			if (response > 0) {
 				return new ResponseEntity<Object>(HttpStatus.OK);
 			} else {
 				return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
 		}
-		return null;
 	}
 
-	@RequestMapping(value = "/addAccount", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.ALL_VALUE)
+	@RequestMapping(value = "/addAccount", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> upsertAccount(@RequestBody AddAccountRequest request) {
 
 		logger.debug("Entering into addAccount");
@@ -68,18 +69,14 @@ public class AddAccountController {
 			logger.debug("Accountname : " + request.getAccountName());
 			AddAccountImpl accountImpl = new AddAccountImpl();
 			int response = accountImpl.upsertAccount(request);
-			if (response>0) {
+			if (response > 0) {
 				return new ResponseEntity<Object>(HttpStatus.CREATED);
 			} else {
 				return new ResponseEntity<Object>(HttpStatus.NOT_ACCEPTABLE);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
 		}
-		return null;
 	}
-
-
-
 }
