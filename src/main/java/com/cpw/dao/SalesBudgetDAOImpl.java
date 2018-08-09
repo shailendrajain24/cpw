@@ -27,7 +27,7 @@ public class SalesBudgetDAOImpl implements SalesBudgetDAO {
 		CpwTemplete<SalesBudget> cpwTemplete = new CpwTempleteImpl<SalesBudget>();
 		String sql = "INSERT INTO SALES_BUDGET_HDR (SB_ID, BUDGET_NO, YEAR, BUDGET_TYPE, SALESMAN_ID, SECTOR_ID, CURRENCY_ID,"
 				+ " ROE, FILE_NAME, NOTE, LOC_ID, FY_ID, FY_PRD_ID, CR_BY, CR_DATE, CR_TIME, MD_BY, MD_DATE, MD_TIME)"
-				+ "VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		Object[] values = new Object[19];
 		values[0] = salesBudget.getId();
 		values[1] = salesBudget.getBudgetNumber();

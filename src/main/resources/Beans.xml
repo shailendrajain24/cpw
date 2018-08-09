@@ -58,6 +58,9 @@
 	<bean id="eventDAOImpl" class="com.cpw.dao.EventDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<bean id="fileStoreDAOImpl" class="com.cpw.dao.FileStoringDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	<bean id="industryDAOImpl" class="com.cpw.dao.IndustryDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>

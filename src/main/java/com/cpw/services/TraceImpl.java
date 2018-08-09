@@ -11,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.cpw.dao.TraceDAOImpl;
 import com.cpw.jdbc.model.Trace;
+import com.cpw.jdbc.model.TrackHeader;
 import com.cpw.jdbc.model.TrackingHeader;
 import com.cpw.model.TraceResponse;
 import com.cpw.model.TrackingHeaderResponse;
@@ -79,5 +80,14 @@ private TrackingHeaderResponse map1(TrackingHeader trackingList) {
 		}
 	return trackingHeaderResponse;
 
+}
+public TrackHeader traceHeader(String transactionId, int type)
+{
+	logger.debug("Enter into TrackHeader");
+	
+	TraceImpl traceImpl=new TraceImpl();
+	List<TraceResponse> traceResponse=traceImpl.traceDetail(transactionId, type);
+	TrackingHeaderResponse headerResponse=traceImpl.headerDetail(transactionId, type);
+	return new TrackHeader(traceResponse, headerResponse);
 }
 }
