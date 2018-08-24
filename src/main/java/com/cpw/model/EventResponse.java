@@ -1,5 +1,7 @@
 package com.cpw.model;
 
+import java.util.ArrayList;
+
 public class EventResponse {
 	private long eventId;
 	private String title;
@@ -8,20 +10,24 @@ public class EventResponse {
 	private long fromDate;
 	private long toDate;
 	private String host;
-	private String participants;
+	private int noOfParticipants;
+	private ArrayList<String> participants;
 	private String contact;
 	private String account;
 	private String repeat;
 	private String description;
 	private String reminder;
 	private long participantId;
-	private String participantName;
 	private String createdBy;
 	private long createdTime;
 	private String modifyBy;
 	private long modifyTime;
 	private String notes;
 	private String attachments;
+	private long contactId;
+	private long accountId;
+	
+	
 	public long getEventId() {
 		return eventId;
 	}
@@ -64,10 +70,12 @@ public class EventResponse {
 	public void setHost(String host) {
 		this.host = host;
 	}
-	public String getParticipants() {
+
+
+	public ArrayList<String> getParticipants() {
 		return participants;
 	}
-	public void setParticipants(String participants) {
+	public void setParticipants(ArrayList<String> participants) {
 		this.participants = participants;
 	}
 	public String getContact() {
@@ -106,12 +114,7 @@ public class EventResponse {
 	public void setParticipantId(long participantId) {
 		this.participantId = participantId;
 	}
-	public String getParticipantName() {
-		return participantName;
-	}
-	public void setParticipantName(String participantName) {
-		this.participantName = participantName;
-	}
+	
 	public String getCreatedBy() {
 		return createdBy;
 	}
@@ -148,6 +151,27 @@ public class EventResponse {
 	public void setAttachments(String attachments) {
 		this.attachments = attachments;
 	}
+	
+	public int getNoOfParticipants() {
+		return noOfParticipants;
+	}
+	public void setNoOfParticipants(int noOfParticipants) {
+		this.noOfParticipants = noOfParticipants;
+	}
+	public long getContactId() {
+		return contactId;
+	}
+	public void setContactId(long contactId) {
+		this.contactId = contactId;
+	}
+	public long getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(long accountId) {
+		this.accountId = accountId;
+	}
+	
+	
 
 	
 

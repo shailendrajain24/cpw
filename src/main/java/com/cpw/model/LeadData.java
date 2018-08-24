@@ -3,7 +3,7 @@
  */
 package com.cpw.model;
 
-import java.sql.Blob;
+import java.io.InputStream;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ser.std.DateSerializer;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LeadData {
-	private Blob uploadedInputStream;
+	private InputStream uploadedInputStream;
 	private long leadId;
 	private String leadOwner;
 	private String company;
@@ -33,7 +33,7 @@ public class LeadData {
 	private String leadSource;
 	private String leadStatus;
 	private String industry;
-	private int noOfEmployees;
+	private String noOfEmployees;
 	private String annualRevenue;
 	private String rating;
 	private boolean emailOptOut;
@@ -49,20 +49,26 @@ public class LeadData {
 	private Date createdDate;
 	@JsonSerialize(using=DateSerializer.class)
 	private Date modifyDate;
+	private String salutation;
+	private String secondaryEmailId;
+	private String twitter;
+	private String modifyBy;
 	@JsonCreator
-	public LeadData(@JsonProperty("uploadedInputStream") Blob uploadedInputStream, @JsonProperty("leadId") long leadId, @JsonProperty("leadOwner") String leadOwner, @JsonProperty("company") String company,
+	public LeadData(@JsonProperty("uploadedInputStream") InputStream uploadedInputStream, @JsonProperty("leadId") long leadId, @JsonProperty("leadOwner") String leadOwner, @JsonProperty("company") String company,
 			@JsonProperty("firstName") String firstName, @JsonProperty("lastName") String lastName,
 			@JsonProperty("title") String title, @JsonProperty("email") String email,
 			@JsonProperty("phone") String phone, @JsonProperty("fax") String fax, @JsonProperty("mobile") String mobile,
 			@JsonProperty("website") String website, @JsonProperty("leadSource") String leadSource,
 			@JsonProperty("leadStatus") String leadStatus, @JsonProperty("industry") String industry,
-			@JsonProperty("noOfEmployees") int noOfEmployees, @JsonProperty("annualRevenue") String annualRevenue,
+			@JsonProperty("noOfEmployees") String noOfEmployees, @JsonProperty("annualRevenue") String annualRevenue,
 			@JsonProperty("rating") String rating, @JsonProperty("emailOptOut") boolean emailOptOut,
 			@JsonProperty("skypeId") String skypeId, @JsonProperty("addressStreet") String addressStreet,
 			@JsonProperty("addressCity") String addressCity, @JsonProperty("addressState") String addressState,
 			@JsonProperty("addressZipCode") String addressZipCode, @JsonProperty("addressCounty") String addressCounty,
 			@JsonProperty("description") String description, @JsonProperty("createdBy") String createdBy,
-			@JsonProperty("createdDate") Date createdDate, @JsonProperty("modifyDate") Date modifyDate) {
+			@JsonProperty("createdDate") Date createdDate, @JsonProperty("modifyDate") Date modifyDate,
+			@JsonProperty("salutation")String salutation,@JsonProperty("secondaryEmailId")String secondaryEmailId,
+			@JsonProperty("twitter")String twitter,@JsonProperty("modifyBy")String modifyBy) {
 		this.uploadedInputStream = uploadedInputStream;
 		this.leadId =leadId;
 		this.leadOwner = leadOwner;
@@ -92,17 +98,21 @@ public class LeadData {
 		this.createdBy = createdBy;
 		this.createdDate = createdDate;
 		this.modifyDate = modifyDate;
+		this.salutation=salutation;
+		this.secondaryEmailId=secondaryEmailId;
+		this.twitter=twitter;
+		this.modifyBy=modifyBy;
 	}
 
 	public LeadData() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Blob getUploadedInputStream() {
+	public InputStream getUploadedInputStream() {
 		return uploadedInputStream;
 	}
 
-	public void setUploadedInputStream(Blob uploadedInputStream) {
+	public void setUploadedInputStream(InputStream uploadedInputStream) {
 		this.uploadedInputStream = uploadedInputStream;
 	}
 	
@@ -218,11 +228,11 @@ public class LeadData {
 		this.industry = industry;
 	}
 
-	public int getNoOfEmployees() {
+	public String getNoOfEmployees() {
 		return noOfEmployees;
 	}
 
-	public void setNoOfEmployees(int noOfEmployees) {
+	public void setNoOfEmployees(String noOfEmployees) {
 		this.noOfEmployees = noOfEmployees;
 	}
 
@@ -329,4 +339,37 @@ public class LeadData {
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
+
+	public String getSalutation() {
+		return salutation;
+	}
+
+	public void setSalutation(String salutation) {
+		this.salutation = salutation;
+	}
+
+	public String getSecondaryEmailId() {
+		return secondaryEmailId;
+	}
+
+	public void setSecondaryEmailId(String secondaryEmailId) {
+		this.secondaryEmailId = secondaryEmailId;
+	}
+
+	public String getTwitter() {
+		return twitter;
+	}
+
+	public void setTwitter(String twitter) {
+		this.twitter = twitter;
+	}
+
+	public String getModifyBy() {
+		return modifyBy;
+	}
+
+	public void setModifyBy(String modifyBy) {
+		this.modifyBy = modifyBy;
+	}
+	
 }

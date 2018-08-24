@@ -112,12 +112,22 @@ public class CallDAOImpl implements CallDAO{
 
 	@Override
 	public List<Call> callList(long callId) {
+		CpwTemplete<Call> cpwTemplete = new CpwTempleteImpl<Call>();
 	
 		try {
-			logger.debug("Entering into CallList");
-			String trackingSql="SELECT * FROM CALL WHERE CALL_ID=?";
+			if(callId==-1)
+			{
+				logger.debug("Entering into callList ");
+				final String trackingSql = "SELECT * FROM CALL";
+				List<Call> callList = cpwTemplete.getRecordList(trackingSql, jdbcTemplateObject,new CallMapper());
+				return callList;
+			}else{
+			logger.debug("Entering into CallList" +callId);
+			
+			String trackingSql="SELECT * FROM CALL WHERE CALL_ID>?";
 			List<Call> callList=jdbcTemplateObject.query(trackingSql, new Object[]{callId}, new CallMapper());
 			return callList;
+			}
 			
 		} catch (DataAccessException e) {
 			logger.debug("No CallList In System");

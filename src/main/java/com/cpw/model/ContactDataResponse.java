@@ -52,6 +52,9 @@ public class ContactDataResponse {
 	private String otherAddressZip;
 	private String otherAddressCountry;
 	private String description;
+	private long accountId;
+	private String salutation;
+	
 	public Blob getImage() {
 		return image;
 	}
@@ -285,6 +288,18 @@ public class ContactDataResponse {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public long getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(long accountId) {
+		this.accountId = accountId;
+	}
+	public String getSalutation() {
+		return salutation;
+	}
+	public void setSalutation(String salutation) {
+		this.salutation = salutation;
 	}
 	
 	

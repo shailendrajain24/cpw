@@ -1,7 +1,5 @@
 package com.cpw.model;
 
-import java.util.List;
-
 public class TraceResponse {
 	private String jobId;
 	private String sobDate;
@@ -118,23 +116,14 @@ class HeaderResponse
 	public void setCurrentStatus(String currentStatus) {
 		this.currentStatus = currentStatus;
 	}
+	@Override
+	public String toString() {
+		return "HeaderResponse [polCode=" + polCode + ", podCode=" + podCode + ", etd=" + etd + ", eta=" + eta
+				+ ", currentStatus=" + currentStatus + "]";
+	}
+	
+	
 	
 }
 
-class TraceHeaderResponse
-{
-	private List<TraceResponse> trace;
-	private List<HeaderResponse> header;
-	public List<TraceResponse> getTrace() {
-		return trace;
-	}
-	public void setTrace(List<TraceResponse> trace) {
-		this.trace = trace;
-	}
-	public List<HeaderResponse> getHeader() {
-		return header;
-	}
-	public void setHeader(List<HeaderResponse> header) {
-		this.header = header;
-	}
-}
+

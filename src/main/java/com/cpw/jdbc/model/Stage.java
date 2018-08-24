@@ -6,6 +6,8 @@ public class Stage {
 	
 	private String stage;
 	
+	private String probability;
+	
 	public long getStageId() {
 		return stageId;
 	}
@@ -18,6 +20,14 @@ public class Stage {
 	public void setStage(String stage) {
 		this.stage = stage;
 	}
+	public String getProbability() {
+		return probability;
+	}
+	public void setProbability(String probability) {
+		this.probability = probability;
+	}
+	
+	
 
 
 

@@ -19,7 +19,7 @@ public class Lead {
 	private String leadSource;
 	private String leadStatus;
 	private String industry;
-	private int noOfEmployees;
+	private String noOfEmployees;
 	private String annualRevenue;
 	private String rating;
 	private boolean emailOptOut;
@@ -33,6 +33,11 @@ public class Lead {
 	private String createdBy;
 	private Date createDate;
 	private Date modifyDate;
+	private String salutation;
+	private String secondaryEmailId;
+	private String twitter;
+	private String modifyBy;
+	
 	public Blob getUploadedInputStream() {
 		return uploadedInputStream;
 	}
@@ -123,10 +128,10 @@ public class Lead {
 	public void setIndustry(String industry) {
 		this.industry = industry;
 	}
-	public int getNoOfEmployees() {
+	public String getNoOfEmployees() {
 		return noOfEmployees;
 	}
-	public void setNoOfEmployees(int noOfEmployees) {
+	public void setNoOfEmployees(String noOfEmployees) {
 		this.noOfEmployees = noOfEmployees;
 	}
 	public String getAnnualRevenue() {
@@ -207,4 +212,29 @@ public class Lead {
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
+	public String getSalutation() {
+		return salutation;
+	}
+	public void setSalutation(String salutation) {
+		this.salutation = salutation;
+	}
+	public String getSecondaryEmailId() {
+		return secondaryEmailId;
+	}
+	public void setSecondaryEmailId(String secondaryEmailId) {
+		this.secondaryEmailId = secondaryEmailId;
+	}
+	public String getTwitter() {
+		return twitter;
+	}
+	public void setTwitter(String twitter) {
+		this.twitter = twitter;
+	}
+	public String getModifyBy() {
+		return modifyBy;
+	}
+	public void setModifyBy(String modifyBy) {
+		this.modifyBy = modifyBy;
+	}
+	
 }

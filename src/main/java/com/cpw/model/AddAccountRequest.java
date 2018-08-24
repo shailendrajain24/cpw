@@ -20,7 +20,7 @@ public class AddAccountRequest {
 	private String accountType;
 	private String ownerShip;
 	private String industry;
-	private int employees;
+	private String employees;
 	private String annualRevenue;
 	private String sicCode;
 	private String billingAddressStreet;
@@ -47,7 +47,7 @@ public class AddAccountRequest {
 			@JsonProperty("webSite")String webSite,@JsonProperty("accountNumber")int acaccountNumber,
 			@JsonProperty("tickerSymbol")String tickerSymbol,@JsonProperty("accountType")String accountType,
 			@JsonProperty("ownerShip")String ownerShip,@JsonProperty("indusrty")String indusrty,
-			@JsonProperty("employees")int employees,@JsonProperty("annualRevenue")String annualRevenue,
+			@JsonProperty("employees")String employees,@JsonProperty("annualRevenue")String annualRevenue,
 			@JsonProperty("sicCode")String sicCode,@JsonProperty("billingAddressStreet")String billingAddressStreet,
 			@JsonProperty("billingAddressCity")String billingAddressCity,@JsonProperty("billingAddressState")String billingAddressState,
 			@JsonProperty("billingAddressCode")String billingAddressCode,
@@ -218,11 +218,11 @@ public class AddAccountRequest {
 		this.industry = industry;
 	}
 
-	public int getEmployees() {
+	public String getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(int employees) {
+	public void setEmployees(String employees) {
 		this.employees = employees;
 	}
 

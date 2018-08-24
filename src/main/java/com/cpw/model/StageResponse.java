@@ -5,6 +5,8 @@ public class StageResponse {
 	private long stageId;
 
 	private String stage;
+	
+	private String probability;
 
 	public long getStageId() {
 		return stageId;
@@ -22,6 +24,14 @@ public class StageResponse {
 		this.stage = stage;
 	}
 
+	public String getProbability() {
+		return probability;
+	}
 
+	public void setProbability(String probability) {
+		this.probability = probability;
+	}
+	
+	
 
 }

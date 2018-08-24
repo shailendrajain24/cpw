@@ -16,7 +16,7 @@ public class AddAccount {
 	private String accountType;
 	private String ownerShip;
 	private String industry;
-	private int employees;
+	private String employees;
 	private String annualRevenue;
 	private String sicCode;
 	private String billingAddressStreet;
@@ -125,10 +125,10 @@ public class AddAccount {
 	public void setIndustry(String industry) {
 		this.industry = industry;
 	}
-	public int getEmployees() {
+	public String getEmployees() {
 		return employees;
 	}
-	public void setEmployees(int employees) {
+	public void setEmployees(String employees) {
 		this.employees = employees;
 	}
 	public String getAnnualRevenue() {

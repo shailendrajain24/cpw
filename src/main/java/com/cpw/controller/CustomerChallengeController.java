@@ -28,7 +28,7 @@ import com.cpw.services.CustomerChallengeImpl;
 public class CustomerChallengeController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@RequestMapping(value = "/customerChallenge", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/customerChallenge", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> customerChallenge(@RequestBody CustomerChallengeRequest request) {
 
 		logger.debug("Entering into CustomerChallenge");
@@ -71,6 +71,26 @@ public class CustomerChallengeController {
 	}
 		return null;
 		
+	}
+	@RequestMapping(value="removeCustChallenge/{id}",method=RequestMethod.DELETE,produces=MediaType.APPLICATION_JSON_VALUE,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> removeList(@PathVariable("id")long id)
+	{
+		logger.debug("Entering into Remove List");
+		try {
+			CustomerChallengeImpl custChallengeImpl=new CustomerChallengeImpl();
+			int response=custChallengeImpl.removeCustomerChallenge(id);
+			if(response > 0)
+			{
+				return new ResponseEntity<Object>(HttpStatus.OK);
+			}else{
+				return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+		}
+
+
 	}
 
 }

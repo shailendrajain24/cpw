@@ -69,7 +69,7 @@ public class AddAccountDAOImpl implements AddAccountDAO {
 								: accountRequest.getOwnerShip(),
 						accountRequest.getIndustry() == null ? accountInSystem.getIndustry()
 								: accountRequest.getIndustry(),
-						accountRequest.getEmployees() == 0 ? accountInSystem.getEmployees()
+						accountRequest.getEmployees() == null ? accountInSystem.getEmployees()
 								: accountRequest.getEmployees(),
 						accountRequest.getAnnualRevenue() == null ? accountInSystem.getAnnualRevenue()
 								: accountRequest.getAnnualRevenue(),
@@ -168,7 +168,7 @@ public class AddAccountDAOImpl implements AddAccountDAO {
 		CpwTemplete<AddAccount> cpwTemplete = new CpwTempleteImpl<AddAccount>();
 
 		try {
-			if (id == 0) {
+			if(id==-1){
 				logger.debug("Entering into accountList ");
 				final String trackingSql = "SELECT * FROM ACCOUNT";
 				List<AddAccount> accountList = cpwTemplete.getRecordList(trackingSql, jdbcTemplateObject,

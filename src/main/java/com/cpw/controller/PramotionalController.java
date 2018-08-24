@@ -82,5 +82,24 @@ public class PramotionalController {
 		return null;
 
 	}
+	@RequestMapping(value="removePramotional/{id}",method=RequestMethod.DELETE,produces=MediaType.APPLICATION_JSON_VALUE,consumes=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> removePramotional(@PathVariable("id")long primaryId)
+	{
+		logger.debug("Entering into remove List" +primaryId);
+		try {
+			PramotionalImpl pramotionalImpl=new PramotionalImpl();
+			int response=pramotionalImpl.removePramotional(primaryId);
+			if(response > 0)
+			{
+				return new ResponseEntity<Object>(HttpStatus.OK);
+			}else {
+				return new ResponseEntity<Object>(HttpStatus.NO_CONTENT);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+		}
+	}
 
 }

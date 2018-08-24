@@ -26,7 +26,7 @@ public class AddAccountMapper implements RowMapper<AddAccount>{
 		addAccount.setAccountType(resultSet.getString("ACCOUNT_TYPE"));
 		addAccount.setOwnerShip(resultSet.getString("OWNERSHIP"));
 		addAccount.setIndustry(resultSet.getString("INDUSTRY"));
-		addAccount.setEmployees(resultSet.getInt("EMPLOYEE"));
+		addAccount.setEmployees(resultSet.getString("EMPLOYEE"));
 		addAccount.setAnnualRevenue(resultSet.getString("ANNUAL_REVENUE"));
 		addAccount.setSicCode(resultSet.getString("SIC_CODE"));
 		addAccount.setBillingAddressStreet(resultSet.getString("BILLING_STREET"));

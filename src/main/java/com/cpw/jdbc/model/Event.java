@@ -1,5 +1,7 @@
 package com.cpw.jdbc.model;
 
+import java.util.List;
+
 public class Event {
 	
 	private long eventId;
@@ -9,14 +11,16 @@ public class Event {
 	private long fromDate;
 	private long toDate;
 	private String host;
-	private String participants;
+	private int noOfParticipants;
+	private List<Participants> participants;
+	private long contactId;
 	private String contact;
+	private long accountId;
 	private String account;
 	private String repeat;
 	private String description;
 	private String reminder;
 	private long participantId;
-	private String participantName;
 	private String createdBy;
 	private long createdTime;
 	private String modifyBy;
@@ -66,10 +70,14 @@ public class Event {
 	public void setHost(String host) {
 		this.host = host;
 	}
-	public String getParticipants() {
+	
+	
+	
+	
+	public List<Participants> getParticipants() {
 		return participants;
 	}
-	public void setParticipants(String participants) {
+	public void setParticipants(List<Participants> participants) {
 		this.participants = participants;
 	}
 	public String getContact() {
@@ -108,12 +116,7 @@ public class Event {
 	public void setParticipantId(long participantId) {
 		this.participantId = participantId;
 	}
-	public String getParticipantName() {
-		return participantName;
-	}
-	public void setParticipantName(String participantName) {
-		this.participantName = participantName;
-	}
+	
 	public String getCreatedBy() {
 		return createdBy;
 	}
@@ -151,6 +154,24 @@ public class Event {
 		this.attachments = attachments;
 	}
 	
+	public int getNoOfParticipants() {
+		return noOfParticipants;
+	}
+	public void setNoOfParticipants(int noOfParticipants) {
+		this.noOfParticipants = noOfParticipants;
+	}
+	public long getContactId() {
+		return contactId;
+	}
+	public void setContactId(long contactId) {
+		this.contactId = contactId;
+	}
+	public long getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(long accountId) {
+		this.accountId = accountId;
+	}
 	
 
 }

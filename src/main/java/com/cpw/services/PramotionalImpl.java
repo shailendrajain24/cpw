@@ -133,5 +133,13 @@ public class PramotionalImpl {
 
 	}
 
+	public int removePramotional(long primaryId)
+	{
+		logger.debug("Entering into remove list");
+
+		return pramotionalDAO.removePramotional(primaryId);
+
+	}
+
 
 }

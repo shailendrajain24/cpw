@@ -62,14 +62,14 @@ public class EventImpl {
 			eventResponse.setFromDate(event.getFromDate());
 			eventResponse.setToDate(event.getToDate());
 			eventResponse.setHost(event.getHost());
-			eventResponse.setParticipants(event.getParticipants());
+			//eventResponse.setParticipants(event.getParticipants());
 			eventResponse.setContact(event.getContact());
 			eventResponse.setAccount(event.getAccount());
 			eventResponse.setRepeat(event.getRepeat());
 			eventResponse.setDescription(event.getDescription());
 			eventResponse.setReminder(event.getReminder());
 			eventResponse.setParticipantId(event.getParticipantId());
-			eventResponse.setParticipantName(event.getParticipantName());
+			
 			eventResponse.setCreatedBy(event.getCreatedBy());
 			eventResponse.setCreatedTime(event.getCreatedTime());
 			eventResponse.setModifyBy(event.getModifyBy());
@@ -102,13 +102,18 @@ public class EventImpl {
 			event.setDescription(eventRequest.getDescription());
 			event.setReminder(eventRequest.getReminder());
 			event.setParticipantId(eventRequest.getParticipantId());
-			event.setParticipantName(eventRequest.getParticipantName());
+			
 			event.setCreatedBy(eventRequest.getCreatedBy());
 			event.setCreatedTime(eventRequest.getCreatedTime());
 			event.setModifyBy(eventRequest.getModifyBy());
 			event.setModifyTime(eventRequest.getModifyTime() );
 			event.setNotes(eventRequest.getNotes());
 			event.setAttachments(eventRequest.getAttachments());
+			event.setNoOfParticipants(eventRequest.getNoOfParticipants());
+			event.setContactId(eventRequest.getContactId());
+			event.setAccountId(eventRequest.getAccountId());
+
+
 		}
 		return event;
 	}

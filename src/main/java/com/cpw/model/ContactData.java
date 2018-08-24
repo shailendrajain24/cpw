@@ -53,6 +53,8 @@ public class ContactData {
 	private String otherAddressZip;
 	private String otherAddressCountry;
 	private String description;
+	private long accountId;
+	private String salutation;
 	
 	@JsonCreator
       public ContactData(@JsonProperty("image") Blob image,
@@ -93,7 +95,9 @@ public class ContactData {
 			@JsonProperty("otherAddressState") String otherAddressState,
 			@JsonProperty("otherAddressZip") String otherAddressZip,
 		    @JsonProperty("otherAddressCountry") String otherAddressCountry,
-		    @JsonProperty("description") String description
+		   	@JsonProperty("description") String description,
+		   	@JsonProperty("accountId")long accountId,
+		   	@JsonProperty("salutation")String salutation
 		     ) {
 		this.image = image;
 		this.contactId = contactId;
@@ -134,6 +138,8 @@ public class ContactData {
 		this.otherAddressZip = otherAddressZip;
 		this.otherAddressCountry = otherAddressCountry;
 		this.description =description;
+		this.accountId=accountId;
+		this.salutation=salutation;
 		
 	}
 	
@@ -378,6 +384,30 @@ public class ContactData {
 	}
 	public void setOtherAddressCountry(String otherAddressCountry) {
 		this.otherAddressCountry = otherAddressCountry;
+	}
+
+
+
+	public long getAccountId() {
+		return accountId;
+	}
+
+
+
+	public void setAccountId(long accountId) {
+		this.accountId = accountId;
+	}
+
+
+
+	public String getSalutation() {
+		return salutation;
+	}
+
+
+
+	public void setSalutation(String salutation) {
+		this.salutation = salutation;
 	}
 	
 }

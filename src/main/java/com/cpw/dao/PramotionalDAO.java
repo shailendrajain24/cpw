@@ -13,5 +13,7 @@ public interface PramotionalDAO {
 	public int pramotinal(Pramotional pramotional);
 	
 	public List<Pramotional> pramotionalList(long primaryId);
+	
+	public int removePramotional(long primaryId);
 
 }

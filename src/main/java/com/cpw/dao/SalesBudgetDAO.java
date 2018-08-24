@@ -13,5 +13,7 @@ public interface SalesBudgetDAO {
 	public int salesBudget(SalesBudget salesBudget);
 	
 	public List<SalesBudget> salesBudgetList(long id);
+	
+	public int removeSalesBudget(long id);
 
 }

@@ -17,14 +17,14 @@ public class CustomerChallengeMapper implements RowMapper<CustomerChallenge> {
 		customerChallenge.setContactId(resultSet.getLong("CONTACT_ID"));
 		customerChallenge.setLogDate(resultSet.getString("LOG_DATE"));
 		customerChallenge.setStatus(resultSet.getInt("STATUS"));
-		customerChallenge.setPriority(resultSet.getInt("PRIORITY"));
+		customerChallenge.setPriority(resultSet.getLong("PRIORITY"));
 		customerChallenge.setOrigin(resultSet.getInt("ORIGIN"));
 		customerChallenge.setTypeId(resultSet.getInt("TYPE_ID"));
 		customerChallenge.setReason(resultSet.getString("REASON"));
 		customerChallenge.setDueDate(resultSet.getString("DUE_DATE"));
 		customerChallenge.setInchargeId(resultSet.getLong("INCHARGE_ID"));
 		customerChallenge.setCcEmail(resultSet.getString("CC_MAIL"));
-		customerChallenge.setStatus(resultSet.getInt("SUBJECT"));
+		customerChallenge.setSubject(resultSet.getString("SUBJECT"));
 		customerChallenge.setDescription(resultSet.getString("DESCRIPTION"));
 		customerChallenge.setInternalNote(resultSet.getString("INTERNAL_NOTE"));
 		customerChallenge.setCustomerFeedback(resultSet.getString("CUSTOMER_FEEDBACK"));
@@ -32,8 +32,8 @@ public class CustomerChallengeMapper implements RowMapper<CustomerChallenge> {
 		customerChallenge.setNote(resultSet.getString("NOTE"));
 		customerChallenge.setLocId(resultSet.getLong("LOC_ID"));
 		customerChallenge.setFyId(resultSet.getLong("FY_ID"));
-		customerChallenge.setCreatedBy(resultSet.getLong("CREATED_TIME"));
-		customerChallenge.setCreatedDate(resultSet.getString("IS_DELETED"));
+		customerChallenge.setTime(resultSet.getLong("CREATED_TIME"));
+		customerChallenge.setIsDeleted(resultSet.getInt("IS_DELETED"));
 		customerChallenge.setCreatedBy(resultSet.getLong("CR_BY"));
 		customerChallenge.setCreatedDate(resultSet.getString("CR_DATE"));
 		customerChallenge.setCreatedTime(resultSet.getString("CR_TIME"));

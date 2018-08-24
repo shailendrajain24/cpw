@@ -19,14 +19,13 @@ public class EventMapper implements RowMapper<Event>{
 		event.setFromDate(rs.getLong("FROM_DATE"));
 		event.setToDate(rs.getLong("TO_DATE"));
 		event.setHost(rs.getString("HOST"));
-		event.setParticipants(rs.getString("PARTICIPANTS"));
+		event.setNoOfParticipants(rs.getInt("NO_OF_PARTICIPANTS"));
 		event.setContact(rs.getString("CONTACT"));
 	    event.setAccount(rs.getString("ACCOUNT"));
 	    event.setRepeat(rs.getString("REPEAT"));
 	    event.setDescription(rs.getString("DESCRIPTION"));
 	    event.setReminder(rs.getString("REMINDER"));
 	    event.setParticipantId(rs.getLong("PARTICIPANT_ID"));
-	    event.setParticipantName(rs.getString("PARTICIPANT_NAME"));
 	    event.setCreatedBy(rs.getString("CREATED_BY"));
 	    event.setCreatedTime(rs.getLong("CREATED_TIME"));
 	    event.setModifyBy(rs.getString("MODIFY_BY"));

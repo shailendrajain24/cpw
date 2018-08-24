@@ -30,7 +30,7 @@ public class LeadController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(value = "/leads/{createdBy}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<? extends LeadDataResponse>> leads(@PathVariable("createdBy") long createdBy) {
+	public ResponseEntity<List<? extends LeadDataResponse>> leads(@PathVariable("createdBy") String createdBy) {
 		logger.debug("Entering into lead list");
 		try {
 			LeadImpl leadImpl = new LeadImpl();

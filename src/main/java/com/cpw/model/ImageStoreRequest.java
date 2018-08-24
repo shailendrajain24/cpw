@@ -6,9 +6,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class ImageStoreRequest {
-	private long id;
+	
 	private long imageId;
 	private byte[] bytes;
+	
 	
 	@JsonCreator
 	public ImageStoreRequest(@JsonProperty("imageId")long imageId,@JsonProperty("bytes")byte[] bytes)
@@ -19,13 +20,7 @@ public class ImageStoreRequest {
 		
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
+	
 	
 
 	public long getImageId() {

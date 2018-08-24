@@ -1,15 +1,23 @@
 package com.cpw.jdbc.model;
 
+import java.util.Arrays;
+
 public class ImageStore {
-	private long id;
+
 	private long imageId;
+	private String imageUrl;
+
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
 	private byte[] bytes;
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
+
 	
 	public long getImageId() {
 		return imageId;
@@ -22,6 +30,11 @@ public class ImageStore {
 	}
 	public void setBytes(byte[] bytes) {
 		this.bytes = bytes;
+	}
+
+	@Override
+	public String toString() {
+		return "ImageStore [imageId=" + imageId + ", imageUrl=" + imageUrl + ", bytes=" + Arrays.toString(bytes) + "]";
 	}
 	
 	

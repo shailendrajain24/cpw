@@ -22,12 +22,12 @@ public class LeadDAOImpl implements LeadDAO {
 	}
 
 	@Override
-	public List<Lead> leadList(long createdBy) {
+	public List<Lead> leadList(String createdBy) {
 		logger.debug("Entering into leadList " + createdBy);
 		final String trackingSql = "Select IMAGE, LEAD_ID, LEAD_OWNER, COMPANY, FNAME, LNAME, TITLE, EMAIL, PHONE, FAX, MOBILE, WEBSITE, "
 				+ "LEAD_SOURCE, LEAD_STATUS, INDUSTRY, NO_OF_EMP, ANNUAL_REVENUE, RATING, EMAIL_OUTPUT, SKYPE_ID, ADDRESS_STREET, ADDRESS_CITY, "
-				+ "ADDRESS_STATE, ADDRESS_ZIPCODE, ADDRESS_COUNTRY, DESCRIPTION, CR_DATE, MD_DATE, CR_BY"
-				+ " from  LEAD  WHERE LEAD_ID = ?";
+				+ "ADDRESS_STATE, ADDRESS_ZIPCODE, ADDRESS_COUNTRY, DESCRIPTION, CR_DATE, MD_DATE, CR_BY,SALUTATION,"
+				+ " SECONDARY_EMAIL, TWITTER,MD_BY from  LEAD  WHERE CR_BY = ?";
 		try {
 			List<Lead> leadList = jdbcTemplateObject.query(trackingSql, new Object[] { createdBy }, new LeadMapper());
 			return leadList;
@@ -57,7 +57,7 @@ public class LeadDAOImpl implements LeadDAO {
 						+ " EMAIL=?, PHONE=?, FAX=?, MOBILE=?, WEBSITE=?, LEAD_SOURCE=?, LEAD_STATUS=?, INDUSTRY=?, NO_OF_EMP=?"
 						+ ", ANNUAL_REVENUE=?, RATING=?, EMAIL_OUTPUT=?, SKYPE_ID=?, ADDRESS_STREET=?, ADDRESS_CITY=?,"
 						+ " ADDRESS_STATE=?, ADDRESS_ZIPCODE=?, ADDRESS_COUNTRY=?, DESCRIPTION=?, MD_DATE=?"
-						+ " WHERE LEAD_ID=?";
+						+ "SALUTATION=?,SECONDARY_EMAIL=?,TWITTER=?,MD_BY=? WHERE LEAD_ID=?";
 				return jdbcTemplateObject.update(updateSql,
 						leadRequest.getUploadedInputStream() == null ? leadInSystem.getUploadedInputStream()
 								: leadRequest.getUploadedInputStream(),
@@ -76,7 +76,7 @@ public class LeadDAOImpl implements LeadDAO {
 						leadRequest.getLeadStatus() == null ? leadInSystem.getLeadStatus()
 								: leadRequest.getLeadStatus(),
 						leadRequest.getIndustry() == null ? leadInSystem.getIndustry() : leadRequest.getIndustry(),
-						leadRequest.getNoOfEmployees() == 0 ? leadInSystem.getNoOfEmployees()
+						leadRequest.getNoOfEmployees() == null ? leadInSystem.getNoOfEmployees()
 								: leadRequest.getNoOfEmployees(),
 						leadRequest.getAnnualRevenue() == null ? leadInSystem.getAnnualRevenue()
 								: leadRequest.getAnnualRevenue(),
@@ -98,9 +98,13 @@ public class LeadDAOImpl implements LeadDAO {
 								: leadRequest.getDescription(),
 						leadRequest.getModifyDate() == null ? leadInSystem.getModifyDate()
 								: leadRequest.getModifyDate(),
+						leadRequest.getSalutation(),
+						leadRequest.getSecondaryEmailId(),
+						leadRequest.getTwitter(),
+						leadRequest.getModifyBy(),
 						leadRequest.getLeadId());
 			} else {
-				Object[] values = new Object[29];
+				Object[] values = new Object[33];
 				values[0] = leadRequest.getUploadedInputStream();
 				values[1] = leadRequest.getLeadId();
 				values[2] = leadRequest.getLeadOwner();
@@ -130,12 +134,16 @@ public class LeadDAOImpl implements LeadDAO {
 				values[26] = leadRequest.getCreateDate();
 				values[27] = leadRequest.getModifyDate();
 				values[28] = leadRequest.getCreatedBy();
+				values[29]=leadRequest.getSalutation();
+				values[30]=leadRequest.getSecondaryEmailId();
+				values[31]=leadRequest.getTwitter();
+				values[32]=leadRequest.getModifyBy();
 				logger.debug("INSERT values" + values[1]);
 				String insertSql = "INSERT INTO LEAD (IMAGE, LEAD_ID, LEAD_OWNER, COMPANY, FNAME, LNAME, TITLE,"
 						+ " EMAIL, PHONE, FAX, MOBILE, WEBSITE, LEAD_SOURCE, LEAD_STATUS, INDUSTRY, NO_OF_EMP, ANNUAL_REVENUE,"
 						+ " RATING, EMAIL_OUTPUT, SKYPE_ID, ADDRESS_STREET, ADDRESS_CITY, ADDRESS_STATE, ADDRESS_ZIPCODE,"
-						+ " ADDRESS_COUNTRY, DESCRIPTION, CR_DATE, MD_DATE, CR_BY)"
-						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+						+ " ADDRESS_COUNTRY, DESCRIPTION, CR_DATE, MD_DATE, CR_BY,SALUTATION,SECONDARY_EMAIL,TWITTER,MD_BY)"
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?);";
 				count = cpwTemplete.upsert(insertSql, values, jdbcTemplateObject);
 				logger.debug("Record creation status: " + count);
 			}

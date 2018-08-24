@@ -16,6 +16,7 @@ public class StageMapper implements RowMapper<Stage>{
 		
 		stage.setStage(resultSet.getString("STAGE"));
 		stage.setStageId(resultSet.getLong("STAGE_ID"));
+		stage.setProbability(resultSet.getString("PROBABILITY"));
 		
 		return stage;
 	}

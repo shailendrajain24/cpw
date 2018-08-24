@@ -120,12 +120,27 @@ public class DealDAOImpl implements DealDAO{
 
 	@Override
 	public List<Deal> dealList(long dealId) {
+		
+		CpwTemplete<Deal> cpwTemplete = new CpwTempleteImpl<Deal>();
 		logger.debug("Entering into DealList" +dealId);
-		final String trackingSql="SELECT *FROM DEALS WHERE DEAL_ID=?";
-		try{
-			List<Deal> dealList=jdbcTemplateObject.query(trackingSql, new Object[]{dealId},new DealMapper());
-			return dealList;
-		}catch(Exception e){
+		
+		try {
+			if(dealId==-1){
+				logger.debug("Entering into DealList ");
+				final String sql = "SELECT * FROM DEALS";
+				List<Deal> dealList = cpwTemplete.getRecordList(sql, jdbcTemplateObject,new DealMapper());
+				return dealList;
+			}else
+			{
+				logger.debug("Entering into dealList" +dealId);
+				final String sql = "SELECT * FROM DEALS WHERE DEAL_ID>?";
+				List<Deal> dealList = jdbcTemplateObject.query(sql, new Object[] {dealId},
+						new DealMapper());
+				return dealList;
+			}
+		}
+			
+catch(Exception e){
 			logger.debug("No dealList in system");
 			return null;
 		}

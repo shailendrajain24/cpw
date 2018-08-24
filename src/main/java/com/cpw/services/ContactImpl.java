@@ -95,6 +95,8 @@ public class ContactImpl {
 			contactData.setCreatedDate(contact.getCreatedDate());
 			contactData.setModifyDate(contact.getModifyDate());
 			contactData.setCreatedBy(contact.getCreatedBy());
+			contactData.setAccountId(contact.getAccountId());
+			contactData.setSalutation(contact.getSalutation());
 		}
 		return contactData;
 
@@ -148,6 +150,8 @@ public class ContactImpl {
 			
 				contact.setModifyDate(contactRequest.getModifyDate());
 			contact.setCreatedBy(contactRequest.getCreatedBy());
+			contact.setAccountId(contactRequest.getAccountId());
+			contact.setSalutation(contactRequest.getSalutation());
 		}
 		return contact;
 	}

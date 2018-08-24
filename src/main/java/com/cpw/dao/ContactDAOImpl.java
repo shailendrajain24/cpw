@@ -28,7 +28,7 @@ public class ContactDAOImpl implements ContactDAO {
 				+ " EMAIL_OPT_OUT,CREATED_BY, SKYPE_ID,MODIFY_BY,CREATED_DATE,MODIFY_DATE,SECONDARY_EMAIL,LAST_ACTIVITY_TIME,TWITTER, "
 				+ "MAILING_ADDRESS_STREET,MAILING_ADDRESS_CITY,MAILING_ADDRESS_STATE, MAILING_ADDRESS_ZIP, MAILING_ADDRESS_COUNTRY,"
 				+ "OTHER_ADDRESS_STREET,OTHER_ADDRESS_CITY,OTHER_ADDRESS_STATE, OTHER_ADDRESS_ZIP, OTHER_ADDRESS_COUNTRY,"
-				+ " DESCRIPTION" + " from  CONTACT  WHERE CREATED_BY = ?";
+				+ " DESCRIPTION,PARENT_ID,SALUTATION" + " from  CONTACT  WHERE CREATED_BY = ?";
 		try {
 			List<Contact> contactList = jdbcTemplateObject.query(trackingSql, new Object[] { createdBy },
 					new ContactMapper());
@@ -60,7 +60,7 @@ public class ContactDAOImpl implements ContactDAO {
 						+ " EMAIL_OPT_OUT=?, SKYPE_ID=?,MODIFY_BY=?,MODIFY_DATE=?,SECONDARY_EMAIL=?,LAST_ACTIVITY_TIME=?,TWITTER=?,"
 						+ "MAILING_ADDRESS_STREET=?, MAILING_ADDRESS_CITY=?, MAILING_ADDRESS_STATE=?, MAILING_ADDRESS_ZIP=?, MAILING_ADDRESS_COUNTRY=?,"
 						+ "OTHER_ADDRESS_STREET=?, OTHER_ADDRESS_CITY=?, OTHER_ADDRESS_STATE=?, OTHER_ADDRESS_ZIP=?, OTHER_ADDRESS_COUNTRY=?,"
-						+ " DESCRIPTION=?," + " WHERE CONTACT_ID=?";
+						+ " DESCRIPTION=?,PARENT_ID=?,SALUTATION=?" + " WHERE CONTACT_ID=?";
 				return jdbcTemplateObject.update(updateSql,
 						contactRequest.getImage() == null ? contactInSystem.getImage() : contactRequest.getImage(),
 						contactRequest.getContactOwner() == null ? contactInSystem.getContactOwner()
@@ -124,9 +124,14 @@ public class ContactDAOImpl implements ContactDAO {
 								: contactRequest.getOtherAddressCountry(),
 						contactRequest.getDescription() == null ? contactInSystem.getDescription()
 								: contactRequest.getDescription(),
+						contactRequest.getAccountId() == 0 ? contactInSystem.getAccountId()
+								: contactRequest.getAccountId(),
+						contactRequest.getSalutation() == null ? contactInSystem.getSalutation()
+								:contactRequest.getSalutation(),
+						
 						contactRequest.getContactId());
 			} else {
-				Object[] values = new Object[39];
+				Object[] values = new Object[41];
 				values[0] = contactRequest.getImage();
 				values[1] = contactRequest.getContactId();
 				values[2] = contactRequest.getContactOwner();
@@ -166,6 +171,8 @@ public class ContactDAOImpl implements ContactDAO {
 				values[36] = contactRequest.getOtherAddressZip();
 				values[37] = contactRequest.getOtherAddressCountry();
 				values[38] = contactRequest.getDescription();
+				values[39]=contactRequest.getAccountId();
+				values[40]=contactRequest.getSalutation();
 
 				logger.debug("INSERT values" + values[1]);
 				String insertSql = "INSERT INTO CONTACT (IMAGE, CONTACT_ID, CONTACT_OWNER,LEAD_SOURCE,FIRST_NAME, LAST_NAME,ACCOUNT_NAME,EMAIL, TITLE,"
@@ -173,8 +180,8 @@ public class ContactDAOImpl implements ContactDAO {
 						+ "EMAIL_OPT_OUT,CREATED_BY,CREATED_DATE,MODIFY_BY,MODIFY_DATE,SKYPE_ID,SECONDARY_EMAIL,LAST_ACTIVITY_TIME,TWITTER,"
 						+ "MAILING_ADDRESS_STREET,MAILING_ADDRESS_CITY,MAILING_ADDRESS_STATE,MAILING_ADDRESS_ZIP,MAILING_ADDRESS_COUNTRY,"
 						+ "OTHER_ADDRESS_STREET,OTHER_ADDRESS_CITY,OTHER_ADDRESS_STATE,OTHER_ADDRESS_ZIP,OTHER_ADDRESS_COUNTRY,"
-						+ "DESCRIPTION)"
-						+ "VALUES (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?,?,?,?);";
+						+ "DESCRIPTION,PARENT_ID,SALUTATION)"
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?);";
 				count = cpwTemplete.upsert(insertSql, values, jdbcTemplateObject);
 				logger.debug("Record creation status: " + count);
 			}

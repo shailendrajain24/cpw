@@ -26,7 +26,7 @@ public class LeadMapper implements RowMapper<Lead> {
 		lead.setLeadSource(resultSet.getString("LEAD_SOURCE"));
 		lead.setLeadStatus(resultSet.getString("LEAD_STATUS"));
 		lead.setIndustry(resultSet.getString("INDUSTRY"));
-		lead.setNoOfEmployees(resultSet.getInt("NO_OF_EMP"));
+		lead.setNoOfEmployees(resultSet.getString("NO_OF_EMP"));
 		lead.setAnnualRevenue(resultSet.getString("ANNUAL_REVENUE"));
 		lead.setRating(resultSet.getString("RATING"));
 		lead.setEmailOptOut(resultSet.getBoolean("EMAIL_OUTPUT"));
@@ -58,6 +58,10 @@ public class LeadMapper implements RowMapper<Lead> {
 		}*/
 		lead.setCreateDate(resultSet.getDate("CR_DATE"));
 		lead.setModifyDate(resultSet.getDate("MD_DATE"));	
+		lead.setSalutation(resultSet.getString("SALUTATION"));
+		lead.setSecondaryEmailId(resultSet.getString("SECONDARY_EMAIL"));
+		lead.setTwitter(resultSet.getString("TWITTER"));
+		lead.setModifyBy(resultSet.getString("MD_BY"));
 		return lead;
 	}
 

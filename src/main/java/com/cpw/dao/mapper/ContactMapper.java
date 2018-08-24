@@ -50,6 +50,8 @@ public class ContactMapper implements RowMapper<Contact> {
 		contact.setOtherAddressZip(resultSet.getString("OTHER_ADDRESS_ZIP"));
 		contact.setOtherAddressCountry(resultSet.getString("OTHER_ADDRESS_COUNTRY"));
 		contact.setDescription(resultSet.getString("DESCRIPTION"));
+		contact.setAccountId(resultSet.getLong("PARENT_ID"));
+		contact.setSalutation(resultSet.getString("SALUTATION"));
 		
 		return contact;
 	}

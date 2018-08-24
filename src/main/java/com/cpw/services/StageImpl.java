@@ -44,6 +44,7 @@ public class StageImpl {
 		if (stage != null) {
 			stageResponse.setStage(stage.getStage());
 			stageResponse.setStageId(stage.getStageId());
+			stageResponse.setProbability(stage.getProbability());
 		}
 	//	System.out.println("storage :"+stage.getStage());
 		return stageResponse;

@@ -153,6 +153,11 @@ public class CustomerChallengeImpl {
 		return customerResponse;
 		
 	}
-	
+	public int removeCustomerChallenge(long id)
+	{
+		logger.debug("Entering into Remove List");
+		return customerChallengeDAO.removeCustomerChallenge(id);
+
+	}
 
 }

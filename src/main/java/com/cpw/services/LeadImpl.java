@@ -32,7 +32,7 @@ public class LeadImpl {
 		return leadDAO.removeLead(leadId);
 	}
 
-	public List<LeadDataResponse> leadList(long createdBy) {
+	public List<LeadDataResponse> leadList(String createdBy) {
 		logger.debug("Entering into lead List");
 		final List<Lead> leadList = leadDAO.leadList(createdBy);
 		return map(leadList);
@@ -86,6 +86,10 @@ public class LeadImpl {
 			if (lead.getModifyDate() != null)
 				leadData.setModifyDate(lead.getModifyDate());
 			leadData.setCreatedBy(lead.getCreatedBy());
+			leadData.setSalutation(lead.getSalutation());
+			leadData.setSecondaryEmailId(lead.getSecondaryEmailId());
+			leadData.setTwitter(lead.getTwitter());
+			leadData.setModifyBy(lead.getModifyBy());
 		}
 		return leadData;
 
@@ -134,6 +138,10 @@ public class LeadImpl {
 			lead.setCreateDate(leadRequest.getCreatedDate());
 			lead.setModifyDate(leadRequest.getModifyDate());
 			lead.setCreatedBy(leadRequest.getCreatedBy());
+			lead.setSalutation(leadRequest.getSalutation());
+			lead.setSecondaryEmailId(leadRequest.getSecondaryEmailId());
+			lead.setTwitter(leadRequest.getTwitter());
+			lead.setModifyBy(leadRequest.getModifyBy());
 
 		}
 		return lead;

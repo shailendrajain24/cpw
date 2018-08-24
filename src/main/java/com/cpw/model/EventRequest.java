@@ -1,5 +1,8 @@
 package com.cpw.model;
 
+import java.util.List;
+
+import com.cpw.jdbc.model.Participants;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,33 +16,37 @@ public class EventRequest {
 	private long fromDate;
 	private long toDate;
 	private String host;
-	private String participants;
+	private int noOfParticipants;
+	private List<Participants> participants;
 	private String contact;
 	private String account;
 	private String repeat;
 	private String description;
 	private String reminder;
 	private long participantId;
-	private String participantName;
 	private String createdBy;
 	private long createdTime;
 	private String modifyBy;
 	private long modifyTime;
 	private String notes;
 	private String attachments;
+	private long contactId;
+	private long accountId;
 	
 	@JsonCreator
 	public EventRequest(@JsonProperty("eventId")long eventId,@JsonProperty("title")String title,
 			@JsonProperty("location")String location,@JsonProperty("allDay")boolean allDay,
 			@JsonProperty("fromDate")long fromDate,@JsonProperty("toDate")long toDate,
-			@JsonProperty("host")String host,@JsonProperty("participants")String participants,
+			@JsonProperty("host")String host,@JsonProperty("participants")List<Participants> participants,
 			@JsonProperty("contact")String contact,@JsonProperty("account")String account,
 			@JsonProperty("repeat")String repeat,@JsonProperty("description")String description,
 			@JsonProperty("reminder")String reminder,@JsonProperty("participantId")long participantId,
-			@JsonProperty("participantName")String participantName,@JsonProperty("createdBy")String createdBy,
+			@JsonProperty("createdBy")String createdBy,
 			@JsonProperty("createdTime")long createdTime,@JsonProperty("modifyBy")String modifyBy,
 			@JsonProperty("modifyTime")long modifyTime,@JsonProperty("notes")String notes,
-			@JsonProperty("attachments")String attachments)
+			@JsonProperty("attachments")String attachments,@JsonProperty("noOfParticipants")int noOfParticipants,
+			@JsonProperty("contactId")long contactId,@JsonProperty("accountId")long accountId)
+			
 	{
 		this.eventId=eventId;
 		this.title=title;
@@ -55,13 +62,16 @@ public class EventRequest {
 		this.description=description;
 		this.reminder=reminder;
 		this.participantId=participantId;
-		this.participantName=participantName;
+		
 		this.createdBy=createdBy;
 		this.createdTime=createdTime;
 		this.modifyBy=modifyBy;
 		this.modifyTime=modifyTime;
 		this.notes=notes;
 		this.attachments=attachments;
+		this.noOfParticipants=noOfParticipants;
+		this.contactId=contactId;
+		this.accountId=accountId;
 		
 	}
 
@@ -121,11 +131,13 @@ public class EventRequest {
 		this.host = host;
 	}
 
-	public String getParticipants() {
+	
+
+	public List<Participants> getParticipants() {
 		return participants;
 	}
 
-	public void setParticipants(String participants) {
+	public void setParticipants(List<Participants> participants) {
 		this.participants = participants;
 	}
 
@@ -177,14 +189,7 @@ public class EventRequest {
 		this.participantId = participantId;
 	}
 
-	public String getParticipantName() {
-		return participantName;
-	}
-
-	public void setParticipantName(String participantName) {
-		this.participantName = participantName;
-	}
-
+	
 	public String getCreatedBy() {
 		return createdBy;
 	}
@@ -233,6 +238,30 @@ public class EventRequest {
 		this.attachments = attachments;
 	}
 	
+
+	public int getNoOfParticipants() {
+		return noOfParticipants;
+	}
+
+	public void setNoOfParticipants(int noOfParticipants) {
+		this.noOfParticipants = noOfParticipants;
+	}
+
+	public long getContactId() {
+		return contactId;
+	}
+
+	public void setContactId(long contactId) {
+		this.contactId = contactId;
+	}
+
+	public long getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(long accountId) {
+		this.accountId = accountId;
+	}
 	
 
 }

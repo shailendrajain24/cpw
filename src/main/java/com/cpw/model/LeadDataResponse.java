@@ -3,7 +3,7 @@
  */
 package com.cpw.model;
 
-import java.sql.Blob;
+import java.io.InputStream;
 import java.util.Date;
 
 /**
@@ -11,7 +11,7 @@ import java.util.Date;
  *
  */
 public class LeadDataResponse {
-	private Blob uploadedInputStream;
+	private InputStream uploadedInputStream;
 	private long leadId;
 	private String leadOwner;
 	private String company;
@@ -26,7 +26,7 @@ public class LeadDataResponse {
 	private String leadSource;
 	private String leadStatus;
 	private String industry;
-	private int noOfEmployees;
+	private String noOfEmployees;
 	private String annualRevenue;
 	private String rating;
 	private boolean emailOptOut;
@@ -40,12 +40,16 @@ public class LeadDataResponse {
 	private String createdBy;
 	private Date createdDate;
 	private Date modifyDate;
+	private String salutation;
+	private String secondaryEmailId;
+	private String twitter;
+	private String modifyBy;
 	
-	public Blob getUploadedInputStream() {
+	public InputStream getUploadedInputStream() {
 		return uploadedInputStream;
 	}
 
-	public void setUploadedInputStream(Blob uploadedInputStream) {
+	public void setUploadedInputStream(InputStream uploadedInputStream) {
 		this.uploadedInputStream = uploadedInputStream;
 	}
 	
@@ -161,11 +165,11 @@ public class LeadDataResponse {
 		this.industry = industry;
 	}
 
-	public int getNoOfEmployees() {
+	public String getNoOfEmployees() {
 		return noOfEmployees;
 	}
 
-	public void setNoOfEmployees(int noOfEmployees) {
+	public void setNoOfEmployees(String noOfEmployees) {
 		this.noOfEmployees = noOfEmployees;
 	}
 
@@ -272,4 +276,37 @@ public class LeadDataResponse {
 	public void setModifyDate(Date modifyDate) {
 		this.modifyDate = modifyDate;
 	}
+
+	public String getSalutation() {
+		return salutation;
+	}
+
+	public void setSalutation(String salutation) {
+		this.salutation = salutation;
+	}
+
+	public String getSecondaryEmailId() {
+		return secondaryEmailId;
+	}
+
+	public void setSecondaryEmailId(String secondaryEmailId) {
+		this.secondaryEmailId = secondaryEmailId;
+	}
+
+	public String getTwitter() {
+		return twitter;
+	}
+
+	public void setTwitter(String twitter) {
+		this.twitter = twitter;
+	}
+
+	public String getModifyBy() {
+		return modifyBy;
+	}
+
+	public void setModifyBy(String modifyBy) {
+		this.modifyBy = modifyBy;
+	}
+	
 }

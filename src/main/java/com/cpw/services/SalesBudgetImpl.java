@@ -123,5 +123,13 @@ public class SalesBudgetImpl {
 		return salesBudgetResponse;
 		
 	}
+	
+	public int removeSalesBudget(long id)
+	{
+		logger.debug("Enter into remove list");
+
+		return salesBudgetDAO.removeSalesBudget(id);
+		
+	}
 
 }

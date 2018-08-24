@@ -13,5 +13,7 @@ public interface CustomerChallengeDAO {
 	public int customerChallenge(CustomerChallenge customerChallenge);
 	
 	public List<CustomerChallenge> customerChallengeList(long id);
+	
+	public int removeCustomerChallenge(long id);
 
 }
